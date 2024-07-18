@@ -35,8 +35,9 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.12"
+    ksp {
+        arg("lyricist.internalVisibility", "true")
+        arg("lyricist.generateStringsProperty", "true")
     }
 }
 
@@ -75,6 +76,9 @@ dependencies {
     implementation(libs.firebase.messaging)
 
     implementation(libs.accompanist.permissions)
+
+    implementation(libs.lyricist)
+    ksp(libs.lyricist.processor)
 
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.cio)
