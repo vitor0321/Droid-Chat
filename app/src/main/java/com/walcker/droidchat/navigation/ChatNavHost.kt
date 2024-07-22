@@ -1,15 +1,22 @@
 package com.walcker.droidchat.navigation
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.walcker.droidchat.strings.strings
+import androidx.navigation.navOptions
+import com.walcker.droidchat.ui.feature.signin.SignInRoute
+import com.walcker.droidchat.ui.feature.splash.SplashRoute
+import kotlinx.serialization.Serializable
 
-internal const val SplashRoute = "splash"
-internal const val SignInRoute = "signIn"
-internal const val SignUpRoute = "signUp"
+@Serializable
+object SplashScreenRoute
+
+@Serializable
+object SignInScreenRoute
+
+@Serializable
+object SignUpScreenRoute
 
 @Composable
 internal fun ChatNavHost() {
@@ -18,17 +25,26 @@ internal fun ChatNavHost() {
 
     NavHost(
         navController = navController,
-        startDestination = SplashRoute,
+        startDestination = SplashScreenRoute,
         builder = {
-            composable(SplashRoute) {
-                Text(
-                    text = strings.signInStrings.featureLoginEmail
+            composable<SplashScreenRoute> {
+                SplashRoute(
+                    onNavigationToSignIn = {
+                        navController.navigate(
+                            route = SignInScreenRoute,
+                            navOptions = navOptions {
+                                popUpTo<SplashScreenRoute> {
+                                    inclusive = true
+                                }
+                            })
+
+                    }
                 )
             }
-            composable(SignInRoute) {
-
+            composable<SignInScreenRoute> {
+                SignInRoute()
             }
-            composable(SignUpRoute) {
+            composable<SignUpScreenRoute> {
 
             }
         }

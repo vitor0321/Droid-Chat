@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.walcker.droidchat.navigation.ChatNavHost
 
 @Composable
 internal fun ChatApp() {
@@ -15,7 +16,7 @@ internal fun ChatApp() {
                 .padding(paddingValues)
                 .fillMaxSize()
         ) {
-
+            ChatNavHost()
         }
     }
 }
