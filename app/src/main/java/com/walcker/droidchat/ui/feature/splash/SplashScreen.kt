@@ -19,13 +19,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.walcker.droidchat.R
 import com.walcker.droidchat.strings.strings
 import com.walcker.droidchat.ui.theme.BackgroundGradient
 import com.walcker.droidchat.ui.theme.DroidChatTheme
+import com.walcker.droidchat.ui.theme.SpaceExtraLarge
+import com.walcker.droidchat.ui.theme.SpaceMedium
+import com.walcker.droidchat.ui.theme.SpaceXSmall
 import com.walcker.droidchat.ui.theme.Typography
 import kotlinx.coroutines.delay
+
+private const val SplashRouteDelay = 2000L
 
 @Composable
 internal fun SplashRoute(
@@ -33,7 +37,7 @@ internal fun SplashRoute(
 ) {
     SplashScreen()
     LaunchedEffect(Unit) {
-        delay(2000)
+        delay(SplashRouteDelay)
         onNavigationToSignIn()
     }
 }
@@ -44,7 +48,7 @@ private fun SplashScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(BackgroundGradient)
-            .padding(16.dp),
+            .padding(SpaceMedium),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -53,7 +57,7 @@ private fun SplashScreen() {
             contentDescription = "Logo",
         )
 
-        Spacer(modifier = Modifier.height(77.dp))
+        Spacer(modifier = Modifier.height(SpaceExtraLarge))
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -63,7 +67,7 @@ private fun SplashScreen() {
                 contentDescription = "Lock",
             )
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(SpaceXSmall))
 
             Text(
                 text = strings.splashStrings.splashSafetyInfo,
