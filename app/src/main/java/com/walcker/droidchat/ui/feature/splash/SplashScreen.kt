@@ -23,9 +23,7 @@ import com.walcker.droidchat.R
 import com.walcker.droidchat.strings.strings
 import com.walcker.droidchat.ui.theme.BackgroundGradient
 import com.walcker.droidchat.ui.theme.DroidChatTheme
-import com.walcker.droidchat.ui.theme.SpaceExtraLarge
-import com.walcker.droidchat.ui.theme.SpaceMedium
-import com.walcker.droidchat.ui.theme.SpaceXSmall
+import com.walcker.droidchat.ui.theme.DroidSpace
 import com.walcker.droidchat.ui.theme.Typography
 import kotlinx.coroutines.delay
 
@@ -48,7 +46,7 @@ private fun SplashScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(BackgroundGradient)
-            .padding(SpaceMedium),
+            .padding(DroidSpace.Medium.value),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -57,7 +55,7 @@ private fun SplashScreen() {
             contentDescription = "Logo",
         )
 
-        Spacer(modifier = Modifier.height(SpaceExtraLarge))
+        Spacer(modifier = Modifier.height(DroidSpace.ExtraLarge.value))
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -67,7 +65,7 @@ private fun SplashScreen() {
                 contentDescription = "Lock",
             )
 
-            Spacer(modifier = Modifier.width(SpaceXSmall))
+            Spacer(modifier = Modifier.width(DroidSpace.XSmall.value))
 
             Text(
                 text = strings.splashStrings.splashSafetyInfo,
@@ -79,7 +77,7 @@ private fun SplashScreen() {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun SplashScreenPreview() {
     DroidChatTheme {

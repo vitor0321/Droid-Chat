@@ -25,7 +25,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.walcker.droidchat.R
-import com.walcker.droidchat.ui.theme.SpaceMedium
+import com.walcker.droidchat.ui.theme.DroidChatTheme
+import com.walcker.droidchat.ui.theme.DroidSpace
 
 @Composable
 internal fun PrimaryTextField(
@@ -93,23 +94,40 @@ internal fun PrimaryTextField(
 
         errorMessage?.let {
             Text(
-                modifier = Modifier.padding(top = SpaceMedium),
+                modifier = Modifier.padding(top = DroidSpace.Medium.value),
                 text = it,
                 color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.labelMedium,
             )
         }
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun PrimaryTextFieldPreview() {
-    PrimaryTextField(
-        value = "",
-        leadingIcon = R.drawable.ic_envelope,
-        keyboardType = KeyboardType.Password,
-        placeholder = "Email",
-        errorMessage = "Erro ao digitar o valor",
-        onValueChange = {}
-    )
+    DroidChatTheme {
+        PrimaryTextField(
+            value = "",
+            leadingIcon = R.drawable.ic_envelope,
+            keyboardType = KeyboardType.Password,
+            placeholder = "Email",
+            onValueChange = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun PrimaryTextFieldErrorPreview() {
+    DroidChatTheme {
+        PrimaryTextField(
+            value = "",
+            leadingIcon = R.drawable.ic_envelope,
+            keyboardType = KeyboardType.Password,
+            placeholder = "Email",
+            errorMessage = "Erro ao digitar o valor",
+            onValueChange = {}
+        )
+    }
 }
