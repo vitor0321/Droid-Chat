@@ -7,6 +7,7 @@ enum class DroidSpace(
     val value: Dp
 ){
     Small(2.dp),
+    MSmall(4.dp),
     XSmall(8.dp),
     Medium(14.dp),
     XMedium(20.dp),

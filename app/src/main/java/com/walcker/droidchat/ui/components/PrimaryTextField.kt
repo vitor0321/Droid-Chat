@@ -25,6 +25,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.walcker.droidchat.R
+import com.walcker.droidchat.ui.extension.getVisualTransformationForPassword
 import com.walcker.droidchat.ui.theme.DroidChatTheme
 import com.walcker.droidchat.ui.theme.DroidSpace
 
@@ -74,9 +75,7 @@ internal fun PrimaryTextField(
                     )
                 }
             },
-            visualTransformation = if (keyboardType == KeyboardType.Password)
-                if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation()
-            else VisualTransformation.None,
+            visualTransformation = keyboardType.getVisualTransformationForPassword(passwordVisible),
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType,
                 imeAction = imeAction
