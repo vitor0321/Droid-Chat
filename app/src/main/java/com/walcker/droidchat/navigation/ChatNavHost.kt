@@ -9,17 +9,20 @@ import androidx.navigation.navOptions
 import com.walcker.droidchat.navigation.extension.slideInTo
 import com.walcker.droidchat.navigation.extension.slideOutTo
 import com.walcker.droidchat.ui.feature.signin.SignInRoute
+import com.walcker.droidchat.ui.feature.singup.SignUpRoute
 import com.walcker.droidchat.ui.feature.splash.SplashRoute
 import kotlinx.serialization.Serializable
 
-@Serializable
-object SplashScreenRoute
+internal sealed interface Route {
+    @Serializable
+    object SplashScreenRoute
 
-@Serializable
-object SignInScreenRoute
+    @Serializable
+    object SignInScreenRoute
 
-@Serializable
-object SignUpScreenRoute
+    @Serializable
+    object SignUpScreenRoute
+}
 
 @Composable
 internal fun ChatNavHost() {
@@ -28,17 +31,17 @@ internal fun ChatNavHost() {
 
     NavHost(
         navController = navController,
-        startDestination = SplashScreenRoute,
+        startDestination = Route.SplashScreenRoute,
         enterTransition = { this.slideInTo(AnimatedContentTransitionScope.SlideDirection.Up) },
         exitTransition = { this.slideOutTo(AnimatedContentTransitionScope.SlideDirection.Down) },
         builder = {
-            composable<SplashScreenRoute> {
+            composable<Route.SplashScreenRoute> {
                 SplashRoute(
                     onNavigationToSignIn = {
                         navController.navigate(
-                            route = SignInScreenRoute,
+                            route = Route.SignInScreenRoute,
                             navOptions = navOptions {
-                                popUpTo<SplashScreenRoute> {
+                                popUpTo<Route.SplashScreenRoute> {
                                     inclusive = true
                                 }
                             })
@@ -46,21 +49,21 @@ internal fun ChatNavHost() {
                     }
                 )
             }
-            composable<SignInScreenRoute>(
+            composable<Route.SignInScreenRoute>(
                 enterTransition = { this.slideInTo(AnimatedContentTransitionScope.SlideDirection.Right) },
                 exitTransition = { this.slideOutTo(AnimatedContentTransitionScope.SlideDirection.Left) },
             ) {
                 SignInRoute(
                     navigateToSignUp = {
-                        navController.navigate(SignUpScreenRoute)
+                        navController.navigate(Route.SignUpScreenRoute)
                     }
                 )
             }
-            composable<SignUpScreenRoute>(
+            composable<Route.SignUpScreenRoute>(
                 enterTransition = { this.slideInTo(AnimatedContentTransitionScope.SlideDirection.Left) },
-                exitTransition = { this.slideOutTo(AnimatedContentTransitionScope.SlideDirection.Left) }
+                exitTransition = { this.slideOutTo(AnimatedContentTransitionScope.SlideDirection.Right) }
             ) {
-
+                SignUpRoute()
             }
         }
     )

@@ -21,10 +21,10 @@ import com.walcker.droidchat.ui.theme.DroidChatTheme
 import com.walcker.droidchat.ui.theme.DroidSpace
 
 @Composable
-fun PrimaryButton(
+internal fun PrimaryButton(
+    modifier: Modifier = Modifier,
     text: String,
     isLoading: Boolean = false,
-    modifier: Modifier = Modifier,
     onClick: () -> Unit,
 ) {
 
@@ -46,7 +46,7 @@ fun PrimaryButton(
                 if (isLoading) {
                     CircularProgressIndicator(
                         modifier = Modifier
-                            .size(DroidSpace.XLarge.value)
+                            .size(DroidSpace.MLarge.value)
                             .aspectRatio(1f),
                         color = MaterialTheme.colorScheme.onPrimary,
                         strokeCap = StrokeCap.Round,

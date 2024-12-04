@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.InputTransformation.Companion.keyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -21,20 +22,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.walcker.droidchat.R
+import com.walcker.droidchat.ui.extension.droidChatBottomBorder
 import com.walcker.droidchat.ui.extension.getVisualTransformationForPassword
 import com.walcker.droidchat.ui.theme.ColorSuccess
 import com.walcker.droidchat.ui.theme.DroidChatTheme
 import com.walcker.droidchat.ui.theme.DroidSpace
 
 @Composable
-fun SecondaryTextField(
+internal fun SecondaryTextField(
     label: String,
     value: String,
     onValueChange: (String) -> Unit,
@@ -53,8 +58,8 @@ fun SecondaryTextField(
             onValueChange(it)
         },
         modifier = modifier.fillMaxWidth(),
-        textStyle = MaterialTheme.typography.bodyMedium.copy(
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+        textStyle = TextStyle(
+            color = Color.Black,
             fontWeight = FontWeight.Bold,
         ),
         keyboardOptions = KeyboardOptions(
@@ -68,9 +73,10 @@ fun SecondaryTextField(
         visualTransformation = keyboardType.getVisualTransformationForPassword(passwordVisible),
     ) { innerTextField ->
         Surface(
-            color = MaterialTheme.colorScheme.onSurface,
+            color = Color.White,
         ) {
             Row(
+                modifier = Modifier.droidChatBottomBorder(MaterialTheme.colorScheme.onSurfaceVariant, 1.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Column(
@@ -80,8 +86,8 @@ fun SecondaryTextField(
                 ) {
                     Text(
                         text = label,
-                        style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
-                        color = MaterialTheme.colorScheme.onSurface,
+                        style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Medium),
+                        color = Color.Gray,
                     )
 
                     Spacer(modifier = Modifier.height(DroidSpace.MSmall.value))
@@ -96,8 +102,9 @@ fun SecondaryTextField(
                                 text = extraText,
                                 modifier = Modifier.padding(DroidSpace.MSmall.value),
                                 color = ColorSuccess,
-                                style = MaterialTheme.typography.bodySmall,
-                                fontWeight = FontWeight.Bold,
+                                style = MaterialTheme.typography.labelLarge,
+                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                fontWeight = FontWeight.SemiBold,
                             )
                         }
                     }
