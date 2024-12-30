@@ -9,7 +9,7 @@ import com.example.droidchat.ui.feature.signup.viewModel.SignUpEvent
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpState
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpFormValidator
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpViewModel
-import com.example.droidchat.ui.theme.DroidChatTheme
+import com.example.droidchat.DroidChatTheme
 
 @Composable
 internal fun SignUpRoute(

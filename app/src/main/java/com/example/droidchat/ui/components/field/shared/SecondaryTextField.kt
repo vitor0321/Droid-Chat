@@ -29,10 +29,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.droidchat.R
-import com.example.droidchat.ui.extension.bottomBorder
-import com.example.droidchat.ui.extension.getVisualTransformationForPassword
-import com.example.droidchat.ui.theme.ColorSuccess
-import com.example.droidchat.ui.theme.DroidChatTheme
+import com.example.platform.extension.bottomBorder
+import com.example.platform.extension.getVisualTransformationForPassword
+import com.example.platform.theme.ColorSuccess
+import com.example.droidchat.DroidChatTheme
 
 @Composable
 fun SecondaryTextField(

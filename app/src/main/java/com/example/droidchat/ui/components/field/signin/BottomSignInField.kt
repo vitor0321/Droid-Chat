@@ -12,7 +12,7 @@ import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.droidchat.ui.theme.DroidChatTheme
+import com.example.droidchat.DroidChatTheme
 import com.example.droidchat.strings.strings
 
 @Composable

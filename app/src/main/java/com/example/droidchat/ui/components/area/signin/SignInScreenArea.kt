@@ -17,8 +17,8 @@ import com.example.droidchat.ui.components.field.signin.BodySigInField
 import com.example.droidchat.ui.components.field.signin.BottomSigInField
 import com.example.droidchat.ui.feature.signin.viewModel.SignInEvent
 import com.example.droidchat.ui.feature.signin.viewModel.SignInState
-import com.example.droidchat.ui.theme.BackgroundGradient
-import com.example.droidchat.ui.theme.DroidChatTheme
+import com.example.platform.theme.BackgroundGradient
+import com.example.droidchat.DroidChatTheme
 
 @Composable
 internal fun SigInScreenArea(

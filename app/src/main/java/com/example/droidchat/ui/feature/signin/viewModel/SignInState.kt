@@ -6,4 +6,5 @@ internal data class SignInState(
     val password: String = "",
     val passwordError: String? = null,
     val isLoading: Boolean = false,
+    val hasError: Boolean = false,
 )

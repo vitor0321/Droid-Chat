@@ -1,8 +1,8 @@
 package com.example.droidchat.ui.feature.signup.viewModel
 
-import com.example.droidchat.ui.validator.EmailValidator
-import com.example.droidchat.ui.validator.FormValidator
-import com.example.droidchat.ui.validator.PasswordValidator
+import com.example.platform.validator.EmailValidator
+import com.example.platform.validator.FormValidator
+import com.example.platform.validator.PasswordValidator
 import com.example.droidchat.strings.strings
 
 internal class SignUpFormValidator : FormValidator<SignUpState> {

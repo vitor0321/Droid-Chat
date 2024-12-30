@@ -23,9 +23,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.droidchat.R
-import com.example.droidchat.ui.extension.getVisualTransformationForPassword
-import com.example.droidchat.ui.theme.DroidChatTheme
-import com.example.droidchat.ui.theme.DroidSpace
+import com.example.platform.extension.getVisualTransformationForPassword
+import com.example.droidchat.DroidChatTheme
+import com.example.platform.theme.DroidSpace
 
 @Composable
 fun PrimaryTextField(
