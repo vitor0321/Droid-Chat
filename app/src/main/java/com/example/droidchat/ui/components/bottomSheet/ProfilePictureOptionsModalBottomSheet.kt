@@ -1,11 +1,10 @@
-package com.example.droidchat.ui.components
+package com.example.droidchat.ui.components.bottomSheet
 
 import android.content.Context
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -30,14 +29,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.dp
 import com.example.droidchat.DroidChatFileProvider
 import com.example.droidchat.R
 import com.example.droidchat.ui.theme.DroidChatTheme
-import com.walcker.droidchat.strings.strings
+import com.example.droidchat.ui.theme.DroidSpace
+import com.example.droidchat.strings.strings
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -98,11 +96,9 @@ private fun ProfilePictureOptionRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .defaultMinSize(minHeight = 48.dp)
-            .clickable {
-                onClick()
-            }
-            .padding(horizontal = 16.dp),
+            .defaultMinSize(minHeight = DroidSpace.XLarge.value)
+            .clickable { onClick() }
+            .padding(horizontal = DroidSpace.MMedium.value),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
@@ -111,7 +107,7 @@ private fun ProfilePictureOptionRow(
             tint = MaterialTheme.colorScheme.onSurface,
         )
 
-        Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = Modifier.width(DroidSpace.XSmall.value))
 
         Text(
             text = text,

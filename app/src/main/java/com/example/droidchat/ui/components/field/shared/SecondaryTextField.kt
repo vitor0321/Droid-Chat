@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.components
+package com.example.droidchat.ui.components.field.shared
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

@@ -1,4 +1,4 @@
-package com.walcker.droidchat.strings
+package com.example.droidchat.strings
 
 import cafe.adriel.lyricist.LyricistStrings
 

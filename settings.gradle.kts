@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Droid Chat"
 include(":app")
+include(":app:platform")

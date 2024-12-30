@@ -4,28 +4,27 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.example.droidchat.R
-import com.walcker.droidchat.strings.strings
+import com.example.droidchat.strings.strings
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 internal class SignInViewModel @Inject constructor() : ViewModel() {
 
-    var formState by mutableStateOf(SignInFormState())
+    var state by mutableStateOf(SignInState())
         private set
 
-    fun onFormEvent(event: SignInFormEvent) {
+    fun onFormEvent(event: SignInEvent) {
         when (event) {
-            is SignInFormEvent.EmailChanged -> {
-                formState = formState.copy(email = event.email, emailError = null)
+            is SignInEvent.EmailChanged -> {
+                state = state.copy(email = event.email, emailError = null)
             }
 
-            is SignInFormEvent.PasswordChanged -> {
-                formState = formState.copy(password = event.password, passwordError = null)
+            is SignInEvent.PasswordChanged -> {
+                state = state.copy(password = event.password, passwordError = null)
             }
 
-            SignInFormEvent.Submit -> {
+            SignInEvent.Submit -> {
                 doSignIn()
             }
         }
@@ -34,24 +33,24 @@ internal class SignInViewModel @Inject constructor() : ViewModel() {
     private fun doSignIn() {
         var isFormValid = true
         // resetFormErrorState()
-        if (formState.email.isBlank()) {
-            formState = formState.copy(emailError =strings.errorMessagesStrings.errorMessageEmailInvalid)
+        if (state.email.isBlank()) {
+            state = state.copy(emailError = strings.errorMessagesStrings.errorMessageEmailInvalid)
             isFormValid = false
         }
 
-        if (formState.password.isBlank()) {
-            formState = formState.copy(passwordError = strings.errorMessagesStrings.errorMessagePasswordInvalid)
+        if (state.password.isBlank()) {
+            state = state.copy(passwordError = strings.errorMessagesStrings.errorMessagePasswordInvalid)
             isFormValid = false
         }
 
         if (isFormValid) {
-            formState = formState.copy(isLoading = true)
+            state = state.copy(isLoading = true)
             // Request to API
         }
     }
 
     private fun resetFormErrorState() {
-        formState = formState.copy(
+        state = state.copy(
             emailError = null,
             passwordError = null,
         )

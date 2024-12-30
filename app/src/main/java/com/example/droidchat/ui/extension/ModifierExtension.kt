@@ -10,7 +10,7 @@ import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.platform.InspectorInfo
 import androidx.compose.ui.unit.Dp
 
-fun Modifier.bottomBorder(color: Color, strokeWidth: Dp) = this.drawBehind {
+internal fun Modifier.bottomBorder(color: Color, strokeWidth: Dp) = this.drawBehind {
     val strokeWidthPx = strokeWidth.toPx()
 
     val width = size.width

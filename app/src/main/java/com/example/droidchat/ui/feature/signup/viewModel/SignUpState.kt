@@ -2,7 +2,7 @@ package com.example.droidchat.ui.feature.signup.viewModel
 
 import android.net.Uri
 
-internal data class SignUpFormState(
+internal data class SignUpState(
     val profilePictureUri: Uri? = null,
     val firstName: String = "",
     val firstNameError: String? = null,

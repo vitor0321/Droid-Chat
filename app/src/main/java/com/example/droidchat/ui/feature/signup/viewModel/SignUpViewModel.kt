@@ -5,53 +5,53 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.droidchat.ui.validator.FormValidator
-import com.walcker.droidchat.strings.strings
+import com.example.droidchat.strings.strings
 
 internal class SignUpViewModel(
-    private val formValidator: FormValidator<SignUpFormState>
+    private val formValidator: FormValidator<SignUpState>
 ) : ViewModel() {
 
-    var formState by mutableStateOf(SignUpFormState())
+    var state by mutableStateOf(SignUpState())
         private set
 
-    fun onFormEvent(event: SignUpFormEvent) {
+    fun onFormEvent(event: SignUpEvent) {
         when (event) {
-            is SignUpFormEvent.ProfilePhotoUriChanged ->
-                formState = formState.copy(profilePictureUri = event.uri)
+            is SignUpEvent.ProfilePhotoUriChanged ->
+                state = state.copy(profilePictureUri = event.uri)
 
-            is SignUpFormEvent.FirstNameChanged ->
-                formState = formState.copy(firstName = event.firstName)
+            is SignUpEvent.FirstNameChanged ->
+                state = state.copy(firstName = event.firstName)
 
-            is SignUpFormEvent.LastNameChanged ->
-                formState = formState.copy(lastName = event.lastName)
+            is SignUpEvent.LastNameChanged ->
+                state = state.copy(lastName = event.lastName)
 
-            is SignUpFormEvent.EmailChanged ->
-                formState = formState.copy(email = event.email)
+            is SignUpEvent.EmailChanged ->
+                state = state.copy(email = event.email)
 
-            is SignUpFormEvent.PasswordChanged -> {
-                formState = formState.copy(password = event.password)
+            is SignUpEvent.PasswordChanged -> {
+                state = state.copy(password = event.password)
                 updatePasswordExtraText()
             }
 
-            is SignUpFormEvent.PasswordConfirmationChanged -> {
-                formState = formState.copy(passwordConfirmation = event.passwordConfirmation)
+            is SignUpEvent.PasswordConfirmationChanged -> {
+                state = state.copy(passwordConfirmation = event.passwordConfirmation)
                 updatePasswordExtraText()
             }
 
-            is SignUpFormEvent.OpenProfilePictureOptionsModalBottomSheet ->
-                formState = formState.copy(isProfilePictureModalBottomSheetOpen = true)
+            is SignUpEvent.OpenProfilePictureOptionsModalBottomSheet ->
+                state = state.copy(isProfilePictureModalBottomSheetOpen = true)
 
-            is SignUpFormEvent.CloseProfilePictureOptionsModalBottomSheet ->
-                formState = formState.copy(isProfilePictureModalBottomSheetOpen = false)
+            is SignUpEvent.CloseProfilePictureOptionsModalBottomSheet ->
+                state = state.copy(isProfilePictureModalBottomSheetOpen = false)
 
-            is SignUpFormEvent.Submit -> doSignUp()
+            is SignUpEvent.Submit -> doSignUp()
         }
     }
 
     private fun updatePasswordExtraText() {
-        formState = formState.copy(
-            passwordExtraText = if (formState.password.isNotEmpty()
-                && formState.password == formState.passwordConfirmation
+        state = state.copy(
+            passwordExtraText = if (state.password.isNotEmpty()
+                && state.password == state.passwordConfirmation
             ) {
                 strings.signUpStrings.featureSignUpPasswordsMatch
             } else null
@@ -60,14 +60,14 @@ internal class SignUpViewModel(
 
     private fun doSignUp() {
         if (isValidForm()) {
-            formState = formState.copy(isLoading = true)
+            state = state.copy(isLoading = true)
             // Request to API
         }
     }
 
     private fun isValidForm(): Boolean {
-        return !formValidator.validate(formState).also {
-            formState = it
+        return !formValidator.validate(state).also {
+            state = it
         }.hasError
     }
 }
