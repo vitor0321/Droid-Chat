@@ -57,7 +57,7 @@ internal fun SignUpRoute(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun SignUpScreen(
+private fun SignUpScreen(
     formState: SignUpFormState,
     onFormEvent: (SignUpFormEvent) -> Unit,
 ) {
@@ -196,7 +196,7 @@ internal fun SignUpScreen(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun SignUpScreenPreview() {
     DroidChatTheme {

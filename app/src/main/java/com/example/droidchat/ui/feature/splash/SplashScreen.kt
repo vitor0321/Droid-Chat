@@ -30,7 +30,7 @@ import com.walcker.droidchat.strings.strings
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashRoute(
+internal fun SplashRoute(
     onNavigateToSignIn: () -> Unit,
 ) {
     SplashScreen()
@@ -41,7 +41,7 @@ fun SplashRoute(
 }
 
 @Composable
-fun SplashScreen() {
+private fun SplashScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -79,7 +79,7 @@ fun SplashScreen() {
 
 @Composable
 @Preview(showBackground = true, backgroundColor = 0xFF00BCD4)
-fun SplashScreenPreview() {
+internal fun SplashScreenPreview() {
     DroidChatTheme {
         SplashScreen()
     }
