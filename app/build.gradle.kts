@@ -1,29 +1,35 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinKsp)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
-    namespace = "com.walcker.droidchat"
+    namespace = "com.example.droidchat"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.walcker.droidchat"
-        minSdk = 24
-        targetSdk = 35
+        applicationId = "com.example.droidchat"
+        minSdk = 26
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -36,9 +42,10 @@ android {
     buildFeatures {
         compose = true
     }
-    ksp {
-        arg("lyricist.internalVisibility", "true")
-        arg("lyricist.generateStringsProperty", "true")
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 }
 
@@ -63,6 +70,9 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
 
+    implementation(libs.lyricist)
+    ksp(libs.lyricist.processor)
+
     implementation(libs.coil.compose)
 
     implementation(libs.androidx.core.splashscreen)
@@ -77,9 +87,6 @@ dependencies {
     implementation(libs.firebase.messaging)
 
     implementation(libs.accompanist.permissions)
-
-    implementation(libs.lyricist)
-    ksp(libs.lyricist.processor)
 
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.cio)
