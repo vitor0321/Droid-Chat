@@ -6,11 +6,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.example.droidchat.navigation.extension.slidOutTo
-import com.example.droidchat.navigation.extension.slideInTo
+import com.example.platform.extension.slidOutTo
+import com.example.platform.extension.slideInTo
 import com.example.droidchat.ui.feature.signin.SignInRoute
 import com.example.droidchat.ui.feature.signup.SignUpRoute
 import com.example.droidchat.ui.feature.splash.SplashRoute
+import com.example.droidchat.navigation.Route.SplashRoute
 import kotlinx.serialization.Serializable
 
 internal sealed interface Route {
@@ -28,14 +29,14 @@ internal sealed interface Route {
 internal fun ChatNavHost() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Route.SplashRoute) {
-        composable<Route.SplashRoute> {
+    NavHost(navController = navController, startDestination = SplashRoute) {
+        composable<SplashRoute> {
             SplashRoute(
                 onNavigateToSignIn = {
                     navController.navigate(
                         route = Route.SignInRoute,
                         navOptions = navOptions {
-                            popUpTo(Route.SplashRoute) {
+                            popUpTo(SplashRoute) {
                                 inclusive = true
                             }
                         }

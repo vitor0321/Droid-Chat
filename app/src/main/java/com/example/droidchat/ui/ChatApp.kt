@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import com.example.droidchat.navigation.ChatNavHost
 
 @Composable
-fun ChatApp() {
+internal fun ChatApp() {
     Scaffold(
         bottomBar = {
             // Vazio

@@ -1,4 +1,4 @@
-package com.walcker.droidchat.strings
+package com.example.droidchat.strings
 
 internal data class CommonStrings(
     val commonGenericErrorTitle: String = "Alguma coisa deu errado",
