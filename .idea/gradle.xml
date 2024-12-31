@@ -12,6 +12,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/app/platform" />
+            <option value="$PROJECT_DIR$/app/products" />
+            <option value="$PROJECT_DIR$/app/products/auth" />
           </set>
         </option>
       </GradleProjectSettings>

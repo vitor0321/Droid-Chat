@@ -26,7 +26,7 @@
 
         <provider
             android:authorities="com.example.droidchat.fileprovider"
-            android:name=".DroidChatFileProvider"
+            android:name="com.example.platform.DroidChatFileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
 
