@@ -1,4 +1,4 @@
-package com.example.droidchat.strings
+package com.example.droidchat.ui.strings
 
 internal data class SignUpStrings(
     val featureSignUpChangeProfilePhoto: String = "Alterar foto de perfil",

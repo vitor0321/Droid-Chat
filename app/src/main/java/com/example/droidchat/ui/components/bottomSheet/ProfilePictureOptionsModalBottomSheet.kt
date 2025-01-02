@@ -35,7 +35,7 @@ import com.example.droidchat.DroidChatFileProvider
 import com.example.droidchat.R
 import com.example.droidchat.DroidChatTheme
 import com.example.platform.theme.DroidSpace
-import com.example.droidchat.strings.strings
+import com.example.droidchat.ui.strings.strings
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -5,10 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.platform.validator.FormValidator
-import com.example.droidchat.strings.strings
+import com.example.droidchat.ui.strings.strings
+import javax.inject.Inject
 
-internal class SignUpViewModel(
-    private val formValidator: FormValidator<SignUpState>
+internal class SignUpViewModel @Inject constructor(
+//    private val formValidator: FormValidator<SignUpState>
 ) : ViewModel() {
 
     var state by mutableStateOf(SignUpState())
@@ -59,15 +60,15 @@ internal class SignUpViewModel(
     }
 
     private fun doSignUp() {
-        if (isValidForm()) {
-            state = state.copy(isLoading = true)
-            // Request to API
-        }
+//        if (isValidForm()) {
+//            state = state.copy(isLoading = true)
+//            // Request to API
+//        }
     }
 
-    private fun isValidForm(): Boolean {
-        return !formValidator.validate(state).also {
-            state = it
-        }.hasError
-    }
+//    private fun isValidForm(): Boolean {
+//        return !formValidator.validate(state).also {
+//            state = it
+//        }.hasError
+//    }
 }

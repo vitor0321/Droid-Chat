@@ -4,14 +4,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.droidchat.data.network.model.AuthRequest
+import com.example.droidchat.domain.NetWorkDataSource
 import com.example.platform.validator.FormValidator
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-internal class SignInViewModel @Inject constructor(
-    private val formValidator: FormValidator<SignInState>
+internal class SignInViewModel @Inject constructor (
+//    private val formValidator: FormValidator<SignInState>,
+    private val netWorkDataSource: NetWorkDataSource,
 ) : ViewModel() {
+
+    init {
+        viewModelScope.launch {
+            val response = netWorkDataSource.signIn(AuthRequest("username", "password"))
+            // Handle response
+        }
+    }
 
     var state by mutableStateOf(SignInState())
         private set
@@ -29,15 +41,15 @@ internal class SignInViewModel @Inject constructor(
     }
 
     private fun doSignIn() {
-        if (isValidForm()) {
-            state = state.copy(isLoading = true)
-            // Request to API
-        }
+//        if (isValidForm()) {
+//            state = state.copy(isLoading = true)
+//            // Request to API
+//        }
     }
 
-    private fun isValidForm(): Boolean {
-        return !formValidator.validate(state).also {
-            state = it
-        }.hasError
-    }
+//    private fun isValidForm(): Boolean {
+//        return !formValidator.validate(state).also {
+//            state = it
+//        }.hasError
+//    }
 }

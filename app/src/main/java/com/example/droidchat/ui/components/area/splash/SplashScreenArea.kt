@@ -23,7 +23,7 @@ import com.example.droidchat.R
 import com.example.platform.theme.BackgroundGradient
 import com.example.droidchat.DroidChatTheme
 import com.example.platform.theme.DroidSpace
-import com.example.droidchat.strings.strings
+import com.example.droidchat.ui.strings.strings
 
 @Composable
 internal fun SplashScreenArea() {

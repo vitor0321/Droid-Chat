@@ -1,4 +1,4 @@
-package com.example.droidchat.navigation
+package com.example.droidchat.ui.navigation
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.runtime.Composable
@@ -11,7 +11,7 @@ import com.example.platform.extension.slideInTo
 import com.example.droidchat.ui.feature.signin.SignInRoute
 import com.example.droidchat.ui.feature.signup.SignUpRoute
 import com.example.droidchat.ui.feature.splash.SplashRoute
-import com.example.droidchat.navigation.Route.SplashRoute
+import com.example.droidchat.ui.navigation.Route.SplashRoute
 import kotlinx.serialization.Serializable
 
 internal sealed interface Route {

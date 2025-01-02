@@ -3,6 +3,7 @@ package com.example.droidchat.ui.feature.signup
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.droidchat.ui.components.area.sigup.SignUpScreenArea
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpEvent
@@ -13,9 +14,7 @@ import com.example.droidchat.DroidChatTheme
 
 @Composable
 internal fun SignUpRoute(
-    viewModel: SignUpViewModel = viewModel {
-        SignUpViewModel(SignUpFormValidator())
-    }
+    viewModel: SignUpViewModel = hiltViewModel()
 ) {
     val state = viewModel.state
 
