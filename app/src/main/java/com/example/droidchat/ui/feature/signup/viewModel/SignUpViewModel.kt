@@ -4,7 +4,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.example.platform.validator.FormValidator
 import com.example.droidchat.ui.strings.strings
 import javax.inject.Inject
 
