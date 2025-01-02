@@ -1,7 +1,7 @@
 package com.example.droidchat.data.network.di
 
+import com.example.droidchat.data.network.NetWorkDataSource
 import com.example.droidchat.data.network.NetworkDataSourceImpl
-import com.example.droidchat.domain.NetWorkDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

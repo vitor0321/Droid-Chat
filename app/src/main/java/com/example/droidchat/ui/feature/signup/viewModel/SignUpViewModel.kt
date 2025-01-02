@@ -4,11 +4,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.droidchat.data.network.model.NetworkException
+import com.example.droidchat.domain.AuthRepository
+import com.example.droidchat.domain.model.CreateAccount
 import com.example.droidchat.ui.strings.strings
+import com.example.droidchat.ui.validator.FormValidator
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 internal class SignUpViewModel @Inject constructor(
-//    private val formValidator: FormValidator<SignUpState>
+    private val formValidator: FormValidator<SignUpState>,
+    private val authRepository: AuthRepository,
 ) : ViewModel() {
 
     var state by mutableStateOf(SignUpState())
@@ -59,15 +68,44 @@ internal class SignUpViewModel @Inject constructor(
     }
 
     private fun doSignUp() {
-//        if (isValidForm()) {
-//            state = state.copy(isLoading = true)
-//            // Request to API
-//        }
+        if (isValidForm()) {
+            state = state.copy(isLoading = true)
+            viewModelScope.launch {
+                authRepository.signUp(
+                    createAccount = CreateAccount(
+                        username = "",
+                        password = "",
+                        firstName = state.firstName,
+                        lastName = state.lastName,
+                        profilePictureUri = null,
+                    )
+                ).fold(
+                    onSuccess = {
+                        state = state.copy(
+                            isLoading = false,
+                            isSignedUp = true
+                        )
+                    },
+                    onFailure = {
+                        state = state.copy(
+                            isLoading = false,
+                            apiErrorMessage = if (it is NetworkException.ApiException){
+                                when (it.statusCode) {
+                                    400 -> strings.errorMessagesStrings.errorMessageApiFormValidationFailed
+                                    409 -> strings.errorMessagesStrings.errorMessageUserWithUsernameAlreadyExists
+                                    else -> strings.errorMessagesStrings.commonGenericErrorTitle
+                                }
+                            }else strings.errorMessagesStrings.commonGenericErrorTitle
+                        )
+                    }
+                )
+            }
+        }
     }
 
-//    private fun isValidForm(): Boolean {
-//        return !formValidator.validate(state).also {
-//            state = it
-//        }.hasError
-//    }
+    private fun isValidForm(): Boolean {
+        return !formValidator.validate(state).also {
+            state = it
+        }.hasError
+    }
 }
