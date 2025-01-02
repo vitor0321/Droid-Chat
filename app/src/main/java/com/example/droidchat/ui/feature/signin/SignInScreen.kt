@@ -2,19 +2,16 @@ package com.example.droidchat.ui.feature.signin
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.droidchat.DroidChatTheme
 import com.example.droidchat.ui.components.area.signin.SigInScreenArea
 import com.example.droidchat.ui.feature.signin.viewModel.SignInEvent
-import com.example.droidchat.ui.feature.signin.viewModel.SignInFormValidator
 import com.example.droidchat.ui.feature.signin.viewModel.SignInState
 import com.example.droidchat.ui.feature.signin.viewModel.SignInViewModel
 
 @Composable
 internal fun SignInRoute(
-    viewModel: SignInViewModel = viewModel {
-        SignInViewModel(formValidator = SignInFormValidator())
-    },
+    viewModel: SignInViewModel = hiltViewModel(),
     navigateToSignUp: () -> Unit,
 ) {
     val state = viewModel.state

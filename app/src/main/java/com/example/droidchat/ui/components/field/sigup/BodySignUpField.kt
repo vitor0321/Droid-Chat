@@ -19,7 +19,7 @@ import com.example.droidchat.ui.components.field.shared.SecondaryTextField
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpEvent
 import com.example.droidchat.DroidChatTheme
 import com.example.platform.theme.DroidSpace
-import com.example.droidchat.strings.strings
+import com.example.droidchat.ui.strings.strings
 
 @Composable
 internal fun BodySigUpField(

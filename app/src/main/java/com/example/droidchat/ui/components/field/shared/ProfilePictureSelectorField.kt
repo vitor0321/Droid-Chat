@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.droidchat.R
 import com.example.droidchat.DroidChatTheme
-import com.example.droidchat.strings.strings
+import com.example.droidchat.ui.strings.strings
 
 @Composable
 fun ProfilePictureSelector(

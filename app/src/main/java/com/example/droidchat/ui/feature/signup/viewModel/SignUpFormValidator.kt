@@ -3,7 +3,7 @@ package com.example.droidchat.ui.feature.signup.viewModel
 import com.example.platform.validator.EmailValidator
 import com.example.platform.validator.FormValidator
 import com.example.platform.validator.PasswordValidator
-import com.example.droidchat.strings.strings
+import com.example.droidchat.ui.strings.strings
 
 internal class SignUpFormValidator : FormValidator<SignUpState> {
 

@@ -1,4 +1,4 @@
-package com.example.droidchat.strings
+package com.example.droidchat.ui.strings
 
 internal data class ErrorMessagesStrings(
     val errorMessageInvalidUsernameOrPassword: String = "E-mail ou senha incorretos",

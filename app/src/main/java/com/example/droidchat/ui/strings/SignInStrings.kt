@@ -1,4 +1,4 @@
-package com.example.droidchat.strings
+package com.example.droidchat.ui.strings
 
 internal data class SignInStrings(
     val featureLoginEmail: String = "E-mail",
