@@ -18,4 +18,6 @@ internal data class SignUpState(
     val isProfilePictureModalBottomSheetOpen: Boolean = false,
     val hasError: Boolean = false,
     val isLoading: Boolean = false,
+    val isSignedUp: Boolean = false,
+    val apiErrorMessage: String? = null,
 )
