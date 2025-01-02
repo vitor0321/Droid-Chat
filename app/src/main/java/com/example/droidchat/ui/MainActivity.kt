@@ -4,8 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.droidchat.DroidChatTheme
-import dagger.hilt.EntryPoint
+import com.example.droidchat.ui.theme.DroidChatTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

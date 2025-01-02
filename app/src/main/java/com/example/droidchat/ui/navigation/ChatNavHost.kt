@@ -6,8 +6,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.example.platform.extension.slidOutTo
-import com.example.platform.extension.slideInTo
+import com.example.droidchat.ui.extension.slidOutTo
+import com.example.droidchat.ui.extension.slideInTo
 import com.example.droidchat.ui.feature.signin.SignInRoute
 import com.example.droidchat.ui.feature.signup.SignUpRoute
 import com.example.droidchat.ui.feature.splash.SplashRoute

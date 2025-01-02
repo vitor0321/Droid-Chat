@@ -3,8 +3,8 @@ package com.example.droidchat.ui.feature.splash
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.droidchat.ui.components.area.splash.SplashScreenArea
-import com.example.droidchat.DroidChatTheme
+import com.example.droidchat.ui.feature.components.area.splash.SplashScreenArea
+import com.example.droidchat.ui.theme.DroidChatTheme
 import kotlinx.coroutines.delay
 
 @Composable
