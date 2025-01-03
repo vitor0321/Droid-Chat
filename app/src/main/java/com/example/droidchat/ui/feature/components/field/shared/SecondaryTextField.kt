@@ -35,7 +35,7 @@ import com.example.droidchat.ui.theme.ColorSuccess
 import com.example.droidchat.ui.theme.DroidChatTheme
 
 @Composable
-fun SecondaryTextField(
+internal fun SecondaryTextField(
     label: String,
     value: String,
     onValueChange: (String) -> Unit,

@@ -11,5 +11,6 @@ internal sealed interface SignUpEvent {
     data class PasswordConfirmationChanged(val passwordConfirmation: String) : SignUpEvent
     data object OpenProfilePictureOptionsModalBottomSheet : SignUpEvent
     data object CloseProfilePictureOptionsModalBottomSheet : SignUpEvent
+    data object AlertDialogDismiss : SignUpEvent
     data object Submit : SignUpEvent
 }

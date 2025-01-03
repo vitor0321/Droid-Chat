@@ -74,6 +74,7 @@ dependencies {
     implementation(libs.lyricist)
     ksp(libs.lyricist.processor)
 
+    implementation(libs.androidx.exifinterface)
     implementation(libs.coil.compose)
 
     implementation(libs.androidx.core.splashscreen)

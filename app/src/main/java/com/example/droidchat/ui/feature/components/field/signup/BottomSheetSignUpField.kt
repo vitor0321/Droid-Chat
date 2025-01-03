@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.components.field.sigup
+package com.example.droidchat.ui.feature.components.field.signup
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberModalBottomSheetState
