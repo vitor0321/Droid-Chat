@@ -1,6 +1,5 @@
-package com.example.droidchat.ui.feature.components.field.sigup
+package com.example.droidchat.ui.feature.components.field.signup
 
-import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,24 +16,14 @@ import com.example.droidchat.ui.feature.components.field.shared.PrimaryButton
 import com.example.droidchat.ui.feature.components.field.shared.ProfilePictureSelector
 import com.example.droidchat.ui.feature.components.field.shared.SecondaryTextField
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpEvent
+import com.example.droidchat.ui.feature.signup.viewModel.SignUpState
+import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpace
-import com.example.droidchat.ui.strings.strings
 
 @Composable
 internal fun BodySigUpField(
-    profilePictureUri: Uri?,
-    firstName: String,
-    firstNameError: String?,
-    lastName: String,
-    lastNameError: String?,
-    email: String,
-    emailError: String?,
-    password: String,
-    passwordError: String?,
-    passwordConfirmation: String,
-    passwordConfirmationError: String?,
-    passwordExtraText: String?,
+    state: SignUpState,
     onFormEvent: (SignUpEvent) -> Unit,
 ) {
     Column(
@@ -43,7 +32,8 @@ internal fun BodySigUpField(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         ProfilePictureSelector(
-            imageUri = profilePictureUri,
+            imageUri = state.profilePictureUri,
+            isCompressingImage = state.isCompressingImage,
             modifier = Modifier
                 .clickable { onFormEvent(SignUpEvent.OpenProfilePictureOptionsModalBottomSheet) }
         )
@@ -52,58 +42,59 @@ internal fun BodySigUpField(
 
         SecondaryTextField(
             label = strings.signUpStrings.featureSignUpFirstName,
-            value = firstName,
+            value = state.firstName,
             onValueChange = { onFormEvent(SignUpEvent.FirstNameChanged(it)) },
-            errorText = firstNameError,
+            errorText = state.firstNameError,
         )
 
         Spacer(modifier = Modifier.height(DroidSpace.XMedium.value))
 
         SecondaryTextField(
             label = strings.signUpStrings.featureSignUpLastName,
-            value = lastName,
+            value = state.lastName,
             onValueChange = { onFormEvent(SignUpEvent.LastNameChanged(it)) },
-            errorText = lastNameError,
+            errorText = state.lastNameError,
         )
 
         Spacer(modifier = Modifier.height(DroidSpace.XMedium.value))
 
         SecondaryTextField(
             label = strings.signUpStrings.featureSignUpEmail,
-            value = email,
+            value = state.email,
             onValueChange = { onFormEvent(SignUpEvent.EmailChanged(it)) },
             keyboardType = KeyboardType.Email,
-            errorText = emailError,
+            errorText = state.emailError,
         )
 
         Spacer(modifier = Modifier.height(DroidSpace.XMedium.value))
 
         SecondaryTextField(
             label = strings.signUpStrings.featureSignUpPassword,
-            value = password,
+            value = state.password,
             onValueChange = { onFormEvent(SignUpEvent.PasswordChanged(it)) },
             keyboardType = KeyboardType.Password,
-            extraText = passwordExtraText,
-            errorText = passwordError,
+            extraText = state.passwordExtraText,
+            errorText = state.passwordError,
         )
 
         Spacer(modifier = Modifier.height(DroidSpace.XMedium.value))
 
         SecondaryTextField(
             label = strings.signUpStrings.featureSignUpPasswordConfirmation,
-            value = passwordConfirmation,
+            value = state.passwordConfirmation,
             onValueChange = { onFormEvent(SignUpEvent.PasswordConfirmationChanged(it)) },
             keyboardType = KeyboardType.Password,
             imeAction = ImeAction.Done,
-            extraText = passwordExtraText,
-            errorText = passwordConfirmationError,
+            extraText = state.passwordExtraText,
+            errorText = state.passwordConfirmationError,
         )
 
         Spacer(modifier = Modifier.height(DroidSpace.MLarge.value))
 
         PrimaryButton(
             text = strings.signUpStrings.featureSignUpButton,
-            onClick = { onFormEvent(SignUpEvent.Submit) }
+            isLoading = state.isLoading,
+            onClick = { onFormEvent(SignUpEvent.Submit) },
         )
     }
 }
@@ -113,18 +104,7 @@ internal fun BodySigUpField(
 private fun BodySigInFieldPreview() {
     DroidChatTheme {
         BodySigUpField(
-            profilePictureUri = null,
-            firstName = "",
-            firstNameError = "",
-            lastName = "",
-            lastNameError = "",
-            email = "",
-            emailError = "",
-            password = "",
-            passwordError = "",
-            passwordConfirmation = "",
-            passwordConfirmationError = "",
-            passwordExtraText = "",
+            state = SignUpState(),
             onFormEvent = {}
         )
     }

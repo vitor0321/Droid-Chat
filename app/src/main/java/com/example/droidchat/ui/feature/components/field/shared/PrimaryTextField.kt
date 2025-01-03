@@ -28,7 +28,7 @@ import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpace
 
 @Composable
-fun PrimaryTextField(
+internal fun PrimaryTextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,

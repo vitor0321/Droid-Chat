@@ -20,4 +20,5 @@ internal data class SignUpState(
     val isLoading: Boolean = false,
     val isSignedUp: Boolean = false,
     val apiErrorMessage: String? = null,
+    val isCompressingImage: Boolean = false,
 )

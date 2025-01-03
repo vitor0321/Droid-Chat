@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.components.area.sigup
+package com.example.droidchat.ui.feature.components.area.signup
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -7,9 +7,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.droidchat.ui.feature.components.field.sigup.BodySigUpField
-import com.example.droidchat.ui.feature.components.field.sigup.BottomSheetSigUpField
-import com.example.droidchat.ui.feature.components.field.sigup.HeadSignUpField
+import com.example.droidchat.ui.feature.components.field.signup.BodySigUpField
+import com.example.droidchat.ui.feature.components.field.signup.BottomSheetSigUpField
+import com.example.droidchat.ui.feature.components.field.signup.HeadSignUpField
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpEvent
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpState
 import com.example.droidchat.ui.theme.BackgroundGradient
@@ -28,18 +28,7 @@ internal fun SignUpScreenArea(
         HeadSignUpField(
             bodySignUp = {
                 BodySigUpField(
-                    profilePictureUri = state.profilePictureUri,
-                    firstName = state.firstName,
-                    firstNameError = state.firstNameError,
-                    lastName = state.lastName,
-                    lastNameError = state.lastNameError,
-                    email = state.email,
-                    emailError = state.emailError,
-                    password = state.password,
-                    passwordError = state.passwordError,
-                    passwordConfirmation = state.passwordConfirmation,
-                    passwordConfirmationError = state.passwordConfirmationError,
-                    passwordExtraText = state.passwordExtraText,
+                    state = state,
                     onFormEvent = onFormEvent,
                 )
             },
