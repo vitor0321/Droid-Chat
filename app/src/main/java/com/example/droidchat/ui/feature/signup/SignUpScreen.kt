@@ -6,15 +6,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.droidchat.ui.feature.components.area.signup.SignUpScreenArea
-import com.example.droidchat.ui.feature.components.dialog.AlertDialogErrorApi
+import com.example.droidchat.ui.feature.components.dialog.AppDialog
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpEvent
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpState
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpViewModel
+import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
 
 @Composable
 internal fun SignUpRoute(
-    viewModel: SignUpViewModel = hiltViewModel()
+    viewModel: SignUpViewModel = hiltViewModel(),
+    onSignUpSuccess: () -> Unit,
 ) {
     val state = viewModel.state
     val onFormEvent: (SignUpEvent) -> Unit = remember { { viewModel.onFormEvent(it) } }
@@ -24,10 +26,20 @@ internal fun SignUpRoute(
         onFormEvent = onFormEvent
     )
 
+    state.isSignedUp.takeIf { it }?.let {
+        AppDialog(
+            message = strings.signUpStrings.featureSignUpSuccess,
+            onEventDismiss = { onSignUpSuccess() },
+            onEventConfirm = { onSignUpSuccess() }
+        )
+    }
+
     state.apiErrorMessage?.let {
-        AlertDialogErrorApi(
-            title = it,
-            onEventDismiss = { onFormEvent(SignUpEvent.AlertDialogDismiss) }
+        AppDialog(
+            title = strings.errorMessagesStrings.commonGenericErrorTitle,
+            message = it,
+            onEventDismiss = { onFormEvent(SignUpEvent.AlertDialogDismiss) },
+            onEventConfirm = { onFormEvent(SignUpEvent.AlertDialogDismiss) }
         )
     }
 }

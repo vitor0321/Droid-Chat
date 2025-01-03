@@ -9,6 +9,7 @@ internal data class ErrorMessagesStrings(
     val errorMessagePasswordConfirmationInvalid: String = "Confirmação de senha não corresponde",
     val errorMessageEmailInvalid: String = "E-mail inválido",
     val errorMessageApiFormValidationFailed: String = "Erro de validação de formulário, confira os dados e tente novamente",
+    val errorMessageApiFormUploadImageFailed: String = "Erro ao fazer upload da foto de perfil, tente novamente (formatos aceitos: .jpg, .jpeg, .png)",
     val commonGenericErrorTitle: String = "Alguma coisa deu errado",
     val commonGenericErrorMessage: String = "Tente novamente ou reporte um problema",
 )

@@ -10,5 +10,6 @@ internal data class SignUpStrings(
     val featureSignUpButton: String = "Cadastrar",
     val featureSignUpPasswordsMatch: String = "as senhas são iguais",
     val featureSignUpHasAccount: String = "Já possui uma conta?",
-    val featureSignUpLoginHere: String = "Fazer login"
+    val featureSignUpLoginHere: String = "Fazer login",
+    val featureSignUpSuccess: String = "Cadastro realizado com sucesso. Faça login para continuar",
 )

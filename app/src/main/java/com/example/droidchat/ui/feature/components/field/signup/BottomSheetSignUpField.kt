@@ -19,14 +19,14 @@ internal fun BottomSheetSigUpField(
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
 
-    if (isProfilePictureModalBottomSheetOpen) {
+    isProfilePictureModalBottomSheetOpen.takeIf { it }?.let {
         ProfilePictureOptionsModalBottomSheet(
             onPictureSelected = { uri ->
                 onFormEvent(SignUpEvent.ProfilePhotoUriChanged(uri))
                 scope.launch {
                     sheetState.hide()
                 }.invokeOnCompletion {
-                    if (!sheetState.isVisible) {
+                    sheetState.isVisible.takeIf { it.not() }?.let {
                         onFormEvent(SignUpEvent.CloseProfilePictureOptionsModalBottomSheet)
                     }
                 }
