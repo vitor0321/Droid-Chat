@@ -10,28 +10,31 @@ import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
 
 @Composable
-internal fun AlertDialogErrorApi(
-    title: String,
+internal fun AppDialog(
+    title: String? = null,
+    message: String,
+    confirmButtonText: String = strings.commonStrings.commonOk,
     onEventDismiss: () -> Unit,
+    onEventConfirm: () -> Unit,
 ) {
     AlertDialog(
         onDismissRequest = onEventDismiss,
         title = {
             TextButton(
                 onClick = onEventDismiss,
-                content = { Text(text = strings.errorMessagesStrings.commonGenericErrorTitle) }
+                content = { title?.let { Text(text = title) } }
             )
         },
         text = {
             Text(
-                text = title,
+                text = message,
                 color = MaterialTheme.colorScheme.onSurface
             )
         },
         confirmButton = {
             TextButton(
-                onClick = onEventDismiss,
-                content = { Text(text = strings.commonStrings.commonOk) }
+                onClick = onEventConfirm,
+                content = { Text(text = confirmButtonText) }
             )
         },
         containerColor = MaterialTheme.colorScheme.surface,
@@ -44,9 +47,10 @@ internal fun AlertDialogErrorApi(
 @Composable
 private fun AlertDialogErrorApiPreview() {
     DroidChatTheme {
-        AlertDialogErrorApi(
-            title = "Erro de validação de formulário, confira os dados e tente novamente",
-            onEventDismiss = { }
+        AppDialog(
+            message = "Erro de validação de formulário, confira os dados e tente novamente",
+            onEventDismiss = { },
+            onEventConfirm = { },
         )
     }
 }

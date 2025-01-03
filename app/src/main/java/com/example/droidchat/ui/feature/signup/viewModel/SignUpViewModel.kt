@@ -93,20 +93,35 @@ internal class SignUpViewModel @Inject constructor(
         if (isValidForm()) {
             state = state.copy(isLoading = true)
             viewModelScope.launch {
-                authRepository.signUp(
-                    createAccount = CreateAccount(
-                        username = "",
-                        password = "",
-                        firstName = state.firstName,
-                        lastName = state.lastName,
-                        profilePictureUri = null,
+                state.profilePictureUri?.path?.let { path ->
+                    authRepository.uploadProfilePicture(path).fold(
+                        onSuccess = { image -> signUp(profilePictureId = image.id) },
+                        onFailure = {
+                            state = state.copy(
+                                isLoading = false,
+                                profilePictureUri = null,
+                                apiErrorMessage = strings.errorMessagesStrings.errorMessageApiFormUploadImageFailed
+                            )
+                        }
                     )
-                ).fold(
-                    onSuccess = { state = state.copy(isLoading = false, isSignedUp = true) },
-                    onFailure = { handleSignUpError(it) }
-                )
+                }
             }
         }
+    }
+
+    private suspend fun signUp(profilePictureId: Int) {
+        authRepository.signUp(
+            createAccount = CreateAccount(
+                email = state.email,
+                password = state.password,
+                firstName = state.firstName,
+                lastName = state.lastName,
+                profilePictureUri = profilePictureId,
+            )
+        ).fold(
+            onSuccess = { state = state.copy(isLoading = false, isSignedUp = true) },
+            onFailure = { handleSignUpError(it) }
+        )
     }
 
     private fun handleSignUpError(exception: Throwable) {
@@ -116,9 +131,9 @@ internal class SignUpViewModel @Inject constructor(
                 when (exception.statusCode) {
                     400 -> strings.errorMessagesStrings.errorMessageApiFormValidationFailed
                     409 -> strings.errorMessagesStrings.errorMessageUserWithUsernameAlreadyExists
-                    else -> strings.errorMessagesStrings.commonGenericErrorTitle
+                    else -> strings.errorMessagesStrings.commonGenericErrorMessage
                 }
-            } else strings.errorMessagesStrings.commonGenericErrorTitle
+            } else strings.errorMessagesStrings.commonGenericErrorMessage
         )
     }
 

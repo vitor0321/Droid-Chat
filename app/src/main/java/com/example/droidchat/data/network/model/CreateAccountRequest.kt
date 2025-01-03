@@ -4,9 +4,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class CreateAccountRequest(
-    val username: String,
-    val password: String,
     val firstName: String,
     val lastName: String,
-    val profilePhoto: String?,
+    val password: String,
+    val profilePictureId: Int?,
+    val username: String,
 )
