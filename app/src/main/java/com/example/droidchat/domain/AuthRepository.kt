@@ -5,7 +5,7 @@ import com.example.droidchat.domain.model.Image
 
 internal interface AuthRepository {
 
-    suspend fun signIn(userName: String, password: String): Result<Unit>
+    suspend fun signIn(email: String, password: String): Result<Unit>
 
     suspend fun signUp(createAccount: CreateAccount): Result<Unit>
 
