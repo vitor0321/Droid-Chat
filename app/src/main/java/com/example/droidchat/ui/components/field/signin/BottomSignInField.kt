@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.components.field.signin
+package com.example.droidchat.ui.components.field.signin
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
@@ -12,8 +12,8 @@ import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.strings.strings
+import com.example.droidchat.ui.theme.DroidChatTheme
 
 @Composable
 internal fun BottomSigInField(

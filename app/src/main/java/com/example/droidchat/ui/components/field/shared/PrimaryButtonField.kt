@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.components.field.shared
+package com.example.droidchat.ui.components.field.shared
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Box

@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.components.field.signup
+package com.example.droidchat.ui.components.field.signup
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column

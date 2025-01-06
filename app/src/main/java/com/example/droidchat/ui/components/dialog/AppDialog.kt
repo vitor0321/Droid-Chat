@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.components.dialog
+package com.example.droidchat.ui.components.dialog
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme

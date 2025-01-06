@@ -6,7 +6,7 @@ import com.example.droidchat.domain.model.CreateAccount
 internal object CreateAccountMapper {
 
     fun CreateAccount.toCreateAccountRequest() = CreateAccountRequest(
-        username = email,
+        email = email,
         password = password,
         firstName = firstName,
         lastName = lastName,
