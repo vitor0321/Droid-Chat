@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.hilt.android)
+    implementation(libs.androidx.security.crypto.ktx)
     ksp(libs.hilt.compiler)
 
     implementation(libs.androidx.navigation.compose)

@@ -41,7 +41,7 @@ internal class SignInViewModel @Inject constructor (
         if (isValidForm()) {
             state = state.copy(isLoading = true)
             viewModelScope.launch {
-                authRepository.signIn(state.email, state.password).fold(
+                authRepository.signIn(email = state.email, password = state.password).fold(
                     onSuccess = {
                         state = state.copy(
                             isSignedSuccess = true,
