@@ -24,9 +24,11 @@ internal class AuthRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun signIn(userName: String, password: String): Result<Unit> =
-        runCatching {
-            networkDataSource.signIn(request = AuthRequest(userName, password))
+    override suspend fun signIn(email: String, password: String): Result<Unit> =
+        withContext(ioDispatcher) {
+            runCatching {
+                networkDataSource.signIn(request = AuthRequest(email, password))
+            }
         }
 
     override suspend fun uploadProfilePicture(filePath: String): Result<Image> =

@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.components.field.signup
+package com.example.droidchat.ui.components.field.signup
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -12,9 +12,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.droidchat.ui.feature.components.field.shared.PrimaryButton
-import com.example.droidchat.ui.feature.components.field.shared.ProfilePictureSelector
-import com.example.droidchat.ui.feature.components.field.shared.SecondaryTextField
+import com.example.droidchat.ui.components.field.shared.PrimaryButton
+import com.example.droidchat.ui.components.field.shared.ProfilePictureSelector
+import com.example.droidchat.ui.components.field.shared.SecondaryTextField
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpEvent
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpState
 import com.example.droidchat.ui.strings.strings

@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.components.bottomSheet
+package com.example.droidchat.ui.components.bottomSheet
 
 import android.content.Context
 import android.net.Uri
@@ -33,9 +33,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import com.example.droidchat.DroidChatFileProvider
 import com.example.droidchat.R
+import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpace
-import com.example.droidchat.ui.strings.strings
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

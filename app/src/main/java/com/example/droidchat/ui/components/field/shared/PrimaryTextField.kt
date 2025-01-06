@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.components.field.shared
+package com.example.droidchat.ui.components.field.shared
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable

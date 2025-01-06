@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.example.droidchat.ui.extension.slidOutTo
 import com.example.droidchat.ui.extension.slideInTo
+import com.example.droidchat.ui.feature.message.MessageRoute
 import com.example.droidchat.ui.feature.signin.SignInRoute
 import com.example.droidchat.ui.feature.signup.SignUpRoute
 import com.example.droidchat.ui.feature.splash.SplashRoute
@@ -23,6 +24,9 @@ internal sealed interface Route {
 
     @Serializable
     object SignUpRoute
+
+    @Serializable
+    object MessageRoute
 }
 
 @Composable
@@ -44,33 +48,39 @@ internal fun ChatNavHost() {
                 }
             )
         }
+
         composable<Route.SignInRoute>(
-            enterTransition = {
-                this.slideInTo(AnimatedContentTransitionScope.SlideDirection.Right)
-            },
-            exitTransition = {
-                this.slidOutTo(AnimatedContentTransitionScope.SlideDirection.Left)
-            }
+            enterTransition = { this.slideInTo(AnimatedContentTransitionScope.SlideDirection.Right) },
+            exitTransition = { this.slidOutTo(AnimatedContentTransitionScope.SlideDirection.Left) }
         ) {
             SignInRoute(
                 navigateToSignUp = {
                     navController.navigate(Route.SignUpRoute)
+                },
+                navigateToMessage = {
+                    navController.navigate(
+                        route = Route.MessageRoute,
+                        navOptions = navOptions {
+                            popUpTo(Route.SignInRoute) {
+                                inclusive = true
+                            }
+                        })
                 }
             )
         }
+
         composable<Route.SignUpRoute>(
-            enterTransition = {
-                this.slideInTo(AnimatedContentTransitionScope.SlideDirection.Left)
-            },
-            exitTransition = {
-                this.slidOutTo(AnimatedContentTransitionScope.SlideDirection.Right)
-            }
+            enterTransition = { this.slideInTo(AnimatedContentTransitionScope.SlideDirection.Left) },
+            exitTransition = { this.slidOutTo(AnimatedContentTransitionScope.SlideDirection.Right) }
         ) {
-            SignUpRoute(
-                onSignUpSuccess = {
-                    navController.popBackStack()
-                }
-            )
+            SignUpRoute(onSignUpSuccess = { navController.popBackStack() })
+        }
+
+        composable<Route.MessageRoute>(
+            enterTransition = { this.slideInTo(AnimatedContentTransitionScope.SlideDirection.Left) },
+            exitTransition = { this.slidOutTo(AnimatedContentTransitionScope.SlideDirection.Right) }
+        ) {
+            MessageRoute()
         }
     }
 }

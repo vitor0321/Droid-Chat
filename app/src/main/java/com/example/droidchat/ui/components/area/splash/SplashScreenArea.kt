@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.components.area.splash
+package com.example.droidchat.ui.components.area.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,10 +20,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.droidchat.R
+import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.BackgroundGradient
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpace
-import com.example.droidchat.ui.strings.strings
 
 @Composable
 internal fun SplashScreenArea() {

@@ -12,4 +12,5 @@ internal data class ErrorMessagesStrings(
     val errorMessageApiFormUploadImageFailed: String = "Erro ao fazer upload da foto de perfil, tente novamente (formatos aceitos: .jpg, .jpeg, .png)",
     val commonGenericErrorTitle: String = "Alguma coisa deu errado",
     val commonGenericErrorMessage: String = "Tente novamente ou reporte um problema",
+    val commonServiceUnavailable: String = "Serviço fora do ar, tente novamente mais tarde",
 )
