@@ -17,7 +17,7 @@ import com.example.droidchat.ui.theme.DroidChatTheme
 
 @Composable
 internal fun BottomSigInField(
-    onRegisterClick: () -> Unit,
+    onSinUp: () -> Unit,
 ) {
     val noAccountText = remember { strings.signInStrings.featureLoginNoAccount }
     val registerText = remember { strings.signInStrings.featureLoginRegister }
@@ -45,9 +45,7 @@ internal fun BottomSigInField(
                             textDecoration = TextDecoration.Underline,
                         )
                     ),
-                    linkInteractionListener = {
-                        onRegisterClick()
-                    }
+                    linkInteractionListener = { onSinUp() }
                 ),
                 start = registerTextStartIndex,
                 end = registerTextEndIndex,
@@ -63,7 +61,7 @@ internal fun BottomSigInField(
 private fun BottomSigInFieldPreview() {
     DroidChatTheme {
         BottomSigInField(
-            onRegisterClick = {}
+            onSinUp = {}
         )
     }
 }

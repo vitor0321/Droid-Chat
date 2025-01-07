@@ -23,7 +23,6 @@ import com.example.droidchat.ui.theme.DroidChatTheme
 @Composable
 internal fun SigInScreenArea(
     state: SignInState,
-    onRegisterClick: () -> Unit,
     onFormEvent: (SignInEvent) -> Unit,
 ) {
     Column(
@@ -46,7 +45,7 @@ internal fun SigInScreenArea(
         Spacer(modifier = Modifier.height(56.dp))
 
         BottomSigInField(
-            onRegisterClick = onRegisterClick
+            onSinUp = { onFormEvent(SignInEvent.OnSignUp) }
         )
     }
 }
@@ -58,7 +57,6 @@ private fun SigInScreenAreaPreview() {
         SigInScreenArea(
             state = SignInState(),
             onFormEvent = {},
-            onRegisterClick = {}
         )
     }
 }

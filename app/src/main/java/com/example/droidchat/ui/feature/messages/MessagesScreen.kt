@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.message
+package com.example.droidchat.ui.feature.messages
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

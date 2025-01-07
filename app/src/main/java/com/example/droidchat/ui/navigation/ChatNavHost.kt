@@ -8,7 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.example.droidchat.ui.extension.slidOutTo
 import com.example.droidchat.ui.extension.slideInTo
-import com.example.droidchat.ui.feature.message.MessageRoute
+import com.example.droidchat.ui.feature.messages.MessageRoute
 import com.example.droidchat.ui.feature.signin.SignInRoute
 import com.example.droidchat.ui.feature.signup.SignUpRoute
 import com.example.droidchat.ui.feature.splash.SplashRoute
@@ -57,7 +57,7 @@ internal fun ChatNavHost() {
                 navigateToSignUp = {
                     navController.navigate(Route.SignUpRoute)
                 },
-                navigateToMessage = {
+                navigateToMessages = {
                     navController.navigate(
                         route = Route.MessageRoute,
                         navOptions = navOptions {
