@@ -9,6 +9,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.HttpResponseValidator
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
@@ -50,6 +51,12 @@ internal object ApiModule {
                         ignoreUnknownKeys = true
                     }
                 )
+            }
+
+            install(HttpTimeout) {
+                requestTimeoutMillis = 30000
+                connectTimeoutMillis = 10000
+                socketTimeoutMillis = 15000
             }
 
             defaultRequest {

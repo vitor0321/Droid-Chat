@@ -1,7 +1,6 @@
 package com.example.droidchat.data.token.di
 
 import com.example.droidchat.data.token.TokenManagerImpl
-import com.example.droidchat.domain.AuthRepository
 import com.example.droidchat.domain.TokenManager
 import dagger.Binds
 import dagger.Module
