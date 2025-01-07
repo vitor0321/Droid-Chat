@@ -92,6 +92,7 @@ dependencies {
     implementation(libs.accompanist.permissions)
 
     implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.plugins)
     implementation(libs.ktor.client.cio)
     implementation(libs.ktor.client.android)
     implementation(libs.ktor.client.websockets)
