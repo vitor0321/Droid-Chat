@@ -7,9 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.droidchat.data.network.model.NetworkException
 import com.example.droidchat.domain.AuthRepository
-import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.validator.FormValidator
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,6 +22,9 @@ internal class SignInViewModel @Inject constructor (
 
     var state by mutableStateOf(SignInState())
         private set
+
+    private val _signInActionFlow = MutableSharedFlow<SignInAction>()
+    val signInActionFlow = _signInActionFlow.asSharedFlow()
 
     fun onFormEvent(event: SignInEvent) {
         when (event) {
@@ -34,6 +38,9 @@ internal class SignInViewModel @Inject constructor (
 
             is SignInEvent.CloseErrorDialog ->
                 state = state.copy(errorMessage = null)
+
+            is SignInEvent.OnSignUp ->
+                viewModelScope.launch { _signInActionFlow.emit(SignInAction.NavigateToSignUp) }
         }
     }
 
@@ -43,10 +50,8 @@ internal class SignInViewModel @Inject constructor (
             viewModelScope.launch {
                 authRepository.signIn(email = state.email, password = state.password).fold(
                     onSuccess = {
-                        state = state.copy(
-                            isSignedSuccess = true,
-                            isLoading = false
-                        )
+                        state = state.copy(isLoading = false)
+                        _signInActionFlow.emit(SignInAction.Success)
                     },
                     onFailure = { handleSignUpError(exception = it) }
                 )
@@ -54,17 +59,13 @@ internal class SignInViewModel @Inject constructor (
         }
     }
 
-    private fun handleSignUpError(exception: Throwable) {
-        state = state.copy(
-            isLoading = false,
-            errorMessage = if (exception is NetworkException.ApiException) {
-                when (exception.statusCode) {
-                    401 -> strings.errorMessagesStrings.errorMessageInvalidUsernameOrPassword
-                    500 -> strings.errorMessagesStrings.commonServiceUnavailable
-                    else -> strings.errorMessagesStrings.commonGenericErrorMessage
-                }
-            } else strings.errorMessagesStrings.commonGenericErrorMessage
-        )
+    private suspend fun handleSignUpError(exception: Throwable) {
+        state = state.copy(isLoading = false)
+        val error = if (exception is NetworkException.ApiException && exception.statusCode == 401)
+            SignInAction.Error.UnauthorizedError
+        else SignInAction.Error.GenericError
+
+        _signInActionFlow.emit(error)
     }
 
     private fun isValidForm(): Boolean {
