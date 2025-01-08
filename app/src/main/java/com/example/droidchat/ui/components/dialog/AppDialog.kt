@@ -13,7 +13,7 @@ import com.example.droidchat.ui.theme.DroidChatTheme
 internal fun AppDialog(
     title: String? = null,
     message: String,
-    confirmButtonText: String = strings.commonStrings.commonOk,
+    confirmButtonText: String,
     onEventDismiss: () -> Unit,
     onEventConfirm: () -> Unit,
 ) {
@@ -49,6 +49,7 @@ private fun AlertDialogErrorApiPreview() {
     DroidChatTheme {
         AppDialog(
             message = "Erro de validação de formulário, confira os dados e tente novamente",
+            confirmButtonText = "Ok",
             onEventDismiss = { },
             onEventConfirm = { },
         )

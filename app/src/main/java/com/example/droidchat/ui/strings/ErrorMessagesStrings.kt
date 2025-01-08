@@ -1,6 +1,8 @@
 package com.example.droidchat.ui.strings
 
 internal data class ErrorMessagesStrings(
+    val errorMessageUnexpected: String = "Ocorreu um erro inesperado ao abrir o aplicativo\n\nPor favor, tente novamente mais tarde",
+    val errorBottomUnexpected: String = "Fechar aplicativo",
     val errorMessageInvalidUsernameOrPassword: String = "E-mail ou senha incorretos",
     val errorMessageUserWithUsernameAlreadyExists: String = "Usuário com o e-mail fornecido já existe no sistema",
     val errorMessageFieldBlank: (String) -> String = { "$it é obrigatório" },
