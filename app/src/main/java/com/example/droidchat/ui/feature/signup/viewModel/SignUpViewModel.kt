@@ -10,10 +10,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.droidchat.data.network.model.NetworkException
 import com.example.droidchat.domain.AuthRepository
 import com.example.droidchat.domain.model.CreateAccount
+import com.example.droidchat.ui.feature.signup.navigation.SignUpAction
 import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.validator.FormValidator
 import com.example.droidchat.util.image.ImageCompressor
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,6 +29,9 @@ internal class SignUpViewModel @Inject constructor(
 
     var state by mutableStateOf(SignUpState())
         private set
+
+    private val _signUpActionFlow = MutableSharedFlow<SignUpAction>()
+    val signUpActionFlow = _signUpActionFlow.asSharedFlow()
 
     fun onFormEvent(event: SignUpEvent) {
         when (event) {
@@ -62,6 +68,11 @@ internal class SignUpViewModel @Inject constructor(
             is SignUpEvent.AlertDialogDismiss -> state = state.copy(apiErrorMessage = null)
 
             is SignUpEvent.Submit -> doSignUp()
+
+            is SignUpEvent.OnSignIn ->
+                viewModelScope.launch {
+                    _signUpActionFlow.emit(SignUpAction.NavigateToSignIn)
+                }
         }
     }
 
@@ -93,18 +104,16 @@ internal class SignUpViewModel @Inject constructor(
         if (isValidForm()) {
             state = state.copy(isLoading = true)
             viewModelScope.launch {
-                state.profilePictureUri?.path?.let { path ->
-                    authRepository.uploadProfilePicture(path).fold(
-                        onSuccess = { image -> signUp(profilePictureId = image.id) },
-                        onFailure = {
-                            state = state.copy(
-                                isLoading = false,
-                                profilePictureUri = null,
-                                apiErrorMessage = strings.errorMessagesStrings.errorMessageApiFormUploadImageFailed
-                            )
-                        }
-                    )
-                }
+                authRepository.uploadProfilePicture(state.profilePictureUri?.path.orEmpty()).fold(
+                    onSuccess = { image -> signUp(profilePictureId = image.id) },
+                    onFailure = {
+                        state = state.copy(
+                            isLoading = false,
+                            profilePictureUri = null,
+                            apiErrorMessage = strings.errorMessagesStrings.errorMessageApiFormUploadImageFailed
+                        )
+                    }
+                )
             }
         }
     }
@@ -119,7 +128,7 @@ internal class SignUpViewModel @Inject constructor(
                 profilePictureUri = profilePictureId,
             )
         ).fold(
-            onSuccess = { state = state.copy(isLoading = false, isSignedUp = true) },
+            onSuccess = { state = state.copy(isLoading = false, showDialogSignIn = true) },
             onFailure = { handleSignUpError(it) }
         )
     }

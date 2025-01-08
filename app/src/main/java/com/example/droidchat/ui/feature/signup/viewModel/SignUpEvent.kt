@@ -13,4 +13,5 @@ internal sealed interface SignUpEvent {
     data object CloseProfilePictureOptionsModalBottomSheet : SignUpEvent
     data object AlertDialogDismiss : SignUpEvent
     data object Submit : SignUpEvent
+    data object OnSignIn : SignUpEvent
 }

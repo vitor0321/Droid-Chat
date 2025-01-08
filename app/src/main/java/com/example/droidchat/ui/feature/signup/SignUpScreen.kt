@@ -5,8 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.droidchat.ui.components.area.shared.AppDialogArea
 import com.example.droidchat.ui.components.area.signup.SignUpScreenArea
-import com.example.droidchat.ui.components.dialog.AppDialog
+import com.example.droidchat.ui.feature.signup.navigation.SignUpNavigationEffect
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpEvent
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpState
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpViewModel
@@ -16,30 +17,33 @@ import com.example.droidchat.ui.theme.DroidChatTheme
 @Composable
 internal fun SignUpRoute(
     viewModel: SignUpViewModel = hiltViewModel(),
-    onSignUpSuccess: () -> Unit,
+    onSignInSuccess: () -> Unit,
 ) {
     val state = viewModel.state
     val onFormEvent: (SignUpEvent) -> Unit = remember { { viewModel.onFormEvent(it) } }
+
+    SignUpNavigationEffect(
+        actions = viewModel.signUpActionFlow,
+        onSignInSuccess = onSignInSuccess
+    )
 
     SignUpScreen(
         state = state,
         onFormEvent = onFormEvent
     )
 
-    state.isSignedUp.takeIf { it }?.let {
-        AppDialog(
+    state.showDialogSignIn.takeIf { it }?.let {
+        AppDialogArea(
             message = strings.signUpStrings.featureSignUpSuccess,
-            onEventDismiss = { onSignUpSuccess() },
-            onEventConfirm = { onSignUpSuccess() }
+            onCloseDialog = { onFormEvent(SignUpEvent.OnSignIn) },
         )
     }
 
     state.apiErrorMessage?.let {
-        AppDialog(
+        AppDialogArea(
             title = strings.errorMessagesStrings.commonGenericErrorTitle,
             message = it,
-            onEventDismiss = { onFormEvent(SignUpEvent.AlertDialogDismiss) },
-            onEventConfirm = { onFormEvent(SignUpEvent.AlertDialogDismiss) }
+            onCloseDialog = { onFormEvent(SignUpEvent.AlertDialogDismiss) },
         )
     }
 }

@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinKsp)
     alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.protoBuf)
 }
 
 android {
@@ -66,7 +67,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.hilt.android)
-    implementation(libs.androidx.security.crypto.ktx)
+    implementation(libs.security.crypto)
     ksp(libs.hilt.compiler)
 
     implementation(libs.androidx.navigation.compose)
@@ -109,4 +110,20 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.24.4"
+    }
+
+    generateProtoTasks {
+        all().configureEach {
+            builtins {
+                create("java") {
+                    option("lite")
+                }
+            }
+        }
+    }
 }

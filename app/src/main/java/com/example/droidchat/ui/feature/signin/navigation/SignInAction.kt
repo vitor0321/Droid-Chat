@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.signin.viewModel
+package com.example.droidchat.ui.feature.signin.navigation
 
 internal sealed interface SignInAction {
     data object Success : SignInAction
