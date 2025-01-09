@@ -13,7 +13,7 @@ import com.example.droidchat.ui.theme.DroidChatTheme
 internal fun SplashRoute(
     viewModel: SplashViewModel = hiltViewModel(),
     onNavigateToSignIn: () -> Unit,
-    onNavigateToHome: () -> Unit,
+    onNavigateToChats: () -> Unit,
     onCloseApp: () -> Unit,
 ) {
 
@@ -25,7 +25,7 @@ internal fun SplashRoute(
     SplashNavigationEffect(
         actions = viewModel.splashActionFlow,
         onNavigateToSignIn = onNavigateToSignIn,
-        onNavigateToHome = onNavigateToHome,
+        onNavigateToChats = onNavigateToChats,
         onCloseApp = onCloseApp,
     )
 

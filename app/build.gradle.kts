@@ -91,6 +91,7 @@ dependencies {
     implementation(libs.firebase.messaging)
 
     implementation(libs.accompanist.permissions)
+    implementation(libs.constraint.layout.compose)
 
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.plugins)
