@@ -23,13 +23,13 @@ internal class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             val accessToken = authRepository.getAccessToken()
             if (accessToken.isNullOrBlank().not()) {
-                _splashActionFlow.emit(SplashAction.NavigateToSignIn)
+                _splashActionFlow.emit(SplashAction.NavigateToChats)
                 return@launch
             }
             println("accessToken3: $accessToken")
             authRepository.authenticate(accessToken.toString()).fold(
                 onSuccess = {
-                    _splashActionFlow.emit(SplashAction.NavigateToSignIn)
+                    _splashActionFlow.emit(SplashAction.NavigateToChats)
                 },
                 onFailure = {
                     if (it is NetworkException.ApiException && it.statusCode == 401) {

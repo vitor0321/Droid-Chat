@@ -10,26 +10,13 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.example.droidchat.ui.extension.slidOutTo
 import com.example.droidchat.ui.extension.slideInTo
-import com.example.droidchat.ui.feature.home.HomeRoute
+import com.example.droidchat.ui.feature.chats.ChatsRoute
+import com.example.droidchat.ui.feature.chats.navigateToChats
 import com.example.droidchat.ui.feature.signin.SignInRoute
 import com.example.droidchat.ui.feature.signup.SignUpRoute
 import com.example.droidchat.ui.feature.splash.SplashRoute
 import com.example.droidchat.ui.navigation.Route.SplashRoute
 import kotlinx.serialization.Serializable
-
-internal sealed interface Route {
-    @Serializable
-    object SplashRoute
-
-    @Serializable
-    object SignInRoute
-
-    @Serializable
-    object SignUpRoute
-
-    @Serializable
-    object HomeRoute
-}
 
 @Composable
 internal fun ChatNavHost() {
@@ -45,9 +32,8 @@ internal fun ChatNavHost() {
                         navOptions = navOptions { popUpTo(SplashRoute) { inclusive = true } }
                     )
                 },
-                onNavigateToHome = {
-                    navController.navigate(
-                        route = Route.HomeRoute,
+                onNavigateToChats = {
+                    navController.navigateToChats(
                         navOptions = navOptions { popUpTo(SplashRoute) { inclusive = true } }
                     )
                 },
@@ -64,9 +50,8 @@ internal fun ChatNavHost() {
                     navController.navigate(Route.SignUpRoute)
                 },
                 navigateToMessages = {
-                    navController.navigate(
-                        route = Route.HomeRoute,
-                        navOptions = navOptions { popUpTo(Route.SignInRoute) { inclusive = true } }
+                    navController.navigateToChats(
+                        navOptions = navOptions { popUpTo(SplashRoute) { inclusive = true } }
                     )
                 }
             )
@@ -79,11 +64,11 @@ internal fun ChatNavHost() {
             SignUpRoute(onSignInSuccess = { navController.popBackStack() })
         }
 
-        composable<Route.HomeRoute>(
+        composable<Route.ChatsRoute>(
             enterTransition = { this.slideInTo(AnimatedContentTransitionScope.SlideDirection.Left) },
             exitTransition = { this.slidOutTo(AnimatedContentTransitionScope.SlideDirection.Right) }
         ) {
-            HomeRoute()
+            ChatsRoute()
         }
     }
 }
