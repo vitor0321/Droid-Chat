@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.SharedFlow
 internal fun SplashNavigationEffect(
     actions: SharedFlow<SplashAction>,
     onNavigateToSignIn: () -> Unit,
-    onNavigateToHome: () -> Unit,
+    onNavigateToChats: () -> Unit,
     onCloseApp: () -> Unit,
 ) {
 
@@ -21,7 +21,7 @@ internal fun SplashNavigationEffect(
     LaunchedEffect(true) {
         actions.collect { action ->
             when (action) {
-                is SplashAction.NavigateToSignIn -> onNavigateToHome()
+                is SplashAction.NavigateToChats -> onNavigateToChats()
                 is SplashAction.UserNotAuthenticated -> onNavigateToSignIn()
                 is SplashAction.ShowErrorDialog -> showErrorDialog.value = true
             }
