@@ -5,5 +5,7 @@ internal data class CommonStrings(
     val commonAddProfilePhoto: String = "Adicionar foto de perfil",
     val commonAddProfilePhotoOptimizing: String = "Otimizando ...",
     val commonTakePhoto: String = "Tirar foto",
-    val commonUploadPhoto: String = "Galeria"
+    val commonUploadPhoto: String = "Galeria",
+    val commonNavigationItemChats: String = "Conversas",
+    val commonNavigationItemProfile: String = "Perfil",
 )

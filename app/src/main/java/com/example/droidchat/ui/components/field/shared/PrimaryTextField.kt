@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -84,6 +85,12 @@ internal fun PrimaryTextField(
             ),
             singleLine = true,
             shape = CircleShape,
+            textStyle = TextStyle(
+                color = MaterialTheme.colorScheme.onSecondary,
+                fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                fontFamily = MaterialTheme.typography.titleLarge.fontFamily,
+                fontWeight = MaterialTheme.typography.titleLarge.fontWeight,
+            ),
             colors = OutlinedTextFieldDefaults.colors(
                 unfocusedContainerColor = MaterialTheme.colorScheme.surface,
                 focusedContainerColor = MaterialTheme.colorScheme.surface,

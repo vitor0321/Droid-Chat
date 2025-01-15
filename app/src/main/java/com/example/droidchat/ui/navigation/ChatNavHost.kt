@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.example.droidchat.ui.extension.slidOutTo
 import com.example.droidchat.ui.extension.slideInTo
@@ -16,11 +15,12 @@ import com.example.droidchat.ui.feature.signin.SignInRoute
 import com.example.droidchat.ui.feature.signup.SignUpRoute
 import com.example.droidchat.ui.feature.splash.SplashRoute
 import com.example.droidchat.ui.navigation.Route.SplashRoute
-import kotlinx.serialization.Serializable
 
 @Composable
-internal fun ChatNavHost() {
-    val navController = rememberNavController()
+internal fun ChatNavHost(
+    navigationState: DroidChatNavigationState,
+) {
+    val navController = navigationState.navController
     val activity = LocalContext.current as? Activity
 
     NavHost(navController = navController, startDestination = SplashRoute) {

@@ -6,7 +6,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
 
 @Composable
@@ -28,7 +27,8 @@ internal fun AppDialog(
         text = {
             Text(
                 text = message,
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.onSecondary,
+                style = MaterialTheme.typography.bodyMedium
             )
         },
         confirmButton = {
@@ -38,8 +38,8 @@ internal fun AppDialog(
             )
         },
         containerColor = MaterialTheme.colorScheme.surface,
-        titleContentColor = MaterialTheme.colorScheme.onSurface,
-        textContentColor = MaterialTheme.colorScheme.onSurface
+        titleContentColor = MaterialTheme.colorScheme.onSecondary,
+        textContentColor = MaterialTheme.colorScheme.onSecondary
     )
 }
 
@@ -48,6 +48,7 @@ internal fun AppDialog(
 private fun AlertDialogErrorApiPreview() {
     DroidChatTheme {
         AppDialog(
+            title = "Erro de validação de formulário",
             message = "Erro de validação de formulário, confira os dados e tente novamente",
             confirmButtonText = "Ok",
             onEventDismiss = { },

@@ -33,7 +33,7 @@ internal fun ChatItem(
         val (
             avatarRef,
             firstNameRef,
-            lastNameRef,
+            _,
             lastMessageRef,
             lastMessageTimeRef,
             unreadCountRef) = createRefs()
@@ -60,7 +60,7 @@ internal fun ChatItem(
                 bottom.linkTo(lastMessageRef.top)
                 width = Dimension.fillToConstraints
             },
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontWeight = Bold,
             style = MaterialTheme.typography.titleMedium,
         )
@@ -102,7 +102,7 @@ internal fun ChatItem(
                     bottom.linkTo(lastMessageRef.bottom)
                     width = Dimension.wrapContent
                 },
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontWeight = Medium,
             style = MaterialTheme.typography.bodySmall,
         )
