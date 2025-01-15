@@ -8,14 +8,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.example.droidchat.ui.components.bottomNavigation.BottomNavigationMenu
 import com.example.droidchat.ui.navigation.ChatNavHost
+import com.example.droidchat.ui.navigation.rememberDroidChatNavigationState
 
 @Composable
 internal fun ChatApp() {
+    val navigationController = rememberDroidChatNavigationState()
+
     Scaffold(
         bottomBar = {
-            // Vazio
-        }
+            val topLevelDestination = navigationController.topLevelDestination.toTypedArray()
+            if (topLevelDestination.contains(navigationController.currentTopLevelDestination)) {
+                BottomNavigationMenu(navigationState = navigationController)
+            }
+        },
     ) { innerPaddings ->
         Box(
            modifier = Modifier
@@ -24,7 +31,7 @@ internal fun ChatApp() {
                .imePadding()
                .fillMaxSize()
         ) {
-            ChatNavHost()
+            ChatNavHost(navigationState = navigationController)
         }
     }
 }
