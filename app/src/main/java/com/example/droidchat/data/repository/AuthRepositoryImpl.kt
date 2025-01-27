@@ -17,9 +17,9 @@ import javax.inject.Inject
 
 internal class AuthRepositoryImpl @Inject constructor(
     private val networkDataSource: NetWorkDataSource,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     private val tokenManager: TokenManager,
-    private val selfUserManager: SelfUserManager
+    private val selfUserManager: SelfUserManager,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : AuthRepository {
 
     override suspend fun getAccessToken(): String? =
@@ -59,6 +59,7 @@ internal class AuthRepositoryImpl @Inject constructor(
             runCatching {
                 val userResponse = networkDataSource.authenticate(token = token)
                 selfUserManager.saveSelfUserData(
+                    id = userResponse.id,
                     firstName = userResponse.firstName,
                     lastName = userResponse.lastName,
                     profilePictureUrl = userResponse.profilePictureUrl.toString(),
