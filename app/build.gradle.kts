@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.jwtdecode)
 
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.collections.immutable)
 
     implementation(libs.hilt.android)
     implementation(libs.security.crypto)

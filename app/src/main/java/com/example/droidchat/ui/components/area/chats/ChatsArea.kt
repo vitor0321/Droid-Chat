@@ -1,49 +1,36 @@
 package com.example.droidchat.ui.components.area.chats
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.example.droidchat.ui.components.field.chats.ChatItem
+import com.example.droidchat.ui.components.field.chats.ContentBoxChatField
+import com.example.droidchat.ui.components.field.chats.SuccessField
+import com.example.droidchat.ui.feature.chats.viewModel.ChatsListUiState
 import com.example.droidchat.ui.theme.DroidChatTheme
-import com.example.droidchat.ui.theme.DroidSpace
-import com.example.droidchat.ui.theme.Grey1
+import kotlinx.collections.immutable.persistentListOf
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ChatsArea(
     modifier: Modifier = Modifier,
+    state: ChatsListUiState,
 ) {
-    LazyColumn(
-        modifier = modifier
-            .background(
-                color = MaterialTheme.colorScheme.surface,
-                shape = MaterialTheme.shapes.extraLarge.copy(
-                    bottomStart = CornerSize(0.dp),
-                    bottomEnd = CornerSize(0.dp),
-                )
-            )
-            .clip(
-                shape = MaterialTheme.shapes.extraLarge.copy(
-                    bottomStart = CornerSize(0.dp),
-                    bottomEnd = CornerSize(0.dp),
-                )
-            )
-            .fillMaxSize(),
-        contentPadding = PaddingValues(horizontal = DroidSpace.MMedium.value),
+    ContentBoxChatField(
+        modifier = modifier,
     ) {
-        items(100) {
-            ChatItem()
-            HorizontalDivider(
-                color = Grey1
-            )
+        when (state) {
+            is ChatsListUiState.Loading -> {
+                // Loading
+            }
+
+            is ChatsListUiState.Success -> {
+                SuccessField(chats = state.chats)
+            }
+
+            is ChatsListUiState.Error -> {
+                // Error
+            }
         }
     }
 }
@@ -52,6 +39,8 @@ internal fun ChatsArea(
 @Composable
 private fun ChatsAreaPreview() {
     DroidChatTheme {
-        ChatsArea()
+        ChatsArea(
+            state = ChatsListUiState.Success(persistentListOf())
+        )
     }
 }

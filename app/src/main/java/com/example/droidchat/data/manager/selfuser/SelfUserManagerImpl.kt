@@ -21,6 +21,7 @@ internal class SelfUserManagerImpl @Inject constructor(
         get() = selfUserDataStore.data
 
     override suspend fun saveSelfUserData(
+        id: Int,
         firstName: String,
         lastName: String,
         profilePictureUrl: String,
@@ -29,6 +30,7 @@ internal class SelfUserManagerImpl @Inject constructor(
         withContext(ioDispatcher) {
             selfUserDataStore.updateData { preferences ->
                 preferences.toBuilder()
+                    .setId(id)
                     .setFirstName(firstName)
                     .setLastName(lastName)
                     .setProfilePictureUrl(profilePictureUrl)
