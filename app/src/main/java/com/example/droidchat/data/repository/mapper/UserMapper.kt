@@ -5,8 +5,9 @@ import com.example.droidchat.domain.model.User
 
 internal object UserMapper {
 
-    fun UserResponse.toUser() = User(
+    fun UserResponse.toUser(selfUserIdi: Int?) = User(
         id = id,
+        self = id == selfUserIdi,
         firstName = firstName,
         lastName = lastName,
         profilePictureUrl = profilePictureUrl,

@@ -18,12 +18,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.example.droidchat.R
+import com.example.droidchat.domain.model.Chat
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpace
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 internal fun ChatItem(
     modifier: Modifier = Modifier,
+    chat: Chat,
 ) {
     ConstraintLayout(
         modifier = modifier
@@ -113,6 +116,14 @@ internal fun ChatItem(
 @Composable
 private fun ChatItemPreview() {
     DroidChatTheme {
-        ChatItem()
+        ChatItem(
+            chat = Chat(
+                id = 1,
+                lastMessage = "Ok, vamos!",
+                members = persistentListOf(),
+                unreadCount = 2,
+                timestamp = "12:25"
+            )
+        )
     }
 }

@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.chats
+package com.example.droidchat.ui.feature.chats.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions

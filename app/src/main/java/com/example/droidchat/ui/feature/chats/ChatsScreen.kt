@@ -4,59 +4,71 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.droidchat.ui.components.area.chats.ChatsArea
-import com.example.droidchat.ui.strings.strings
+import com.example.droidchat.ui.components.field.chats.TopAppBarField
+import com.example.droidchat.ui.feature.chats.viewModel.ChatsListUiState
+import com.example.droidchat.ui.feature.chats.viewModel.ChatsViewModel
 import com.example.droidchat.ui.theme.DroidChatTheme
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
-internal fun ChatsRoute() {
-    ChatsScreenScreen()
+internal fun ChatsRoute(
+    viewModel: ChatsViewModel = hiltViewModel(),
+) {
+    val state = viewModel.state.collectAsStateWithLifecycle()
+    ChatsScreenScreen(
+        state = state.value,
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ChatsScreenScreen() {
+private fun ChatsScreenScreen(
+    state: ChatsListUiState,
+) {
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = buildAnnotatedString {
-                            append(strings.chatsStrings.featureChatsGreetings)
-                            pushStyle(SpanStyle(fontWeight = FontWeight.Bold))
-                            append("Vitor")
-                        },
-                        color = MaterialTheme.colorScheme.onPrimary,
-                        style = MaterialTheme.typography.titleLarge,
-                    )
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                ),
-                expandedHeight = 100.dp,
+        topBar = { TopAppBarField() },
+        content = { paddingValues ->
+            ChatsArea(
+                modifier = Modifier.padding(paddingValues),
+                state = state
             )
         },
-        content = { paddingValues ->
-            ChatsArea(modifier = Modifier.padding(paddingValues))
-        },
-        containerColor = MaterialTheme.colorScheme.inverseOnSurface,
+        containerColor = MaterialTheme.colorScheme.primary,
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun ChatsScreenPreview() {
+private fun ChatsScreenLoadingPreview() {
     DroidChatTheme {
-        ChatsScreenScreen()
+        ChatsScreenScreen(
+            state = ChatsListUiState.Loading,
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ChatsScreenSuccessPreview() {
+    DroidChatTheme {
+        ChatsScreenScreen(
+            state = ChatsListUiState.Success(persistentListOf()),
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ChatsScreenErrorPreview() {
+    DroidChatTheme {
+        ChatsScreenScreen(
+            state = ChatsListUiState.Error,
+        )
     }
 }
