@@ -53,8 +53,7 @@ internal fun PrimaryButton(
             } else {
                 Text(
                     text = text,
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
                 )
             }

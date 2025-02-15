@@ -17,5 +17,6 @@ enum class DroidSpace(
     MLarge(32.dp),
     XLarge(56.dp),
     ExtraLarge(62.dp),
-    XExtraLarge(78.dp)
+    XExtraLarge(78.dp),
+    XXExtraLarge(200.dp),
 }

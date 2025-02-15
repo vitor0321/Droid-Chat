@@ -12,6 +12,7 @@ import com.example.droidchat.domain.model.Chat
 import com.example.droidchat.ui.components.field.chats.ChatItemShimmer
 import com.example.droidchat.ui.components.field.chats.ContentBoxChatField
 import com.example.droidchat.ui.components.field.chats.SuccessField
+import com.example.droidchat.ui.components.field.error.ErrorAnimated
 import com.example.droidchat.ui.feature.chats.viewModel.ChatsListUiState
 import com.example.droidchat.ui.preview.ChatListPreviewParameterProvider
 import com.example.droidchat.ui.theme.DroidChatTheme
@@ -24,12 +25,13 @@ import kotlinx.collections.immutable.ImmutableList
 internal fun ChatsArea(
     modifier: Modifier = Modifier,
     state: ChatsListUiState,
+    onTryAgain: () -> Unit,
 ) {
     ContentBoxChatField(
         modifier = modifier,
     ) {
         when (state) {
-            is ChatsListUiState.Loading -> {
+            is ChatsListUiState.Loading ->
                 Column(
                     modifier = Modifier.padding(DroidSpace.MMedium.value)
                 ) {
@@ -39,15 +41,12 @@ internal fun ChatsArea(
                             HorizontalDivider(color = Grey1)
                     }
                 }
-            }
 
-            is ChatsListUiState.Success -> {
+            is ChatsListUiState.Success ->
                 SuccessField(chats = state.chats)
-            }
 
-            is ChatsListUiState.Error -> {
-                // Error
-            }
+            is ChatsListUiState.Error ->
+                ErrorAnimated(onTryAgain = onTryAgain)
         }
     }
 }
@@ -60,7 +59,8 @@ private fun ChatsAreaPreview(
 ) {
     DroidChatTheme {
         ChatsArea(
-            state = ChatsListUiState.Success(chats)
+            state = ChatsListUiState.Success(chats),
+            onTryAgain = {},
         )
     }
 }
@@ -71,6 +71,7 @@ private fun ChatsAreaLoadingPreview() {
     DroidChatTheme {
         ChatsArea(
             state = ChatsListUiState.Loading,
+            onTryAgain = {},
         )
     }
 }
@@ -81,6 +82,7 @@ private fun ChatsAreaErrorPreview() {
     DroidChatTheme {
         ChatsArea(
             state = ChatsListUiState.Error,
+            onTryAgain = {},
         )
     }
 }
