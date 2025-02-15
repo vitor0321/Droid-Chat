@@ -1,6 +1,5 @@
 package com.example.droidchat.ui.components.field.chats
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -9,19 +8,23 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.text.font.FontWeight.Companion.Medium
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.constraintlayout.compose.Visibility
+import coil.compose.AsyncImage
 import com.example.droidchat.R
 import com.example.droidchat.domain.model.Chat
+import com.example.droidchat.ui.preview.ChatPreviewParameterProvider
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpace
-import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 internal fun ChatItem(
@@ -33,6 +36,10 @@ internal fun ChatItem(
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.surface),
     ) {
+        val receiver = remember(chat.members) {
+            chat.members.first { it.self.not() }
+        }
+
         val (
             avatarRef,
             firstNameRef,
@@ -41,8 +48,8 @@ internal fun ChatItem(
             lastMessageTimeRef,
             unreadCountRef) = createRefs()
 
-        Image(
-            painter = painterResource(id = R.drawable.no_profile_image),
+        AsyncImage(
+            model = receiver.profilePictureUrl,
             contentDescription = null,
             modifier = Modifier
                 .clip(CircleShape)
@@ -52,10 +59,13 @@ internal fun ChatItem(
                     bottom.linkTo(parent.bottom, margin = DroidSpace.MMedium.value)
                     start.linkTo(parent.start)
                 },
+            placeholder = painterResource(R.drawable.no_profile_image),
+            error = painterResource(R.drawable.no_profile_image),
+            fallback = painterResource(R.drawable.no_profile_image),
         )
 
         Text(
-            text = "John",
+            text = receiver.firstName,
             modifier = Modifier.constrainAs(firstNameRef) {
                 top.linkTo(avatarRef.top)
                 start.linkTo(avatarRef.end, margin = DroidSpace.MMedium.value)
@@ -69,7 +79,7 @@ internal fun ChatItem(
         )
 
         Text(
-            text = "Ok, vamos!",
+            text = chat.lastMessage ?: "",
             modifier = Modifier.constrainAs(lastMessageRef) {
                 top.linkTo(firstNameRef.bottom)
                 start.linkTo(avatarRef.end, margin = DroidSpace.MMedium.value)
@@ -82,11 +92,11 @@ internal fun ChatItem(
         )
 
         Text(
-            text = "12:25",
+            text = chat.timestamp,
             modifier = Modifier.constrainAs(lastMessageTimeRef) {
                 top.linkTo(firstNameRef.top)
                 end.linkTo(parent.end)
-                bottom.linkTo(unreadCountRef.top)
+                bottom.linkTo(firstNameRef.top)
                 width = Dimension.wrapContent
             },
             color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -94,7 +104,7 @@ internal fun ChatItem(
         )
 
         Text(
-            text = "2",
+            text = chat.unreadCount.toString(),
             modifier = Modifier
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.primaryContainer)
@@ -104,6 +114,8 @@ internal fun ChatItem(
                     end.linkTo(parent.end)
                     bottom.linkTo(lastMessageRef.bottom)
                     width = Dimension.wrapContent
+                    visibility = if (chat.unreadCount > 0) Visibility.Visible
+                    else Visibility.Gone
                 },
             color = MaterialTheme.colorScheme.onSecondary,
             fontWeight = Medium,
@@ -114,16 +126,11 @@ internal fun ChatItem(
 
 @Preview(showBackground = true)
 @Composable
-private fun ChatItemPreview() {
+private fun ChatItemPreview(
+    @PreviewParameter(ChatPreviewParameterProvider::class)
+    chat: Chat
+) {
     DroidChatTheme {
-        ChatItem(
-            chat = Chat(
-                id = 1,
-                lastMessage = "Ok, vamos!",
-                members = persistentListOf(),
-                unreadCount = 2,
-                timestamp = "12:25"
-            )
-        )
+        ChatItem(chat = chat)
     }
 }
