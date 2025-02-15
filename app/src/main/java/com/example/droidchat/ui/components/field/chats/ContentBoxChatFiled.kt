@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.droidchat.ui.theme.DroidChatTheme
@@ -19,8 +20,9 @@ internal fun ContentBoxChatField(
 ) {
     Box(
         modifier = modifier
+            .fillMaxSize()
             .background(
-                color = MaterialTheme.colorScheme.surface,
+                color = Color.White,
                 shape = MaterialTheme.shapes.extraLarge.copy(
                     bottomStart = CornerSize(0.dp),
                     bottomEnd = CornerSize(0.dp),
@@ -31,8 +33,7 @@ internal fun ContentBoxChatField(
                     bottomStart = CornerSize(0.dp),
                     bottomEnd = CornerSize(0.dp),
                 )
-            )
-            .fillMaxSize(),
+            ),
     ) {
         content()
     }

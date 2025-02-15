@@ -17,6 +17,7 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,6 +28,7 @@ import com.example.droidchat.ui.navigation.DroidChatNavigationState
 import com.example.droidchat.ui.navigation.TopLevelDestination
 import com.example.droidchat.ui.navigation.rememberDroidChatNavigationState
 import com.example.droidchat.ui.theme.DroidChatTheme
+import com.example.droidchat.ui.theme.Grey1
 import kotlin.reflect.KClass
 
 @Composable
@@ -35,13 +37,11 @@ internal fun BottomNavigationMenu(
     navigationState: DroidChatNavigationState,
 ) {
     Column {
-        HorizontalDivider(
-            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.1f),
-        )
+        HorizontalDivider(color = Grey1)
 
         NavigationBar(
             modifier = modifier,
-            containerColor = MaterialTheme.colorScheme.surface,
+            containerColor = Color.White,
             tonalElevation = 0.dp,
         ) {
             navigationState.topLevelDestination.forEach { topLevelDestination ->

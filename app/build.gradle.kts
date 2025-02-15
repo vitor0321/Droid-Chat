@@ -73,6 +73,7 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.compose.shimmer)
 
     implementation(libs.lyricist)
     ksp(libs.lyricist.processor)

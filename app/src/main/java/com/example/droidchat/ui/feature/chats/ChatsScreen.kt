@@ -1,5 +1,6 @@
 package com.example.droidchat.ui.feature.chats
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -38,7 +39,9 @@ private fun ChatsScreenScreen(
         topBar = { TopAppBarField() },
         content = { paddingValues ->
             ChatsArea(
-                modifier = Modifier.padding(paddingValues),
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .fillMaxSize(),
                 state = state
             )
         },
