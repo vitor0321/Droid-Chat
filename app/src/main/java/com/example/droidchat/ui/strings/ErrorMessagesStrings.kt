@@ -15,4 +15,5 @@ internal data class ErrorMessagesStrings(
     val commonGenericErrorTitle: String = "Alguma coisa deu errado",
     val commonGenericErrorMessage: String = "Tente novamente ou reporte um problema",
     val commonServiceUnavailable: String = "Serviço fora do ar, tente novamente mais tarde",
+    val commonTryAgain: String = "Tentar novamente",
 )
