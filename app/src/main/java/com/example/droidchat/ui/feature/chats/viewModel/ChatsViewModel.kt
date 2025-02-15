@@ -23,8 +23,9 @@ internal class ChatsViewModel @Inject constructor(
         getChats()
     }
 
-    private fun getChats() {
+    fun getChats() {
         viewModelScope.launch {
+            _state.update { ChatsListUiState.Loading }
             chatRepository.getChats(offset = 0, limit = 10)
                 .fold(
                     onSuccess = { chats -> _state.update { ChatsListUiState.Success(chats.toImmutableList()) } },

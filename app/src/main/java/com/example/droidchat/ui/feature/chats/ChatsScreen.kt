@@ -6,6 +6,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -25,8 +26,11 @@ internal fun ChatsRoute(
     viewModel: ChatsViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.collectAsStateWithLifecycle()
+    val onTryAgain = remember(viewModel) { { viewModel.getChats() } }
+
     ChatsScreenScreen(
         state = state.value,
+        onTryAgain = viewModel::getChats,
     )
 }
 
@@ -34,6 +38,7 @@ internal fun ChatsRoute(
 @Composable
 private fun ChatsScreenScreen(
     state: ChatsListUiState,
+    onTryAgain: () -> Unit,
 ) {
     Scaffold(
         topBar = { TopAppBarField() },
@@ -42,7 +47,8 @@ private fun ChatsScreenScreen(
                 modifier = Modifier
                     .padding(paddingValues)
                     .fillMaxSize(),
-                state = state
+                state = state,
+                onTryAgain = onTryAgain,
             )
         },
         containerColor = MaterialTheme.colorScheme.primary,
@@ -55,6 +61,7 @@ private fun ChatsScreenLoadingPreview() {
     DroidChatTheme {
         ChatsScreenScreen(
             state = ChatsListUiState.Loading,
+            onTryAgain = {},
         )
     }
 }
@@ -67,7 +74,8 @@ private fun ChatsScreenSuccessPreview(
 ) {
     DroidChatTheme {
         ChatsScreenScreen(
-            state = ChatsListUiState.Success(chats)
+            state = ChatsListUiState.Success(chats),
+            onTryAgain = {},
         )
     }
 }
@@ -78,6 +86,7 @@ private fun ChatsScreenErrorPreview() {
     DroidChatTheme {
         ChatsScreenScreen(
             state = ChatsListUiState.Error,
+            onTryAgain = {},
         )
     }
 }
