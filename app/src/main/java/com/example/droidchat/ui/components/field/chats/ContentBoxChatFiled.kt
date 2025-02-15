@@ -38,7 +38,7 @@ internal fun ContentBoxChatField(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = false)
 @Composable
 private fun ContentBoxChatFieldPreview() {
     DroidChatTheme {
