@@ -1,4 +1,4 @@
-package com.example.droidchat.data.network.model.request
+package com.example.droidchat.data.service.model.request
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

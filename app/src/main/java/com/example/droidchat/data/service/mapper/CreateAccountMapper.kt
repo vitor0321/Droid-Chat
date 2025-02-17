@@ -1,6 +1,6 @@
 package com.example.droidchat.data.service.mapper
 
-import com.example.droidchat.data.network.model.request.CreateAccountRequest
+import com.example.droidchat.data.service.model.request.CreateAccountRequest
 import com.example.droidchat.domain.model.CreateAccount
 
 internal object CreateAccountMapper {

@@ -1,7 +1,7 @@
 package com.example.droidchat.data.service.mapper
 
-import com.example.droidchat.data.network.model.response.PaginatedChatResponse
 import com.example.droidchat.data.service.mapper.UserMapper.toUser
+import com.example.droidchat.data.service.model.response.PaginatedChatResponse
 import com.example.droidchat.domain.model.Chat
 import kotlinx.collections.immutable.toImmutableList
 import java.time.Instant

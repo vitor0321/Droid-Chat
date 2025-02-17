@@ -3,7 +3,7 @@ package com.example.droidchat.data.di
 
 import com.example.droidchat.data.TokenManager
 import com.example.droidchat.data.network.HttpUrl
-import com.example.droidchat.data.network.model.exception.NetworkException
+import com.example.droidchat.data.service.model.exception.NetworkException
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

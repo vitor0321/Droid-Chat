@@ -1,4 +1,4 @@
-package com.example.droidchat.data.network.model.exception
+package com.example.droidchat.data.service.model.exception
 
 internal enum class NetworkMessage(val message: String) {
     UNKNOWN_ERROR("Ocorreu um erro inesperado. Por favor, tente novamente."),
