@@ -2,6 +2,7 @@ package com.example.droidchat.data.manager.selfuser
 
 import android.content.Context
 import com.example.droidchat.SelfUser
+import com.example.droidchat.data.SelfUserManager
 import com.example.droidchat.data.datastore.selfUserStore
 import com.example.droidchat.data.di.IoDispatcher
 import dagger.hilt.android.qualifiers.ApplicationContext

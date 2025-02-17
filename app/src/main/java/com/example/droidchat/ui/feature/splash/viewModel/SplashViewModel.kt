@@ -2,8 +2,8 @@ package com.example.droidchat.ui.feature.splash.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.droidchat.data.network.model.NetworkException
-import com.example.droidchat.domain.AuthRepository
+import com.example.droidchat.data.network.model.exception.NetworkException
+import com.example.droidchat.domain.AuthService
 import com.example.droidchat.ui.feature.splash.navigation.SplashAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class SplashViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authService: AuthService
 ) : ViewModel() {
 
     private val _splashActionFlow = MutableSharedFlow<SplashAction>()
@@ -21,19 +21,19 @@ internal class SplashViewModel @Inject constructor(
 
     fun checkSession() {
         viewModelScope.launch {
-            val accessToken = authRepository.getAccessToken()
+            val accessToken = authService.getAccessToken()
             if (accessToken.isNullOrBlank().not()) {
                 _splashActionFlow.emit(SplashAction.NavigateToChats)
                 return@launch
             }
 
-            authRepository.authenticate().fold(
+            authService.authenticate().fold(
                 onSuccess = {
                     _splashActionFlow.emit(SplashAction.NavigateToChats)
                 },
                 onFailure = {
                     if (it is NetworkException.ApiException && it.statusCode == 401) {
-                        authRepository.clearAccessToken()
+                        authService.clearAccessToken()
                         _splashActionFlow.emit(SplashAction.UserNotAuthenticated)
                     } else {
                         _splashActionFlow.emit(SplashAction.ShowErrorDialog)

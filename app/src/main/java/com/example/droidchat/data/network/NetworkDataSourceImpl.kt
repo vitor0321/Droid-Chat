@@ -1,13 +1,13 @@
 package com.example.droidchat.data.network
 
 import com.example.droidchat.data.NetWorkDataSource
-import com.example.droidchat.data.network.model.AuthRequest
-import com.example.droidchat.data.network.model.CreateAccountRequest
-import com.example.droidchat.data.network.model.ImageResponse
-import com.example.droidchat.data.network.model.PaginatedChatResponse
 import com.example.droidchat.data.network.model.PaginationParams
-import com.example.droidchat.data.network.model.TokenResponse
-import com.example.droidchat.data.network.model.UserResponse
+import com.example.droidchat.data.network.model.request.AuthRequest
+import com.example.droidchat.data.network.model.request.CreateAccountRequest
+import com.example.droidchat.data.network.model.response.ImageResponse
+import com.example.droidchat.data.network.model.response.PaginatedChatResponse
+import com.example.droidchat.data.network.model.response.TokenResponse
+import com.example.droidchat.data.network.model.response.UserResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.forms.formData
@@ -25,15 +25,15 @@ internal class NetworkDataSourceImpl @Inject constructor(
 ) : NetWorkDataSource {
 
     override suspend fun signUp(request: CreateAccountRequest) =
-        httpClient.post("signup") { setBody(request) }.body<Unit>()
+        httpClient.post(HttpUrl.SIGN_UP.value) { setBody(request) }.body<Unit>()
 
     override suspend fun signIn(request: AuthRequest): TokenResponse =
-        httpClient.post("signin") { setBody(request) }.body()
+        httpClient.post(HttpUrl.SIGN_IN.value) { setBody(request) }.body()
 
     override suspend fun uploadProfilePicture(filePath: String): ImageResponse {
         val file = File(filePath)
         return httpClient.submitFormWithBinaryData(
-            url = "profile-picture",
+            url = HttpUrl.UPLOADING.value,
             formData = formData {
                 append("image", file.readBytes(), Headers.build {
                     append(HttpHeaders.ContentType, "image/${file.extension}")
@@ -44,12 +44,12 @@ internal class NetworkDataSourceImpl @Inject constructor(
     }
 
     override suspend fun authenticate(): UserResponse =
-        httpClient.get("authenticate").body()
+        httpClient.get(HttpUrl.AUTHENTICATE.value).body()
 
     override suspend fun getChats(
         paginationParams: PaginationParams
     ): PaginatedChatResponse =
-        httpClient.get("conversation") {
+        httpClient.get(HttpUrl.CONVERSATIONS.value) {
             url {
                 parameters.append("offset", paginationParams.offset)
                 parameters.append("limit", paginationParams.limit)

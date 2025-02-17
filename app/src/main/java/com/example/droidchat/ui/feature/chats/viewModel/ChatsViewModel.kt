@@ -2,7 +2,7 @@ package com.example.droidchat.ui.feature.chats.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.droidchat.domain.ChatRepository
+import com.example.droidchat.domain.ChatService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class ChatsViewModel @Inject constructor(
-    private val chatRepository: ChatRepository,
+    private val chatService: ChatService,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<ChatsListUiState>(ChatsListUiState.Loading)
@@ -26,7 +26,7 @@ internal class ChatsViewModel @Inject constructor(
     fun getChats() {
         viewModelScope.launch {
             _state.update { ChatsListUiState.Loading }
-            chatRepository.getChats(offset = 0, limit = 10)
+            chatService.getChats(offset = 0, limit = 10)
                 .fold(
                     onSuccess = { chats -> _state.update { ChatsListUiState.Success(chats.toImmutableList()) } },
                     onFailure = { _state.update { ChatsListUiState.Error } }
