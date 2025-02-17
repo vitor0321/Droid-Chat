@@ -64,9 +64,9 @@ fun ProfilePictureOptionsModalBottomSheet(
 
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
-        modifier = modifier,
+        modifier = modifier.padding(DroidSpace.MSmall.value),
         sheetState = sheetState,
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = MaterialTheme.colorScheme.outlineVariant,
         contentColor = MaterialTheme.colorScheme.onSurface,
     ) {
         ProfilePictureOptionRow(

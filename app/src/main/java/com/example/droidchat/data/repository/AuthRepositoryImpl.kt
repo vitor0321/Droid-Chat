@@ -3,11 +3,11 @@ package com.example.droidchat.data.repository
 import com.example.droidchat.data.NetWorkDataSource
 import com.example.droidchat.data.di.IoDispatcher
 import com.example.droidchat.data.manager.selfuser.SelfUserManager
+import com.example.droidchat.data.manager.token.TokenManager
 import com.example.droidchat.data.network.model.AuthRequest
 import com.example.droidchat.data.repository.mapper.CreateAccountMapper.toCreateAccountRequest
 import com.example.droidchat.data.repository.mapper.ImageMapper.toImage
 import com.example.droidchat.domain.AuthRepository
-import com.example.droidchat.data.manager.token.TokenManager
 import com.example.droidchat.domain.model.CreateAccount
 import com.example.droidchat.domain.model.Image
 import kotlinx.coroutines.CoroutineDispatcher
@@ -54,10 +54,10 @@ internal class AuthRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun authenticate(token: String): Result<Unit> =
+    override suspend fun authenticate(): Result<Unit> =
         withContext(ioDispatcher) {
             runCatching {
-                val userResponse = networkDataSource.authenticate(token = token)
+                val userResponse = networkDataSource.authenticate()
                 selfUserManager.saveSelfUserData(
                     id = userResponse.id,
                     firstName = userResponse.firstName,
