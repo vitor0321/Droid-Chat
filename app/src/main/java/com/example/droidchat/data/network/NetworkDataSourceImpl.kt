@@ -1,13 +1,14 @@
 package com.example.droidchat.data.network
 
 import com.example.droidchat.data.NetWorkDataSource
-import com.example.droidchat.data.network.model.PaginationParams
-import com.example.droidchat.data.network.model.request.AuthRequest
-import com.example.droidchat.data.network.model.request.CreateAccountRequest
-import com.example.droidchat.data.network.model.response.ImageResponse
-import com.example.droidchat.data.network.model.response.PaginatedChatResponse
-import com.example.droidchat.data.network.model.response.TokenResponse
-import com.example.droidchat.data.network.model.response.UserResponse
+import com.example.droidchat.data.service.model.request.AuthRequest
+import com.example.droidchat.data.service.model.request.CreateAccountRequest
+import com.example.droidchat.data.service.model.request.PaginationParams
+import com.example.droidchat.data.service.model.response.ImageResponse
+import com.example.droidchat.data.service.model.response.PaginatedChatResponse
+import com.example.droidchat.data.service.model.response.PaginatedUserResponse
+import com.example.droidchat.data.service.model.response.TokenResponse
+import com.example.droidchat.data.service.model.response.UserResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.forms.formData
@@ -17,6 +18,7 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
+import io.ktor.http.URLBuilder
 import java.io.File
 import javax.inject.Inject
 
@@ -50,9 +52,18 @@ internal class NetworkDataSourceImpl @Inject constructor(
         paginationParams: PaginationParams
     ): PaginatedChatResponse =
         httpClient.get(HttpUrl.CONVERSATIONS.value) {
-            url {
-                parameters.append("offset", paginationParams.offset)
-                parameters.append("limit", paginationParams.limit)
-            }
+            url { appendPaginationParams(paginationParams) }
         }.body()
+
+    override suspend fun getUsers(
+        paginationParams: PaginationParams
+    ): PaginatedUserResponse =
+        httpClient.get(HttpUrl.CONVERSATIONS.value) {
+            url { appendPaginationParams(paginationParams) }
+        }.body()
+
+    private fun URLBuilder.appendPaginationParams(paginationParams: PaginationParams) {
+        parameters.append("offset", paginationParams.offset)
+        parameters.append("limit", paginationParams.limit)
+    }
 }

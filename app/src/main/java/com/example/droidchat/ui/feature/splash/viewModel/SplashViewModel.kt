@@ -2,7 +2,7 @@ package com.example.droidchat.ui.feature.splash.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.droidchat.data.network.model.exception.NetworkException
+import com.example.droidchat.data.service.model.exception.NetworkException
 import com.example.droidchat.domain.AuthService
 import com.example.droidchat.ui.feature.splash.navigation.SplashAction
 import dagger.hilt.android.lifecycle.HiltViewModel

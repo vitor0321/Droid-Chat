@@ -88,6 +88,9 @@ dependencies {
     implementation(libs.androidx.datastore)
     implementation(libs.protobuf.javalite)
 
+    implementation( libs.androidx.paging.runtime.ktx)
+    implementation( libs.androidx.paging.compose)
+
     implementation(libs.kotlinx.serialization.json)
 
     implementation(platform(libs.firebase.bom))

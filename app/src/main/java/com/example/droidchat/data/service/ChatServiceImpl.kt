@@ -3,8 +3,8 @@ package com.example.droidchat.data.service
 import com.example.droidchat.data.NetWorkDataSource
 import com.example.droidchat.data.SelfUserManager
 import com.example.droidchat.data.di.IoDispatcher
-import com.example.droidchat.data.network.model.PaginationParams
 import com.example.droidchat.data.service.mapper.ChatResponseMapper.toChatList
+import com.example.droidchat.data.service.model.request.PaginationParams
 import com.example.droidchat.domain.ChatService
 import com.example.droidchat.domain.model.Chat
 import kotlinx.coroutines.CoroutineDispatcher

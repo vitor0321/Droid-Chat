@@ -1,6 +1,6 @@
 package com.example.droidchat.data.service.mapper
 
-import com.example.droidchat.data.network.model.response.UserResponse
+import com.example.droidchat.data.service.model.response.UserResponse
 import com.example.droidchat.domain.model.User
 
 internal object UserMapper {

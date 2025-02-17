@@ -4,9 +4,9 @@ import com.example.droidchat.data.NetWorkDataSource
 import com.example.droidchat.data.SelfUserManager
 import com.example.droidchat.data.TokenManager
 import com.example.droidchat.data.di.IoDispatcher
-import com.example.droidchat.data.network.model.request.AuthRequest
 import com.example.droidchat.data.service.mapper.CreateAccountMapper.toCreateAccountRequest
 import com.example.droidchat.data.service.mapper.ImageMapper.toImage
+import com.example.droidchat.data.service.model.request.AuthRequest
 import com.example.droidchat.domain.AuthService
 import com.example.droidchat.domain.model.CreateAccount
 import com.example.droidchat.domain.model.Image
