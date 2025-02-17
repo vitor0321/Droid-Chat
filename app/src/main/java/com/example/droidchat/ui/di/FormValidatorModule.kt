@@ -1,10 +1,10 @@
 package com.example.droidchat.ui.di
 
+import com.example.droidchat.ui.extension.validator.FormValidator
 import com.example.droidchat.ui.feature.signin.viewModel.SignInFormValidator
 import com.example.droidchat.ui.feature.signin.viewModel.SignInState
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpFormValidator
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpState
-import com.example.droidchat.ui.validator.FormValidator
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

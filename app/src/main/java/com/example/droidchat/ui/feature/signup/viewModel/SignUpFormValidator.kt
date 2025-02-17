@@ -1,9 +1,9 @@
 package com.example.droidchat.ui.feature.signup.viewModel
 
+import com.example.droidchat.ui.extension.validator.EmailValidator
+import com.example.droidchat.ui.extension.validator.FormValidator
+import com.example.droidchat.ui.extension.validator.PasswordValidator
 import com.example.droidchat.ui.strings.strings
-import com.example.droidchat.ui.validator.EmailValidator
-import com.example.droidchat.ui.validator.FormValidator
-import com.example.droidchat.ui.validator.PasswordValidator
 import javax.inject.Inject
 
 internal class SignUpFormValidator @Inject constructor() : FormValidator<SignUpState> {

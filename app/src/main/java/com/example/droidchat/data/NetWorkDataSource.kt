@@ -1,12 +1,12 @@
 package com.example.droidchat.data
 
-import com.example.droidchat.data.network.model.AuthRequest
-import com.example.droidchat.data.network.model.CreateAccountRequest
-import com.example.droidchat.data.network.model.ImageResponse
-import com.example.droidchat.data.network.model.PaginatedChatResponse
 import com.example.droidchat.data.network.model.PaginationParams
-import com.example.droidchat.data.network.model.TokenResponse
-import com.example.droidchat.data.network.model.UserResponse
+import com.example.droidchat.data.network.model.request.AuthRequest
+import com.example.droidchat.data.network.model.request.CreateAccountRequest
+import com.example.droidchat.data.network.model.response.ImageResponse
+import com.example.droidchat.data.network.model.response.PaginatedChatResponse
+import com.example.droidchat.data.network.model.response.TokenResponse
+import com.example.droidchat.data.network.model.response.UserResponse
 
 internal interface NetWorkDataSource {
 

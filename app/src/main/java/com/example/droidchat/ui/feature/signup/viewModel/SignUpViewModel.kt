@@ -7,12 +7,13 @@ import androidx.compose.runtime.setValue
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.droidchat.data.network.model.NetworkException
-import com.example.droidchat.domain.AuthRepository
+import com.example.droidchat.data.network.model.exception.NetworkException
+import com.example.droidchat.domain.AuthService
 import com.example.droidchat.domain.model.CreateAccount
+import com.example.droidchat.ui.extension.validator.FormValidator
 import com.example.droidchat.ui.feature.signup.navigation.SignUpAction
 import com.example.droidchat.ui.strings.strings
-import com.example.droidchat.ui.validator.FormValidator
+import com.example.droidchat.util.handleError
 import com.example.droidchat.util.image.ImageCompressor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -23,7 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 internal class SignUpViewModel @Inject constructor(
     private val formValidator: FormValidator<SignUpState>,
-    private val authRepository: AuthRepository,
+    private val authService: AuthService,
     private val imageCompressor: ImageCompressor,
 ) : ViewModel() {
 
@@ -104,13 +105,13 @@ internal class SignUpViewModel @Inject constructor(
         if (isValidForm()) {
             state = state.copy(isLoading = true)
             viewModelScope.launch {
-                authRepository.uploadProfilePicture(state.profilePictureUri?.path.orEmpty()).fold(
+                authService.uploadProfilePicture(state.profilePictureUri?.path.orEmpty()).fold(
                     onSuccess = { image -> signUp(profilePictureId = image.id) },
-                    onFailure = {
-                        state = state.copy(
-                            isLoading = false,
-                            profilePictureUri = null,
-                            apiErrorMessage = strings.errorMessagesStrings.errorMessageApiFormUploadImageFailed
+                    onFailure = { exception ->
+                        handleError(
+                            exception = exception,
+                            isLoading = { state = state.copy(isLoading = it) },
+                            emitError = { state = state.copy(apiErrorMessage = strings.errorMessagesStrings.errorMessageApiFormUploadImageFailed) }
                         )
                     }
                 )
@@ -119,7 +120,7 @@ internal class SignUpViewModel @Inject constructor(
     }
 
     private suspend fun signUp(profilePictureId: Int) {
-        authRepository.signUp(
+        authService.signUp(
             createAccount = CreateAccount(
                 email = state.email,
                 password = state.password,
@@ -129,20 +130,24 @@ internal class SignUpViewModel @Inject constructor(
             )
         ).fold(
             onSuccess = { state = state.copy(isLoading = false, showDialogSignIn = true) },
-            onFailure = { handleSignUpError(it) }
+            onFailure = { exception -> handleSignUpError(exception) }
         )
     }
 
-    private fun handleSignUpError(exception: Throwable) {
-        state = state.copy(
-            isLoading = false,
-            apiErrorMessage = if (exception is NetworkException.ApiException) {
-                when (exception.statusCode) {
-                    400 -> strings.errorMessagesStrings.errorMessageApiFormValidationFailed
-                    409 -> strings.errorMessagesStrings.errorMessageUserWithUsernameAlreadyExists
-                    else -> strings.errorMessagesStrings.commonGenericErrorMessage
+    private suspend fun handleSignUpError(exception: Throwable) {
+        handleError(
+            exception = exception,
+            isLoading = { state = state.copy(isLoading = it) },
+            emitError = {
+                if (exception is NetworkException.ApiException) {
+                    when (exception.statusCode) {
+                        400 -> strings.errorMessagesStrings.errorMessageApiFormValidationFailed
+                        409 -> strings.errorMessagesStrings.errorMessageUserWithUsernameAlreadyExists
+                        else -> strings.errorMessagesStrings.commonGenericErrorMessage
+                    }
                 }
-            } else strings.errorMessagesStrings.commonGenericErrorMessage
+                state = state.copy(apiErrorMessage = it)
+            }
         )
     }
 
