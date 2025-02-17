@@ -19,15 +19,17 @@ internal fun AppDialog(
     AlertDialog(
         onDismissRequest = onEventDismiss,
         title = {
-            TextButton(
-                onClick = onEventDismiss,
-                content = { title?.let { Text(text = title) } }
-            )
+            if (title != null)
+                Text(
+                    text = title,
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.titleMedium
+                )
         },
         text = {
             Text(
                 text = message,
-                color = MaterialTheme.colorScheme.onSecondary,
+                color = MaterialTheme.colorScheme.onError,
                 style = MaterialTheme.typography.bodyMedium
             )
         },
@@ -37,7 +39,7 @@ internal fun AppDialog(
                 content = { Text(text = confirmButtonText) }
             )
         },
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = MaterialTheme.colorScheme.outlineVariant,
         titleContentColor = MaterialTheme.colorScheme.onSecondary,
         textContentColor = MaterialTheme.colorScheme.onSecondary
     )
