@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.components.field.animated
+package com.example.droidchat.ui.components.field.shared.animated
 
 import androidx.annotation.RawRes
 import androidx.compose.runtime.Composable
