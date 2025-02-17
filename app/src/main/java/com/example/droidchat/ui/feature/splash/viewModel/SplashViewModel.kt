@@ -27,7 +27,7 @@ internal class SplashViewModel @Inject constructor(
                 return@launch
             }
 
-            authRepository.authenticate(accessToken.toString()).fold(
+            authRepository.authenticate().fold(
                 onSuccess = {
                     _splashActionFlow.emit(SplashAction.NavigateToChats)
                 },
