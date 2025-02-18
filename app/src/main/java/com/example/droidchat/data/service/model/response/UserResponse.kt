@@ -10,5 +10,5 @@ internal data class UserResponse(
     val lastName: String,
     val profilePictureUrl: String?,
     @SerialName("userName")
-    val email: String,
+    val email: String = "",
 )

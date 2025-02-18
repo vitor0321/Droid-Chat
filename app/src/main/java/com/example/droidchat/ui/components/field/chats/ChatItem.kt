@@ -22,7 +22,7 @@ import androidx.constraintlayout.compose.Visibility
 import coil.compose.AsyncImage
 import com.example.droidchat.R
 import com.example.droidchat.domain.model.Chat
-import com.example.droidchat.ui.preview.ChatPreviewParameterProvider
+import com.example.droidchat.ui.mockPreview.ChatPreviewParameterProvider
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpace
 

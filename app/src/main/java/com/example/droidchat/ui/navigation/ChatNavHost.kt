@@ -14,6 +14,7 @@ import com.example.droidchat.ui.feature.chats.navigation.navigateToChats
 import com.example.droidchat.ui.feature.signin.SignInRoute
 import com.example.droidchat.ui.feature.signup.SignUpRoute
 import com.example.droidchat.ui.feature.splash.SplashRoute
+import com.example.droidchat.ui.feature.users.UsersRoute
 import com.example.droidchat.ui.navigation.Route.SplashRoute
 
 @Composable
@@ -64,11 +65,12 @@ internal fun ChatNavHost(
             SignUpRoute(onSignInSuccess = { navController.popBackStack() })
         }
 
-        composable<Route.ChatsRoute>(
-            enterTransition = { this.slideInTo(AnimatedContentTransitionScope.SlideDirection.Left) },
-            exitTransition = { this.slidOutTo(AnimatedContentTransitionScope.SlideDirection.Right) }
-        ) {
+        composable<Route.ChatsRoute> {
             ChatsRoute()
+        }
+
+        composable<Route.UsersRoute> {
+            UsersRoute()
         }
     }
 }

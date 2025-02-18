@@ -7,4 +7,5 @@ internal enum class HttpUrl(val value: String) {
     AUTHENTICATE("/authenticate"),
     UPLOADING("/profile-picture"),
     CONVERSATIONS("/conversations"),
+    USERS("/users"),
 }

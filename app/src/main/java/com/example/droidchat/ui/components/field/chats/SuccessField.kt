@@ -8,12 +8,13 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.example.droidchat.domain.model.Chat
+import com.example.droidchat.ui.mockPreview.ChatListPreviewParameterProvider
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpace
 import com.example.droidchat.ui.theme.Grey1
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 internal fun SuccessField(
@@ -39,10 +40,13 @@ internal fun SuccessField(
 
 @Preview(showBackground = true)
 @Composable
-private fun SuccessAreaPreview() {
+private fun SuccessAreaPreview(
+    @PreviewParameter(ChatListPreviewParameterProvider::class)
+    chats: ImmutableList<Chat>
+) {
     DroidChatTheme {
         SuccessField(
-            chats = persistentListOf()
+            chats = chats
         )
     }
 }

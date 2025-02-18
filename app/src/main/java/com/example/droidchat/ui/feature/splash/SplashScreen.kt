@@ -6,7 +6,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LifecycleStartEffect
 import com.example.droidchat.ui.components.area.splash.SplashScreenArea
 import com.example.droidchat.ui.feature.splash.navigation.SplashNavigationEffect
-import com.example.droidchat.ui.feature.splash.viewModel.SplashViewModel
 import com.example.droidchat.ui.theme.DroidChatTheme
 
 @Composable

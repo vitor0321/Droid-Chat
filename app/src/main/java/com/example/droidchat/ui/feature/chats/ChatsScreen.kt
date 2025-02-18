@@ -17,7 +17,7 @@ import com.example.droidchat.ui.components.area.chats.ChatsArea
 import com.example.droidchat.ui.components.field.chats.TopAppBarField
 import com.example.droidchat.ui.feature.chats.viewModel.ChatsListUiState
 import com.example.droidchat.ui.feature.chats.viewModel.ChatsViewModel
-import com.example.droidchat.ui.preview.ChatListPreviewParameterProvider
+import com.example.droidchat.ui.mockPreview.ChatListPreviewParameterProvider
 import com.example.droidchat.ui.theme.DroidChatTheme
 import kotlinx.collections.immutable.ImmutableList
 

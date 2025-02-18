@@ -18,10 +18,12 @@ import io.ktor.client.plugins.auth.providers.BearerTokens
 import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.ANDROID
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
-import io.ktor.client.plugins.logging.SIMPLE
+import io.ktor.client.statement.bodyAsText
+import io.ktor.client.statement.request
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
@@ -44,9 +46,9 @@ internal object NetworkModule {
             expectSuccess = true
 
             install(Logging) {
-                // Configuração do log que vai aparecer no console Logcat
-                logger = Logger.SIMPLE
-                level = LogLevel.ALL
+                logger = Logger.ANDROID  // Usa o Logcat para exibir logs
+                level = LogLevel.ALL     // Captura TODOS os logs (headers, corpo, status, etc.)
+                filter { request -> true } // Aplica o log para todas as requisições
             }
 
             install(ContentNegotiation) {
@@ -75,10 +77,27 @@ internal object NetworkModule {
             }
 
             HttpResponseValidator {
-                handleResponseExceptionWithRequest { cause, request ->
+                handleResponseExceptionWithRequest { cause, _ ->
+
                     // se a causa do erro for uma exceção de requisição do cliente, isso de forma global para todas as requisições
                     handleResponseExceptionWithRequest { cause, _ ->
                         val exception = cause as? ClientRequestException ?: return@handleResponseExceptionWithRequest
+
+                        // Captura informações da resposta HTTP
+                        val response = exception.response
+                        val errorBody = response.bodyAsText()
+
+                        // Log completo da resposta com erro
+                        Logger.ANDROID.log(
+                            """
+                                ❌ HTTP ERROR:
+                                ├── URL: ${response.request.url}
+                                ├── Method: ${response.request.method.value}
+                                ├── Status: ${response.status}
+                                ├── Headers: ${response.headers.entries().joinToString("\n│    ") { "${it.key}: ${it.value}" }}
+                                ├── Response Body: $errorBody
+                            """.trimIndent()
+                        )
 
                         throw when (exception.response.status) {
                             HttpStatusCode.NotFound -> NetworkException.NotFoundException(cause)
