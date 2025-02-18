@@ -58,7 +58,7 @@ internal class NetworkDataSourceImpl @Inject constructor(
     override suspend fun getUsers(
         paginationParams: PaginationParams
     ): PaginatedUserResponse =
-        httpClient.get(HttpUrl.CONVERSATIONS.value) {
+        httpClient.get(HttpUrl.USERS.value) {
             url { appendPaginationParams(paginationParams) }
         }.body()
 

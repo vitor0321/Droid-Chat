@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.splash.viewModel
+package com.example.droidchat.ui.feature.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

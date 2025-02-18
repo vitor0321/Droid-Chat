@@ -81,10 +81,7 @@ private fun RowScope.NavigationBarItem(
             selectedTextColor = MaterialTheme.colorScheme.onSecondary,
             unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
         ),
-        onClick = {
-            if (!selected)
-                navigationState.navigateToTopLevelDestination(topLevelDestination)
-        }
+        onClick = { navigationState.navigateToTopLevelDestination(topLevelDestination) }
     )
 }
 

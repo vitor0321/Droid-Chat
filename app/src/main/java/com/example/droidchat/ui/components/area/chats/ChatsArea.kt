@@ -21,7 +21,7 @@ import com.example.droidchat.ui.components.field.shared.animated.AnimatedContent
 import com.example.droidchat.ui.components.field.shared.error.GeneralError
 import com.example.droidchat.ui.components.field.shared.list.GeneralEmptyList
 import com.example.droidchat.ui.feature.chats.viewModel.ChatsListUiState
-import com.example.droidchat.ui.preview.ChatListPreviewParameterProvider
+import com.example.droidchat.ui.mockPreview.ChatListPreviewParameterProvider
 import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpace

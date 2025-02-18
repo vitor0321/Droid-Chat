@@ -4,8 +4,8 @@ import androidx.paging.PagingSource
 import com.example.droidchat.data.NetWorkDataSource
 import com.example.droidchat.data.service.pagingSource.UserPagingSource
 import com.example.droidchat.domain.model.User
-import com.google.android.datatransport.runtime.dagger.Provides
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
