@@ -13,11 +13,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.example.droidchat.domain.model.User
-import com.example.droidchat.ui.components.avatar.RoundedAvatar
 import com.example.droidchat.ui.mockPreview.UsersPreviewParameterProvider
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpaceToken
+import com.walcker.topaz.ExperimentalTopazComposeLibraryApi
+import com.walcker.topaz.components.image.TopazRoundedAvatar
+import com.walcker.topaz.tokens.TopazSpacerSizeToken
 
+@OptIn(ExperimentalTopazComposeLibraryApi::class)
 @Composable
 internal fun UserItem(
     modifier: Modifier = Modifier,
@@ -27,10 +30,10 @@ internal fun UserItem(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        RoundedAvatar(
+        TopazRoundedAvatar(
             imageUri = user.profilePictureUrl,
             contentDescription = null,
-            size = DroidSpaceToken.XSLarge
+            size = TopazSpacerSizeToken.XSLarge
         )
 
         Text(

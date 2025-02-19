@@ -2,10 +2,12 @@ package com.example.droidchat.ui.components.area.shared
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.droidchat.ui.components.dialog.AppDialog
 import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
+import com.walcker.topaz.ExperimentalTopazComposeLibraryApi
+import com.walcker.topaz.components.dialog.TopazDialog
 
+@OptIn(ExperimentalTopazComposeLibraryApi::class)
 @Composable
 internal fun AppDialogArea(
     title: String? = null,
@@ -14,7 +16,7 @@ internal fun AppDialogArea(
     onCloseDialog: () -> Unit,
     onEventDismiss: () -> Unit = { onCloseDialog() },
 ) {
-    AppDialog(
+    TopazDialog(
         title = title,
         message = message,
         confirmButtonText = confirmButtonText,

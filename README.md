@@ -20,13 +20,13 @@ Este projeto é um aplicativo de chat funcional, aplicando os principais conceit
 * WebSockets: Implementação da comunicação bidirecional em tempo real, permitindo que as mensagens sejam trocadas instantaneamente entre os usuários.
 * Repository Pattern: Para organizar as fontes de dados e fazer o gerenciamento de dados de maneira mais eficiente.
 
-## 📱 DroidChat: Integração com a lib Topaz
+## 📱 DroidChat: Integração com o Design System Topaz
 
 O projeto está usando uma lib que ainda não está publicada no maven, e você precisa gerar ela localmente.
 
-# Topaz UI Library 🎨🚀
+# Topaz Design System Library 🎨🚀
 
-Topaz é uma biblioteca de componentes reutilizáveis para Jetpack Compose, projetada para facilitar o desenvolvimento de UIs modernas no Android e Kotlin Multiplatform.
+Topaz é um Design System de componentes reutilizáveis para Jetpack Compose, projetada para facilitar o desenvolvimento de UIs modernas no Android e Kotlin Multiplatform.
 
 
 ## 📥 Instalação Local

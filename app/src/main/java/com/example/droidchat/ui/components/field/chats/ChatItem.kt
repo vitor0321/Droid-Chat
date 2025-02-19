@@ -18,11 +18,13 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.Visibility
 import com.example.droidchat.domain.model.Chat
-import com.example.droidchat.ui.components.avatar.RoundedAvatar
 import com.example.droidchat.ui.mockPreview.ChatPreviewParameterProvider
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpaceToken
+import com.walcker.topaz.ExperimentalTopazComposeLibraryApi
+import com.walcker.topaz.components.image.TopazRoundedAvatar
 
+@OptIn(ExperimentalTopazComposeLibraryApi::class)
 @Composable
 internal fun ChatItem(
     modifier: Modifier = Modifier,
@@ -45,7 +47,7 @@ internal fun ChatItem(
             lastMessageTimeRef,
             unreadCountRef) = createRefs()
 
-        RoundedAvatar(
+        TopazRoundedAvatar(
             imageUri = receiver.profilePictureUrl,
             contentDescription = null,
             modifier = Modifier

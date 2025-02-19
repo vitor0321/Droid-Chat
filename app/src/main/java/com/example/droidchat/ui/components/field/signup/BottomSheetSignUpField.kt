@@ -5,7 +5,6 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.droidchat.ui.components.bottomSheet.ProfilePictureOptionsModalBottomSheet
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpEvent
 import com.example.droidchat.ui.theme.DroidChatTheme
 import kotlinx.coroutines.launch
