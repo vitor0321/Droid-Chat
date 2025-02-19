@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.example.droidchat.R
-import com.example.droidchat.domain.model.Chat
 import com.example.droidchat.ui.components.field.chats.ChatItemShimmer
 import com.example.droidchat.ui.components.field.chats.ContentBoxChatField
 import com.example.droidchat.ui.components.field.chats.SuccessField
@@ -26,8 +25,6 @@ import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpace
 import com.example.droidchat.ui.theme.Grey1
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -84,48 +81,14 @@ internal fun ChatsArea(
     }
 }
 
-@Preview(showBackground = false)
+@Preview(showBackground = true)
 @Composable
-private fun ChatsAreaPreview(
-    @PreviewParameter(ChatListPreviewParameterProvider::class)
-    chats: ImmutableList<Chat>
+private fun ChatsAreaSuccessPreview(
+    @PreviewParameter(ChatListPreviewParameterProvider::class) state: ChatsListUiState
 ) {
     DroidChatTheme {
         ChatsArea(
-            state = ChatsListUiState.Success(chats),
-            onTryAgain = {},
-        )
-    }
-}
-
-@Preview(showBackground = false)
-@Composable
-private fun ChatsAreaEmptyPreview() {
-    DroidChatTheme {
-        ChatsArea(
-            state = ChatsListUiState.Success(persistentListOf()),
-            onTryAgain = {},
-        )
-    }
-}
-
-@Preview(showBackground = false)
-@Composable
-private fun ChatsAreaLoadingPreview() {
-    DroidChatTheme {
-        ChatsArea(
-            state = ChatsListUiState.Loading,
-            onTryAgain = {},
-        )
-    }
-}
-
-@Preview(showBackground = false)
-@Composable
-private fun ChatsAreaErrorPreview() {
-    DroidChatTheme {
-        ChatsArea(
-            state = ChatsListUiState.Error,
+            state = state,
             onTryAgain = {},
         )
     }

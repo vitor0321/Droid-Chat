@@ -1,7 +1,6 @@
 package com.example.droidchat.ui.mockPreview
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
 import com.example.droidchat.domain.model.User
 import com.example.droidchat.ui.mockPreview.UserFake.user2
 import com.example.droidchat.ui.mockPreview.UserFake.user3
@@ -13,16 +12,16 @@ internal class UsersPreviewParameterProvider : PreviewParameterProvider<User> {
     override val values: Sequence<User> = sequenceOf(user2, user3, user4)
 }
 
-internal class UserListPreviewParameterProvider : CollectionPreviewParameterProvider<User>(
+internal val userListPreviewParameterProvider =
     persistentListOf(
         user2,
         user3,
         user4
     )
-)
 
 internal object UserFake {
-    internal val user1 = User(
+
+    val user1 = User(
         id = 1,
         self = true,
         firstName = "John",
@@ -31,7 +30,7 @@ internal object UserFake {
         email = "JohnDoe@gmail.com"
     )
 
-    internal val user2 = User(
+    val user2 = User(
         id = 2,
         self = false,
         firstName = "Jane",
@@ -40,7 +39,7 @@ internal object UserFake {
         email = "JaneDoe@gmail.com"
     )
 
-    internal val user3 = User(
+    val user3 = User(
         id = 3,
         self = false,
         firstName = "Adriana",
@@ -49,7 +48,7 @@ internal object UserFake {
         email = "adrianawalcker@gmail.com"
     )
 
-    internal val user4 = User(
+    val user4 = User(
         id = 4,
         self = false,
         firstName = "Vitor",
