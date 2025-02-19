@@ -12,14 +12,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.droidchat.domain.model.Chat
 import com.example.droidchat.ui.components.area.chats.ChatsArea
 import com.example.droidchat.ui.components.field.chats.TopAppBarField
 import com.example.droidchat.ui.feature.chats.viewModel.ChatsListUiState
 import com.example.droidchat.ui.feature.chats.viewModel.ChatsViewModel
 import com.example.droidchat.ui.mockPreview.ChatListPreviewParameterProvider
 import com.example.droidchat.ui.theme.DroidChatTheme
-import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 internal fun ChatsRoute(
@@ -57,35 +55,12 @@ private fun ChatsScreenScreen(
 
 @Preview(showBackground = true)
 @Composable
-private fun ChatsScreenLoadingPreview() {
-    DroidChatTheme {
-        ChatsScreenScreen(
-            state = ChatsListUiState.Loading,
-            onTryAgain = {},
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun ChatsScreenSuccessPreview(
-    @PreviewParameter(ChatListPreviewParameterProvider::class)
-    chats: ImmutableList<Chat>
+private fun ChatsAreaSuccessPreview(
+    @PreviewParameter(ChatListPreviewParameterProvider::class) state: ChatsListUiState
 ) {
     DroidChatTheme {
-        ChatsScreenScreen(
-            state = ChatsListUiState.Success(chats),
-            onTryAgain = {},
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun ChatsScreenErrorPreview() {
-    DroidChatTheme {
-        ChatsScreenScreen(
-            state = ChatsListUiState.Error,
+        ChatsArea(
+            state = state,
             onTryAgain = {},
         )
     }

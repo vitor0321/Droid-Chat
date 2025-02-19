@@ -1,8 +1,8 @@
 package com.example.droidchat.ui.mockPreview
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
 import com.example.droidchat.domain.model.Chat
+import com.example.droidchat.ui.feature.chats.viewModel.ChatsListUiState
 import com.example.droidchat.ui.mockPreview.ChatFake.chat1
 import com.example.droidchat.ui.mockPreview.ChatFake.chat2
 import com.example.droidchat.ui.mockPreview.ChatFake.chat3
@@ -17,13 +17,15 @@ internal class ChatPreviewParameterProvider : PreviewParameterProvider<Chat> {
     override val values: Sequence<Chat> = sequenceOf(chat1, chat2, chat3)
 }
 
-internal class ChatListPreviewParameterProvider : CollectionPreviewParameterProvider<Chat>(
-    persistentListOf(
-        chat1,
-        chat2,
-        chat3
+internal class ChatListPreviewParameterProvider : PreviewParameterProvider<ChatsListUiState> {
+
+    override val values: Sequence<ChatsListUiState> = sequenceOf(
+        ChatsListUiState.Success(persistentListOf(chat2, chat3, chat1)),
+        ChatsListUiState.Success(persistentListOf()),
+        ChatsListUiState.Loading,
+        ChatsListUiState.Error,
     )
-)
+}
 
 internal object ChatFake {
     internal val chat1 = Chat(

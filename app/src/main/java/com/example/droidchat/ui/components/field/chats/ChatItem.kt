@@ -3,7 +3,6 @@ package com.example.droidchat.ui.components.field.chats
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -11,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.text.font.FontWeight.Companion.Medium
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,9 +17,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.Visibility
-import coil.compose.AsyncImage
-import com.example.droidchat.R
 import com.example.droidchat.domain.model.Chat
+import com.example.droidchat.ui.components.avatar.RoundedAvatar
 import com.example.droidchat.ui.mockPreview.ChatPreviewParameterProvider
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpace
@@ -48,20 +45,15 @@ internal fun ChatItem(
             lastMessageTimeRef,
             unreadCountRef) = createRefs()
 
-        AsyncImage(
-            model = receiver.profilePictureUrl,
+        RoundedAvatar(
+            imageUri = receiver.profilePictureUrl,
             contentDescription = null,
             modifier = Modifier
-                .clip(CircleShape)
-                .size(DroidSpace.ExtraLarge.value)
                 .constrainAs(avatarRef) {
                     top.linkTo(parent.top, margin = DroidSpace.MMedium.value)
                     bottom.linkTo(parent.bottom, margin = DroidSpace.MMedium.value)
                     start.linkTo(parent.start)
                 },
-            placeholder = painterResource(R.drawable.no_profile_image),
-            error = painterResource(R.drawable.no_profile_image),
-            fallback = painterResource(R.drawable.no_profile_image),
         )
 
         Text(
