@@ -11,6 +11,7 @@ import com.example.droidchat.ui.mockPreview.UserFake.user2
 import com.example.droidchat.ui.mockPreview.UserFake.user3
 import com.example.droidchat.ui.mockPreview.UserFake.user4
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 
 internal class ChatPreviewParameterProvider : PreviewParameterProvider<Chat> {
 
@@ -20,7 +21,7 @@ internal class ChatPreviewParameterProvider : PreviewParameterProvider<Chat> {
 internal class ChatListPreviewParameterProvider : PreviewParameterProvider<ChatsListUiState> {
 
     override val values: Sequence<ChatsListUiState> = sequenceOf(
-        ChatsListUiState.Success(persistentListOf(chat2, chat3, chat1)),
+        ChatsListUiState.Success(listOf(chat2, chat3, chat1).toImmutableList()),
         ChatsListUiState.Success(persistentListOf()),
         ChatsListUiState.Loading,
         ChatsListUiState.Error,

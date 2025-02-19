@@ -11,14 +11,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import com.example.droidchat.R
 import com.example.droidchat.ui.theme.DroidChatTheme
-import com.example.droidchat.ui.theme.DroidSpace
+import com.example.droidchat.ui.theme.DroidSpaceToken
 
 @Composable
 internal fun RoundedAvatar(
     modifier: Modifier = Modifier,
     imageUri: Any?,
     contentDescription: String?,
-    size: DroidSpace = DroidSpace.ExtraLarge,
+    size: DroidSpaceToken = DroidSpaceToken.ExtraLarge,
     @DrawableRes defaultImage: Int = R.drawable.no_profile_image,
 ) {
     AsyncImage(

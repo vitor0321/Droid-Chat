@@ -35,7 +35,7 @@ import com.example.droidchat.DroidChatFileProvider
 import com.example.droidchat.R
 import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
-import com.example.droidchat.ui.theme.DroidSpace
+import com.example.droidchat.ui.theme.DroidSpaceToken
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,7 +64,7 @@ fun ProfilePictureOptionsModalBottomSheet(
 
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
-        modifier = modifier.padding(DroidSpace.MSmall.value),
+        modifier = modifier.padding(DroidSpaceToken.MSmall.value),
         sheetState = sheetState,
         containerColor = MaterialTheme.colorScheme.outlineVariant,
         contentColor = MaterialTheme.colorScheme.onSurface,
@@ -96,9 +96,9 @@ private fun ProfilePictureOptionRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .defaultMinSize(minHeight = DroidSpace.XLarge.value)
+            .defaultMinSize(minHeight = DroidSpaceToken.XLarge.value)
             .clickable { onClick() }
-            .padding(horizontal = DroidSpace.MMedium.value),
+            .padding(horizontal = DroidSpaceToken.MMedium.value),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
@@ -107,7 +107,7 @@ private fun ProfilePictureOptionRow(
             tint = MaterialTheme.colorScheme.onSurface,
         )
 
-        Spacer(modifier = Modifier.width(DroidSpace.XSmall.value))
+        Spacer(modifier = Modifier.width(DroidSpaceToken.XSmall.value))
 
         Text(
             text = text,

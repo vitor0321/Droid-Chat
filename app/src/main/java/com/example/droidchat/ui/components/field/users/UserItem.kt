@@ -16,7 +16,7 @@ import com.example.droidchat.domain.model.User
 import com.example.droidchat.ui.components.avatar.RoundedAvatar
 import com.example.droidchat.ui.mockPreview.UsersPreviewParameterProvider
 import com.example.droidchat.ui.theme.DroidChatTheme
-import com.example.droidchat.ui.theme.DroidSpace
+import com.example.droidchat.ui.theme.DroidSpaceToken
 
 @Composable
 internal fun UserItem(
@@ -30,15 +30,15 @@ internal fun UserItem(
         RoundedAvatar(
             imageUri = user.profilePictureUrl,
             contentDescription = null,
-            size = DroidSpace.XSLarge
+            size = DroidSpaceToken.XSLarge
         )
 
         Text(
             text = user.firstName,
             modifier = Modifier
-                .padding(horizontal = DroidSpace.MMedium.value)
+                .padding(horizontal = DroidSpaceToken.MMedium.value)
                 .weight(1f),
-            color = MaterialTheme.colorScheme.surface,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontWeight = FontWeight.Bold,
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,

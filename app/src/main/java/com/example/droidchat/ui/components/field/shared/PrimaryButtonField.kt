@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.droidchat.ui.theme.DroidChatTheme
-import com.example.droidchat.ui.theme.DroidSpace
+import com.example.droidchat.ui.theme.DroidSpaceToken
 
 @Composable
 internal fun PrimaryButton(
@@ -30,7 +30,7 @@ internal fun PrimaryButton(
         onClick = {
             onClick()
         },
-        modifier = modifier.height(DroidSpace.ExtraLarge.value),
+        modifier = modifier.height(DroidSpaceToken.ExtraLarge.value),
         enabled = !isLoading,
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
@@ -45,7 +45,7 @@ internal fun PrimaryButton(
             if (isLoading) {
                 CircularProgressIndicator(
                     modifier = Modifier
-                        .size(DroidSpace.MLarge.value)
+                        .size(DroidSpaceToken.MLarge.value)
                         .aspectRatio(1f),
                     color = MaterialTheme.colorScheme.onPrimary,
                     strokeCap = StrokeCap.Round,

@@ -18,7 +18,7 @@ import com.example.droidchat.ui.components.field.shared.PrimaryTextField
 import com.example.droidchat.ui.feature.signin.viewModel.SignInEvent
 import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
-import com.example.droidchat.ui.theme.DroidSpace
+import com.example.droidchat.ui.theme.DroidSpaceToken
 
 @Composable
 internal fun BodySigInField(
@@ -37,10 +37,10 @@ internal fun BodySigInField(
             contentDescription = null
         )
 
-        Spacer(modifier = Modifier.height(DroidSpace.XExtraLarge.value))
+        Spacer(modifier = Modifier.height(DroidSpaceToken.XExtraLarge.value))
 
         PrimaryTextField(
-            modifier = Modifier.padding(horizontal = DroidSpace.MMedium.value),
+            modifier = Modifier.padding(horizontal = DroidSpaceToken.MMedium.value),
             value = email,
             onValueChange = { onFormEvent(SignInEvent.EmailChanged(it)) },
             placeholder = strings.signInStrings.featureLoginEmail,
@@ -49,10 +49,10 @@ internal fun BodySigInField(
             errorMessage = emailError
         )
 
-        Spacer(modifier = Modifier.height(DroidSpace.Medium.value))
+        Spacer(modifier = Modifier.height(DroidSpaceToken.Medium.value))
 
         PrimaryTextField(
-            modifier = Modifier.padding(horizontal = DroidSpace.MMedium.value),
+            modifier = Modifier.padding(horizontal = DroidSpaceToken.MMedium.value),
             value = password,
             onValueChange = { onFormEvent(SignInEvent.PasswordChanged(it)) },
             placeholder = strings.signInStrings.featureLoginPassword,
@@ -62,10 +62,10 @@ internal fun BodySigInField(
             errorMessage = passwordError
         )
 
-        Spacer(modifier = Modifier.height(DroidSpace.XExtraLarge.value))
+        Spacer(modifier = Modifier.height(DroidSpaceToken.XExtraLarge.value))
 
         PrimaryButton(
-            modifier = Modifier.padding(horizontal = DroidSpace.MMedium.value),
+            modifier = Modifier.padding(horizontal = DroidSpaceToken.MMedium.value),
             text = strings.signInStrings.featureLoginButton,
             onClick = { onFormEvent(SignInEvent.Submit) },
             isLoading = isLoading,

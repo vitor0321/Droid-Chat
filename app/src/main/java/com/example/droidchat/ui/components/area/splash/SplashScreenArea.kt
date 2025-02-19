@@ -23,7 +23,7 @@ import com.example.droidchat.R
 import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.BackgroundGradient
 import com.example.droidchat.ui.theme.DroidChatTheme
-import com.example.droidchat.ui.theme.DroidSpace
+import com.example.droidchat.ui.theme.DroidSpaceToken
 
 @Composable
 internal fun SplashScreenArea() {
@@ -31,7 +31,7 @@ internal fun SplashScreenArea() {
         modifier = Modifier
             .fillMaxSize()
             .background(brush = BackgroundGradient)
-            .padding(DroidSpace.MMedium.value),
+            .padding(DroidSpaceToken.MMedium.value),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -40,7 +40,7 @@ internal fun SplashScreenArea() {
             contentDescription = null,
         )
 
-        Spacer(modifier = Modifier.height(DroidSpace.XExtraLarge.value))
+        Spacer(modifier = Modifier.height(DroidSpaceToken.XExtraLarge.value))
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -50,7 +50,7 @@ internal fun SplashScreenArea() {
                 contentDescription = null,
             )
 
-            Spacer(modifier = Modifier.width(DroidSpace.XSmall.value))
+            Spacer(modifier = Modifier.width(DroidSpaceToken.XSmall.value))
 
             Text(
                 text = strings.splashStrings.splashSafetyInfo,
