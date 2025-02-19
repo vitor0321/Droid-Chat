@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.example.droidchat.ui.theme.DroidChatTheme
-import com.example.droidchat.ui.theme.DroidSpace
+import com.example.droidchat.ui.theme.DroidSpaceToken
 import com.valentinilk.shimmer.shimmer
 
 @Composable
@@ -39,23 +39,23 @@ internal fun ChatItemShimmer() {
         Box(
             modifier = Modifier
                 .clip(CircleShape)
-                .size(DroidSpace.ExtraLarge.value)
+                .size(DroidSpaceToken.ExtraLarge.value)
                 .background(Color.Gray)
                 .constrainAs(avatarRef) {
-                    top.linkTo(parent.top, margin = DroidSpace.MMedium.value)
-                    bottom.linkTo(parent.bottom, margin = DroidSpace.MMedium.value)
+                    top.linkTo(parent.top, margin = DroidSpaceToken.MMedium.value)
+                    bottom.linkTo(parent.bottom, margin = DroidSpaceToken.MMedium.value)
                     start.linkTo(parent.start)
                 },
         )
 
         Box(
             modifier = Modifier
-                .height(DroidSpace.MMedium.value)
+                .height(DroidSpaceToken.MMedium.value)
                 .background(Color.Gray)
                 .constrainAs(firstNameRef) {
                 top.linkTo(avatarRef.top)
-                start.linkTo(avatarRef.end, margin = DroidSpace.MMedium.value)
-                end.linkTo(lastMessageTimeRef.start, margin = DroidSpace.MMedium.value)
+                start.linkTo(avatarRef.end, margin = DroidSpaceToken.MMedium.value)
+                end.linkTo(lastMessageTimeRef.start, margin = DroidSpaceToken.MMedium.value)
                 bottom.linkTo(lastMessageRef.top)
                 width = Dimension.fillToConstraints
             },
@@ -63,12 +63,12 @@ internal fun ChatItemShimmer() {
 
         Box(
             modifier = Modifier
-                .height(DroidSpace.MMedium.value)
+                .height(DroidSpaceToken.MMedium.value)
                 .background(Color.Gray)
                 .constrainAs(lastMessageRef) {
                 top.linkTo(firstNameRef.bottom)
-                start.linkTo(avatarRef.end, margin = DroidSpace.MMedium.value)
-                end.linkTo(unreadCountRef.start, margin = DroidSpace.MMedium.value)
+                start.linkTo(avatarRef.end, margin = DroidSpaceToken.MMedium.value)
+                end.linkTo(unreadCountRef.start, margin = DroidSpaceToken.MMedium.value)
                 bottom.linkTo(avatarRef.bottom)
                 width = Dimension.fillToConstraints
             },
@@ -76,7 +76,7 @@ internal fun ChatItemShimmer() {
 
         Box(
             modifier = Modifier
-                .size(width = DroidSpace.MMedium.value, height = DroidSpace.MMedium.value)
+                .size(width = DroidSpaceToken.MMedium.value, height = DroidSpaceToken.MMedium.value)
                 .background(Color.Gray)
                 .constrainAs(lastMessageTimeRef) {
                 top.linkTo(firstNameRef.top)
@@ -88,10 +88,10 @@ internal fun ChatItemShimmer() {
 
         Box(
             modifier = Modifier
-                .height(DroidSpace.MMedium.value)
+                .height(DroidSpaceToken.MMedium.value)
                 .clip(CircleShape)
                 .background(Color.Gray)
-                .padding(DroidSpace.MSmall.value)
+                .padding(DroidSpaceToken.MSmall.value)
                 .constrainAs(unreadCountRef) {
                     top.linkTo(lastMessageTimeRef.bottom)
                     end.linkTo(parent.end)

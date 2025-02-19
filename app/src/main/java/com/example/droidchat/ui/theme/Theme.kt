@@ -17,7 +17,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 @Composable
-public fun DroidChatTheme(
+fun DroidChatTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     useDynamicColor: Boolean = false,
     content: @Composable () -> Unit
@@ -41,7 +41,14 @@ public fun DroidChatTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = MaterialTheme.typography.copy(
+            displayLarge = DroidChatTypographyToken.heading1,
+            displayMedium = DroidChatTypographyToken.heading2,
+            displaySmall = DroidChatTypographyToken.heading3,
+            bodyLarge = DroidChatTypographyToken.body1,
+            bodyMedium = DroidChatTypographyToken.body2,
+            labelSmall = DroidChatTypographyToken.caption
+        ),
         content = content
     )
 }

@@ -3,7 +3,7 @@ package com.example.droidchat.ui.theme
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-enum class DroidSpace(
+internal enum class DroidSpaceToken(
     val value: Dp
 ){
     None(0.dp),

@@ -19,7 +19,7 @@ import com.example.droidchat.ui.feature.signup.viewModel.SignUpEvent
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpState
 import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
-import com.example.droidchat.ui.theme.DroidSpace
+import com.example.droidchat.ui.theme.DroidSpaceToken
 
 @Composable
 internal fun BodySigUpField(
@@ -38,7 +38,7 @@ internal fun BodySigUpField(
                 .clickable { onFormEvent(SignUpEvent.OpenProfilePictureOptionsModalBottomSheet) }
         )
 
-        Spacer(modifier = Modifier.height(DroidSpace.MLarge.value))
+        Spacer(modifier = Modifier.height(DroidSpaceToken.MLarge.value))
 
         SecondaryTextField(
             label = strings.signUpStrings.featureSignUpFirstName,
@@ -47,7 +47,7 @@ internal fun BodySigUpField(
             errorText = state.firstNameError,
         )
 
-        Spacer(modifier = Modifier.height(DroidSpace.XMedium.value))
+        Spacer(modifier = Modifier.height(DroidSpaceToken.XMedium.value))
 
         SecondaryTextField(
             label = strings.signUpStrings.featureSignUpLastName,
@@ -56,7 +56,7 @@ internal fun BodySigUpField(
             errorText = state.lastNameError,
         )
 
-        Spacer(modifier = Modifier.height(DroidSpace.XMedium.value))
+        Spacer(modifier = Modifier.height(DroidSpaceToken.XMedium.value))
 
         SecondaryTextField(
             label = strings.signUpStrings.featureSignUpEmail,
@@ -66,7 +66,7 @@ internal fun BodySigUpField(
             errorText = state.emailError,
         )
 
-        Spacer(modifier = Modifier.height(DroidSpace.XMedium.value))
+        Spacer(modifier = Modifier.height(DroidSpaceToken.XMedium.value))
 
         SecondaryTextField(
             label = strings.signUpStrings.featureSignUpPassword,
@@ -77,7 +77,7 @@ internal fun BodySigUpField(
             errorText = state.passwordError,
         )
 
-        Spacer(modifier = Modifier.height(DroidSpace.XMedium.value))
+        Spacer(modifier = Modifier.height(DroidSpaceToken.XMedium.value))
 
         SecondaryTextField(
             label = strings.signUpStrings.featureSignUpPasswordConfirmation,
@@ -89,7 +89,7 @@ internal fun BodySigUpField(
             errorText = state.passwordConfirmationError,
         )
 
-        Spacer(modifier = Modifier.height(DroidSpace.MLarge.value))
+        Spacer(modifier = Modifier.height(DroidSpaceToken.MLarge.value))
 
         PrimaryButton(
             text = strings.signUpStrings.featureSignUpButton,

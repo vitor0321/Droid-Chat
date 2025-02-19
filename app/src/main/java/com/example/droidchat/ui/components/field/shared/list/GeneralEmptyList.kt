@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.droidchat.R
 import com.example.droidchat.ui.components.field.shared.animated.AnimatedContent
 import com.example.droidchat.ui.theme.DroidChatTheme
-import com.example.droidchat.ui.theme.DroidSpace
+import com.example.droidchat.ui.theme.DroidSpaceToken
 
 @Composable
 internal fun GeneralEmptyList(
@@ -33,23 +33,23 @@ internal fun GeneralEmptyList(
         modifier = modifier
             .background(MaterialTheme.colorScheme.surface)
             .fillMaxSize()
-            .padding(DroidSpace.MMedium.value),
+            .padding(DroidSpaceToken.MMedium.value),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
         resource?.let {
             Box(
                 modifier = Modifier.sizeIn(
-                    maxWidth = DroidSpace.XXExtraLarge.value,
-                    maxHeight = DroidSpace.XXExtraLarge.value
+                    maxWidth = DroidSpaceToken.XXExtraLarge.value,
+                    maxHeight = DroidSpaceToken.XXExtraLarge.value
                 )
             ) {
                 it()
             }
-            Spacer(modifier = Modifier.size(DroidSpace.MMedium.value))
+            Spacer(modifier = Modifier.size(DroidSpaceToken.MMedium.value))
         }
 
-        Spacer(modifier = Modifier.size(DroidSpace.XSmall.value))
+        Spacer(modifier = Modifier.size(DroidSpaceToken.XSmall.value))
 
         Text(
             text = message,
@@ -68,7 +68,7 @@ private fun GeneralEmptyListPreview() {
             message = "No chats available",
             resource = {
                 AnimatedContent(
-                    modifier = Modifier.size(DroidSpace.XXExtraLarge.value),
+                    modifier = Modifier.size(DroidSpaceToken.XXExtraLarge.value),
                     resId = R.raw.animation_empty_list,
                 )
             }

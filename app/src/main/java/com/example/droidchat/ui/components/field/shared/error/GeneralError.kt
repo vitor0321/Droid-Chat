@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.droidchat.ui.theme.DroidChatTheme
-import com.example.droidchat.ui.theme.DroidSpace
+import com.example.droidchat.ui.theme.DroidSpaceToken
 
 @Composable
 internal fun GeneralError(
@@ -33,7 +33,7 @@ internal fun GeneralError(
         modifier = modifier
             .background(MaterialTheme.colorScheme.surface)
             .fillMaxSize()
-            .padding(DroidSpace.MMedium.value),
+            .padding(DroidSpaceToken.MMedium.value),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -41,13 +41,13 @@ internal fun GeneralError(
             Spacer(modifier = Modifier.weight(1f))
             Box(
                 modifier = Modifier.sizeIn(
-                    maxWidth = DroidSpace.XXExtraLarge.value,
-                    maxHeight = DroidSpace.XXExtraLarge.value
+                    maxWidth = DroidSpaceToken.XXExtraLarge.value,
+                    maxHeight = DroidSpaceToken.XXExtraLarge.value
                 )
             ) {
                 it()
             }
-            Spacer(modifier = Modifier.size(DroidSpace.MMedium.value))
+            Spacer(modifier = Modifier.size(DroidSpaceToken.MMedium.value))
         }
 
         Text(
@@ -57,7 +57,7 @@ internal fun GeneralError(
             style = MaterialTheme.typography.titleLarge,
         )
 
-        Spacer(modifier = Modifier.size(DroidSpace.XSmall.value))
+        Spacer(modifier = Modifier.size(DroidSpaceToken.XSmall.value))
 
         Text(
             text = message,
@@ -69,7 +69,7 @@ internal fun GeneralError(
         action?.let {
             Spacer(modifier = Modifier.weight(1f))
             it()
-            Spacer(modifier = Modifier.size(DroidSpace.MMedium.value))
+            Spacer(modifier = Modifier.size(DroidSpaceToken.MMedium.value))
         }
     }
 }

@@ -26,7 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.droidchat.R
 import com.example.droidchat.ui.extension.getVisualTransformationForPassword
 import com.example.droidchat.ui.theme.DroidChatTheme
-import com.example.droidchat.ui.theme.DroidSpace
+import com.example.droidchat.ui.theme.DroidSpaceToken
 
 @Composable
 internal fun PrimaryTextField(
@@ -104,7 +104,7 @@ internal fun PrimaryTextField(
         errorMessage?.let {
             Text(
                 text = it,
-                modifier = Modifier.padding(start = DroidSpace.Medium.value),
+                modifier = Modifier.padding(start = DroidSpaceToken.Medium.value),
                 color = MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.labelMedium,
             )

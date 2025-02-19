@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.example.droidchat.domain.model.Chat
 import com.example.droidchat.ui.mockPreview.ChatListPreviewParameterProvider
 import com.example.droidchat.ui.theme.DroidChatTheme
-import com.example.droidchat.ui.theme.DroidSpace
+import com.example.droidchat.ui.theme.DroidSpaceToken
 import com.example.droidchat.ui.theme.Grey1
 import kotlinx.collections.immutable.ImmutableList
 
@@ -23,7 +23,7 @@ internal fun SuccessField(
     val lazyListState: LazyListState = rememberLazyListState()
     LazyColumn(
         state = lazyListState,
-        contentPadding = PaddingValues(horizontal = DroidSpace.MMedium.value),
+        contentPadding = PaddingValues(horizontal = DroidSpaceToken.MMedium.value),
     ) {
         itemsIndexed(
             items = chats,
