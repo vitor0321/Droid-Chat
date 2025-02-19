@@ -22,26 +22,27 @@ import com.example.droidchat.ui.components.field.shared.PrimaryButton
 import com.example.droidchat.ui.components.field.shared.animated.AnimatedContent
 import com.example.droidchat.ui.components.field.shared.error.GeneralError
 import com.example.droidchat.ui.components.field.shared.list.GeneralEmptyList
-import com.example.droidchat.ui.components.scaffold.ChatScaffold
-import com.example.droidchat.ui.components.topAppBar.ChatTopAppBar
 import com.example.droidchat.ui.feature.chats.viewModel.ChatsListUiState
 import com.example.droidchat.ui.mockPreview.ChatListPreviewParameterProvider
 import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpaceToken
 import com.example.droidchat.ui.theme.Grey1
+import com.walcker.topaz.ExperimentalTopazComposeLibraryApi
+import com.walcker.topaz.components.scaffold.TopazScaffold
+import com.walcker.topaz.components.topAppBar.TopazTopAppBar
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalTopazComposeLibraryApi::class)
 @Composable
 internal fun ChatsArea(
     modifier: Modifier = Modifier,
     state: ChatsListUiState,
     onTryAgain: () -> Unit,
 ) {
-    ChatScaffold(
+    TopazScaffold(
         modifier = modifier,
         topBar = {
-            ChatTopAppBar(
+            TopazTopAppBar(
                 title = {
                     Text(
                         text = buildAnnotatedString {

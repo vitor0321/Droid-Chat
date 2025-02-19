@@ -21,25 +21,26 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.droidchat.domain.model.User
 import com.example.droidchat.ui.components.field.users.UserItem
-import com.example.droidchat.ui.components.scaffold.ChatScaffold
-import com.example.droidchat.ui.components.topAppBar.ChatTopAppBar
 import com.example.droidchat.ui.mockPreview.userListPreviewParameterProvider
 import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpaceToken
 import com.example.droidchat.ui.theme.Grey1
+import com.walcker.topaz.ExperimentalTopazComposeLibraryApi
+import com.walcker.topaz.components.scaffold.TopazScaffold
+import com.walcker.topaz.components.topAppBar.TopazTopAppBar
 import kotlinx.coroutines.flow.flowOf
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalTopazComposeLibraryApi::class)
 @Composable
 internal fun UsersArea(
     modifier: Modifier = Modifier,
     pagingUsers: LazyPagingItems<User>
 ) {
-    ChatScaffold(
+    TopazScaffold(
         modifier = modifier,
         topBar = {
-            ChatTopAppBar(
+            TopazTopAppBar(
                 title = {
                     Text(
                         text = buildAnnotatedString {
