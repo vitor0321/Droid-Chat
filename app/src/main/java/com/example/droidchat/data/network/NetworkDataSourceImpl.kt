@@ -27,15 +27,15 @@ internal class NetworkDataSourceImpl @Inject constructor(
 ) : NetWorkDataSource {
 
     override suspend fun signUp(request: CreateAccountRequest) =
-        httpClient.post(HttpUrl.SIGN_UP.value) { setBody(request) }.body<Unit>()
+        httpClient.post(HttpConfig.SIGN_UP.value) { setBody(request) }.body<Unit>()
 
     override suspend fun signIn(request: AuthRequest): TokenResponse =
-        httpClient.post(HttpUrl.SIGN_IN.value) { setBody(request) }.body()
+        httpClient.post(HttpConfig.SIGN_IN.value) { setBody(request) }.body()
 
     override suspend fun uploadProfilePicture(filePath: String): ImageResponse {
         val file = File(filePath)
         return httpClient.submitFormWithBinaryData(
-            url = HttpUrl.UPLOADING.value,
+            url = HttpConfig.UPLOADING.value,
             formData = formData {
                 append("image", file.readBytes(), Headers.build {
                     append(HttpHeaders.ContentType, "image/${file.extension}")
@@ -46,19 +46,19 @@ internal class NetworkDataSourceImpl @Inject constructor(
     }
 
     override suspend fun authenticate(): UserResponse =
-        httpClient.get(HttpUrl.AUTHENTICATE.value).body()
+        httpClient.get(HttpConfig.AUTHENTICATE.value).body()
 
     override suspend fun getChats(
         paginationParams: PaginationParams
     ): PaginatedChatResponse =
-        httpClient.get(HttpUrl.CONVERSATIONS.value) {
+        httpClient.get(HttpConfig.CONVERSATIONS.value) {
             url { appendPaginationParams(paginationParams) }
         }.body()
 
     override suspend fun getUsers(
         paginationParams: PaginationParams
     ): PaginatedUserResponse =
-        httpClient.get(HttpUrl.USERS.value) {
+        httpClient.get(HttpConfig.USERS.value) {
             url { appendPaginationParams(paginationParams) }
         }.body()
 
