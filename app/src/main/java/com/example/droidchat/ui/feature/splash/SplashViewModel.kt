@@ -26,13 +26,12 @@ internal class SplashViewModel @Inject constructor(
                 _splashActionFlow.emit(SplashAction.NavigateToChats)
                 return@launch
             }
-
             authService.authenticate().fold(
                 onSuccess = {
                     _splashActionFlow.emit(SplashAction.NavigateToChats)
                 },
                 onFailure = {
-                    if (it is NetworkException.ApiException && it.statusCode == 401) {
+                    if (it is NetworkException.UnauthorizedException) {
                         authService.clearAccessToken()
                         _splashActionFlow.emit(SplashAction.UserNotAuthenticated)
                     } else {

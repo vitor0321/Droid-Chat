@@ -2,7 +2,7 @@ package com.example.droidchat.data.di
 
 
 import com.example.droidchat.data.TokenManager
-import com.example.droidchat.data.network.HttpUrl
+import com.example.droidchat.data.network.HttpConfig
 import com.example.droidchat.data.service.model.exception.NetworkException
 import dagger.Module
 import dagger.Provides
@@ -12,16 +12,16 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.HttpResponseValidator
+import io.ktor.client.plugins.HttpSend
 import io.ktor.client.plugins.HttpTimeout
-import io.ktor.client.plugins.auth.Auth
-import io.ktor.client.plugins.auth.providers.BearerTokens
-import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.ANDROID
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.plugins.plugin
+import io.ktor.client.request.HttpRequest
 import io.ktor.client.statement.bodyAsText
 import io.ktor.client.statement.request
 import io.ktor.http.ContentType
@@ -72,56 +72,56 @@ internal object NetworkModule {
 
             defaultRequest {
                 // deixar a URL base para ser usada em todas as requisições
-                url(HttpUrl.API.value)
+                url(HttpConfig.API.value)
                 contentType(ContentType.Application.Json)
             }
 
             HttpResponseValidator {
-                handleResponseExceptionWithRequest { cause, _ ->
+                handleResponseExceptionWithRequest { cause, request ->
+                    handleClientRequestException(cause = cause, request = request)
+                }
 
-                    // se a causa do erro for uma exceção de requisição do cliente, isso de forma global para todas as requisições
-                    handleResponseExceptionWithRequest { cause, _ ->
-                        val exception = cause as? ClientRequestException ?: return@handleResponseExceptionWithRequest
-
-                        // Captura informações da resposta HTTP
-                        val response = exception.response
-                        val errorBody = response.bodyAsText()
-
-                        // Log completo da resposta com erro
-                        Logger.ANDROID.log(
-                            """
-                                ❌ HTTP ERROR:
-                                ├── URL: ${response.request.url}
-                                ├── Method: ${response.request.method.value}
-                                ├── Status: ${response.status}
-                                ├── Headers: ${response.headers.entries().joinToString("\n│    ") { "${it.key}: ${it.value}" }}
-                                ├── Response Body: $errorBody
-                            """.trimIndent()
-                        )
-
-                        throw when (exception.response.status) {
-                            HttpStatusCode.NotFound -> NetworkException.NotFoundException(cause)
-                            HttpStatusCode.Conflict -> NetworkException.ConflictException(cause)
-                            HttpStatusCode.BadRequest -> NetworkException.BadRequestException(cause)
-                            HttpStatusCode.Unauthorized -> NetworkException.UnauthorizedException(cause)
-                            HttpStatusCode.InternalServerError -> NetworkException.ServerErrorException(cause)
-                            HttpStatusCode.UnprocessableEntity -> NetworkException.UnprocessableEntityException(cause)
-                            else -> NetworkException.UnknownException(cause)
-                        }
-                    }
+                handleResponseException { cause, request ->
+                    handleClientRequestException(cause = cause, request = request)
                 }
             }
-
-            install(Auth) {
-                bearer {
-                    loadTokens {
-                        val accessToken = tokenManager.accessToken.firstOrNull()
-                        accessToken?.let {
-                            BearerTokens(it, "")
-                        }
-                    }
+        }.apply {
+            plugin(HttpSend).intercept { request ->
+                val accessToken = tokenManager.accessToken.firstOrNull()
+                accessToken?.let {
+                    request.headers.append(HttpConfig.AUTHORIZATION.value, "${HttpConfig.BEARER.value} $accessToken")
                 }
+                execute(request)
             }
         }
+    }
+}
+
+private suspend fun handleClientRequestException(cause: Throwable, request: HttpRequest) {
+    val exception = cause as? ClientRequestException ?: return
+
+    val response = exception.response
+    val errorBody = response.bodyAsText()
+
+    Logger.ANDROID.log(
+        """
+            ❌ HTTP ERROR:
+            ├── Response URL: ${response.request.url}
+            ├── Request Method: ${request.method.value} URL: ${request.url}
+            ├── Response Method: ${response.request.method.value}
+            ├── Response Status: ${response.status}
+            ├── Response Headers: ${response.headers.entries().joinToString("\n│    ") { "${it.key}: ${it.value}" }}
+            ├── Response Response Body: $errorBody
+        """.trimIndent()
+    )
+
+    throw when (response.status) {
+        HttpStatusCode.NotFound -> NetworkException.NotFoundException(cause)
+        HttpStatusCode.Conflict -> NetworkException.ConflictException(cause)
+        HttpStatusCode.BadRequest -> NetworkException.BadRequestException(cause)
+        HttpStatusCode.Unauthorized -> NetworkException.UnauthorizedException(cause)
+        HttpStatusCode.InternalServerError -> NetworkException.ServerErrorException(cause)
+        HttpStatusCode.UnprocessableEntity -> NetworkException.UnprocessableEntityException(cause)
+        else -> NetworkException.UnknownException(cause)
     }
 }
