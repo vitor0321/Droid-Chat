@@ -1,10 +1,7 @@
 package com.example.droidchat.ui.components.area.chats
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
@@ -15,11 +12,8 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import com.example.droidchat.R
 import com.example.droidchat.ui.components.field.chats.ChatItemShimmer
 import com.example.droidchat.ui.components.field.chats.SuccessField
-import com.example.droidchat.ui.components.field.shared.PrimaryButton
-import com.example.droidchat.ui.components.field.shared.animated.AnimatedContent
 import com.example.droidchat.ui.components.field.shared.error.GeneralError
 import com.example.droidchat.ui.components.field.shared.list.GeneralEmptyList
 import com.example.droidchat.ui.feature.chats.viewModel.ChatsListUiState
@@ -69,33 +63,11 @@ internal fun ChatsArea(
 
             is ChatsListUiState.Success -> {
                 if (state.chats.isNotEmpty()) SuccessField(chats = state.chats)
-                else GeneralEmptyList(
-                    modifier = Modifier.fillMaxSize(),
-                    message = strings.chatsStrings.featureChatsEmptyList,
-                    resource = {
-                        AnimatedContent(
-                            modifier = Modifier.size(DroidSpaceToken.XXExtraLarge.value),
-                            resId = R.raw.animation_empty_list,
-                        )
-                    },
-                )
+                else GeneralEmptyList()
             }
 
             is ChatsListUiState.Error ->
-                GeneralError(
-                    title = strings.errorMessagesStrings.commonGenericErrorMessage,
-                    message = strings.errorMessagesStrings.commonServiceUnavailable,
-                    resource = {
-                        AnimatedContent(modifier = Modifier.size(DroidSpaceToken.XXExtraLarge.value))
-                    },
-                    action = {
-                        PrimaryButton(
-                            modifier = Modifier.height(DroidSpaceToken.XLarge.value),
-                            text = strings.errorMessagesStrings.commonTryAgain,
-                            onClick = onTryAgain,
-                        )
-                    },
-                )
+                GeneralError(onClickButton = onTryAgain)
         }
     }
 }

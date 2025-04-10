@@ -12,4 +12,5 @@ internal data class DroidChatStrings(
     val signInStrings: SignInStrings = SignInStrings(),
     val signUpStrings: SignUpStrings = SignUpStrings(),
     val splashStrings: SplashStrings = SplashStrings(),
+    val usersStrings: UsersStrings = UsersStrings(),
 )

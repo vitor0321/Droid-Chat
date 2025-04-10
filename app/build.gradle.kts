@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -23,6 +25,14 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        val properties = Properties()
+        if (rootProject.file("local.properties").exists()) {
+            properties.load(rootProject.file("local.properties").inputStream())
+        }
+
+        buildConfigField("String", "SURVICATE_WORKSPACE_KEY", properties.getProperty("SURVICATE_WORKSPACE_KEY", "\"\""))
+        manifestPlaceholders["workspaceKey"] = properties.getProperty("SURVICATE_WORKSPACE_KEY", "").replace("\"", "")
     }
 
     buildTypes {
@@ -43,6 +53,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     packaging {
         resources {
@@ -63,6 +74,8 @@ dependencies {
     implementation(libs.androidx.material3)
 
     implementation(libs.jwtdecode)
+
+    implementation(libs.survicate.sdk)
 
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.collections.immutable)
