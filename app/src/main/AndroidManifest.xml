@@ -37,6 +37,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <meta-data 
+            android:name="com.survicate.surveys.workspaceKey" 
+            android:value="${workspaceKey}"/>
     </application>
 
 </manifest>

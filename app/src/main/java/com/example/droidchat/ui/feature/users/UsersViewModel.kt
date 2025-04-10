@@ -14,5 +14,4 @@ internal class UsersViewModel @Inject constructor(
 
     val usersFlow = userService.getUsers()
         .cachedIn(viewModelScope)
-
 }

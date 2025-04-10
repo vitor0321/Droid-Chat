@@ -19,14 +19,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.droidchat.R
 import com.example.droidchat.ui.components.field.shared.animated.AnimatedContent
+import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpaceToken
 
 @Composable
 internal fun GeneralEmptyList(
     modifier: Modifier = Modifier,
-    message: String,
-    resource: (@Composable () -> Unit)? = null,
+    message: String = strings.chatsStrings.featureChatsEmptyList,
+    resource: (@Composable () -> Unit)? = {
+        AnimatedContent(
+            modifier = Modifier.size(DroidSpaceToken.XXExtraLarge.value),
+            resId = R.raw.animation_empty_list,
+        )
+    },
 ) {
 
     Column(

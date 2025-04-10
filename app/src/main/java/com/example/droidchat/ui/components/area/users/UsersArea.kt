@@ -4,28 +4,29 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.paging.LoadState
+import androidx.paging.LoadStates
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.droidchat.domain.model.User
-import com.example.droidchat.ui.components.field.users.UserItem
+import com.example.droidchat.ui.components.field.shared.error.GeneralError
+import com.example.droidchat.ui.components.field.shared.list.GeneralEmptyList
+import com.example.droidchat.ui.components.field.users.UsersErrorLoadMore
+import com.example.droidchat.ui.components.field.users.UsersListItem
+import com.example.droidchat.ui.components.field.users.UsersLoading
+import com.example.droidchat.ui.components.field.users.UsersLoadingLoadMore
 import com.example.droidchat.ui.mockPreview.userListPreviewParameterProvider
 import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.example.droidchat.ui.theme.DroidSpaceToken
-import com.example.droidchat.ui.theme.Grey1
 import com.walcker.topaz.ExperimentalTopazComposeLibraryApi
 import com.walcker.topaz.components.scaffold.TopazScaffold
 import com.walcker.topaz.components.topAppBar.TopazTopAppBar
@@ -40,39 +41,43 @@ internal fun UsersArea(
     TopazScaffold(
         modifier = modifier,
         topBar = {
-            TopazTopAppBar(
-                title = {
-                    Text(
-                        text = buildAnnotatedString {
-                            append(strings.chatsStrings.featureChatsGreetings)
-                            pushStyle(SpanStyle(fontWeight = FontWeight.Bold))
-                            append("Vitor")
-                        },
-                    )
-                }
-            )
+            TopazTopAppBar(title = { Text(text = strings.usersStrings.featureUsersTitle) })
         }
     ) {
-        LazyColumn(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.surface)
-                .fillMaxSize(),
-            contentPadding = PaddingValues(DroidSpaceToken.MMedium.value),
-            verticalArrangement = Arrangement.spacedBy(DroidSpaceToken.MMedium.value)
-        ) {
-            items(pagingUsers.itemCount) { index ->
-                val user = pagingUsers[index]
-                user?.let {
-                    UserItem(user = it)
+        when (pagingUsers.loadState.refresh) {
+            LoadState.Loading -> UsersLoading()
 
-                    if (index != pagingUsers.itemCount - 1) {
-                        HorizontalDivider(
-                            modifier = Modifier.padding(top = DroidSpaceToken.MMedium.value),
-                            color = Grey1
-                        )
+            is LoadState.NotLoading ->
+                if (pagingUsers.itemCount == 0)
+                    GeneralEmptyList()
+
+                else
+                    LazyColumn(
+                        modifier = Modifier
+                            .background(MaterialTheme.colorScheme.surface)
+                            .fillMaxSize(),
+                        contentPadding = PaddingValues(DroidSpaceToken.MMedium.value),
+                        verticalArrangement = Arrangement.spacedBy(DroidSpaceToken.MMedium.value)
+                    ) {
+                        items(pagingUsers.itemCount) { index ->
+                            UsersListItem(pagingUsers, index)
+                        }
+
+                        if (pagingUsers.loadState.append is LoadState.Loading)
+                            item {
+                                UsersLoadingLoadMore()
+                            }
+
+                        if (pagingUsers.loadState.append is LoadState.Error)
+                            item {
+                                UsersErrorLoadMore(
+                                    onErrorLoadMore = { pagingUsers.retry() }
+                                )
+                            }
                     }
-                }
-            }
+
+            is LoadState.Error ->
+                GeneralError(onClickButton = { pagingUsers.refresh() })
         }
     }
 }
@@ -81,7 +86,16 @@ internal fun UsersArea(
 @Composable
 private fun UsersAreaPreview() {
     DroidChatTheme {
-        val usersFlow = flowOf(PagingData.from(userListPreviewParameterProvider))
+        val usersFlow = flowOf(
+            PagingData.from(
+                data = userListPreviewParameterProvider,
+                sourceLoadStates = LoadStates(
+                    refresh = LoadState.Error(Throwable()),
+                    prepend = LoadState.NotLoading(false),
+                    append = LoadState.NotLoading(false),
+                )
+            )
+        )
         UsersArea(
             pagingUsers = usersFlow.collectAsLazyPagingItems()
         )
