@@ -6,8 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import com.example.droidchat.ui.components.area.shared.AppDialogArea
-import com.example.droidchat.ui.feature.signin.navigation.SignInAction
+import com.example.droidchat.ui.components.AppDialogArea
 import com.example.droidchat.ui.strings.strings
 import kotlinx.coroutines.flow.SharedFlow
 

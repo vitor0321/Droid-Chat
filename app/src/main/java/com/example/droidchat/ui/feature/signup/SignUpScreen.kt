@@ -5,8 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.droidchat.ui.components.area.shared.AppDialogArea
-import com.example.droidchat.ui.components.area.signup.SignUpScreenArea
+import com.example.droidchat.ui.components.AppDialogArea
+import com.example.droidchat.ui.feature.signup.components.area.SignUpScreenArea
 import com.example.droidchat.ui.feature.signup.navigation.SignUpNavigationEffect
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpEvent
 import com.example.droidchat.ui.feature.signup.viewModel.SignUpState

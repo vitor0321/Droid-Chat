@@ -8,7 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.droidchat.domain.model.User
-import com.example.droidchat.ui.components.area.users.UsersArea
+import com.example.droidchat.ui.feature.users.components.area.UsersArea
 import com.example.droidchat.ui.mockPreview.userListPreviewParameterProvider
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.survicate.surveys.Survicate

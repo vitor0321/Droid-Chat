@@ -6,6 +6,7 @@ import cafe.adriel.lyricist.LyricistStrings
 internal val strings: DroidChatStrings = DroidChatStrings()
 
 internal data class DroidChatStrings(
+    val chatDetailsStrings: ChatDetailsStrings = ChatDetailsStrings(),
     val chatsStrings: ChatsStrings = ChatsStrings(),
     val commonStrings: CommonStrings = CommonStrings(),
     val errorMessagesStrings: ErrorMessagesStrings = ErrorMessagesStrings(),

@@ -7,7 +7,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.droidchat.ui.components.area.chats.ChatsArea
+import com.example.droidchat.ui.feature.chats.components.area.ChatsArea
 import com.example.droidchat.ui.feature.chats.viewModel.ChatsListUiState
 import com.example.droidchat.ui.feature.chats.viewModel.ChatsViewModel
 import com.example.droidchat.ui.mockPreview.ChatListPreviewParameterProvider

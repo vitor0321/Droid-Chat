@@ -1,43 +1,65 @@
 # 📱 DroidChat
-DroidChat é uma aplicação de chat em tempo real para Android, desenvolvida com tecnologias modernas e utilizando WebSockets para comunicação instantânea entre os usuários. 
 
-Este projeto é um aplicativo de chat funcional, aplicando os principais conceitos e práticas de desenvolvimento Android.
+### AndroidKotlinJetpack ComposeWebSockets
 
-## 🚀 Desenvolvimento:
+### 📋 Descrição
 
-* WebSockets: Como implementar a comunicação em tempo real entre os usuários do aplicativo de chat.
-* Jetpack Compose: Criação de interfaces de usuário modernas, responsivas e declarativas.
-* Injeção de Dependência com Dagger Hilt: Simplificando a gestão de dependências no projeto.
-* Ktor: Utilização para fazer requisições de rede REST.
-* Repository Pattern: Organização e abstração de dados para um código mais limpo e sustentável.
-* Componentes de Arquitetura: Como estruturar a aplicação para melhorar sua manutenção e escalabilidade.
+DroidChat é uma aplicação de chat em tempo real para Android, desenvolvida com tecnologias modernas e utilizando WebSockets para comunicação instantânea entre os usuários. Este projeto aplica os principais conceitos e práticas de desenvolvimento Android para criar uma experiência de chat fluida e responsiva.
 
-## 🖥️ Tecnologias principais:
+### ✨ Funcionalidades principais
+* 💬 Chat em tempo real entre usuários
+* 👤 Perfis de usuário personalizáveis
+* 🔔 Notificações instantâneas de novas mensagens
+* 🌐 Comunicação bidirecional via WebSockets
+* 🎨 Interface moderna construída com Jetpack Compose
 
-* Jetpack Compose: Para criar interfaces de usuário modernas e reativas.
-* Dagger Hilt: Para simplificar a injeção de dependências e facilitar testes.
-* Ktor: Para realizar requisições REST para a API do backend.
-* WebSockets: Implementação da comunicação bidirecional em tempo real, permitindo que as mensagens sejam trocadas instantaneamente entre os usuários.
-* Repository Pattern: Para organizar as fontes de dados e fazer o gerenciamento de dados de maneira mais eficiente.
+### 🛠️ Tecnologias e bibliotecas
+* UI: Jetpack Compose - Para criar interfaces de usuário modernas e reativas
+* Injeção de dependência: Dagger Hilt - Para simplificar a injeção de dependências e facilitar testes
+* Requisições HTTP: Ktor Client - Para realizar requisições REST para a API do backend
+* Comunicação em tempo real: WebSockets - Implementação da comunicação bidirecional em tempo real
+* Arquitetura: Repository Pattern - Para organizar as fontes de dados e fazer o gerenciamento de dados de maneira mais eficiente
+* Design System: Topaz - Biblioteca de componentes visuais para Jetpack Compose
+
+## 🏗️ Arquitetura do projeto
+
+```kotlin
+com.example.droidchat/
+├── data/
+|   ├── di/
+│   ├── local/
+│   ├── remote/
+│   └── repository/
+├── domain/
+│   ├── model/
+│   └── interface/
+├── ui/
+|   ├── di/
+│   ├── components/
+│   ├── screens/
+│   └── theme/
+└── util/
+
+```
+
+
 
 ## 📱 DroidChat: Integração com o Design System Topaz
 
 O projeto está usando uma lib que ainda não está publicada no maven, e você precisa gerar ela localmente.
 
-# Topaz Design System Library 🎨🚀
+# 🎨 Topaz Design System
 
-Topaz é um Design System de componentes reutilizáveis para Jetpack Compose, projetada para facilitar o desenvolvimento de UIs modernas no Android e Kotlin Multiplatform.
+DroidChat utiliza o Topaz Design System, uma biblioteca de componentes reutilizáveis para Jetpack Compose que proporciona uma experiência visual consistente.
 
+## Como configurar o Topaz
 
-## 📥 Instalação Local
-
-### 1️⃣ Clone o Repositório
-
-Primeiro, faça o clone do projeto:
+### 1️⃣ Clone o repositório do Topaz:
 
 ```kotlin
 git clone git@github.com:vitor0321/topaz.git
 ```
+
 ### 2️⃣ Publique a Library no Maven Local
 
 Dentro da pasta do projeto Topaz, publique a library no Maven Local:
@@ -86,12 +108,47 @@ fun ExampleScreen() {
 }
 ```
 
-## 📌 Nota: No futuro, disponibilizaremos mais componentes e documentações detalhadas.
+# 🚀 Como rodar o projeto
 
-### 📄 Contribuição
-Sinta-se à vontade para abrir issues, pull requests e sugestões para melhorar a biblioteca!
+## Pré-requisitos
+* Android Studio Hedgehog 2023.1.1 ou mais recente
+* JDK 17 ou mais recente
+* Android SDK 33+
+* Dispositivo Android ou Emulador com API 24 Android 7.0 ou superior
 
-## 📌 Repositório: [GitHub - Topaz](https://github.com/vitor0321/topaz)
+## Passos para executar
+* Configure o Topaz Design System conforme as instruções acima
+* Clone o repositório do DroidChat:
+```kotlin
+git clone https://github.com/username/DroidChat.git
+```
 
-# 🔥 Agora você está pronto para usar o Topaz UI! 🚀🎨
-Se precisar de suporte, entre em contato ou abra uma issue no GitHub!
+* Abra o projeto no Android Studio
+* Sincronize o projeto com os arquivos Gradle
+* Execute o aplicativo em um dispositivo ou emulador
+
+
+## 🗺️ Roadmap
+* Suporte a mensagens multimídia imagens, áudio
+* Chamadas de vídeo e áudio
+* Salas de chat em grupo
+* Modo offline com sincronização
+* Criptografia ponta-a-ponta
+
+## 🤝 Como contribuir
+* Faça um Fork do projeto
+* Crie uma branch para sua feature git checkout -b feature/NovaMelhoria
+* Commit suas alterações git commit -m 'Adiciona nova melhoria'
+* Push para a branch git push origin feature/NovaMelhoria
+* Abra um Pull Request
+
+
+## Diretrizes de contribuição
+* Siga o padrão de código do projeto
+* Escreva testes para novas funcionalidades
+* Atualize a documentação conforme necessário
+
+## 📄 Licença
+Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE para detalhes.
+⭐️ Se você gostou deste projeto, por favor, dê uma estrela no GitHub ⭐️
+
