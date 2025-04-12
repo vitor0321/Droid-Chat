@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.users.components.field
+package com.example.droidchat.ui.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,7 +12,7 @@ import com.example.droidchat.ui.theme.DroidChatTheme
 import com.walcker.topaz.tokens.TopazSpacerSizeToken
 
 @Composable
-internal fun UsersLoadingLoadMore() {
+internal fun LoadingLoadMore() {
     Box(
         modifier = Modifier
             .padding(TopazSpacerSizeToken.MMedium.horizontalHeight)
@@ -25,8 +25,8 @@ internal fun UsersLoadingLoadMore() {
 
 @Preview(showBackground = true)
 @Composable
-private fun UsersLoadingLoadMorePreview() {
+private fun LoadingLoadMorePreview() {
     DroidChatTheme {
-        UsersLoadingLoadMore()
+        LoadingLoadMore()
     }
 }

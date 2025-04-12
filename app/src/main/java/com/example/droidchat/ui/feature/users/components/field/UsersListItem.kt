@@ -1,5 +1,6 @@
 package com.example.droidchat.ui.feature.users.components.field
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
@@ -21,10 +22,14 @@ import kotlinx.coroutines.flow.flowOf
 internal fun UsersListItem(
     pagingUsers: LazyPagingItems<User>,
     index: Int,
+    onUserClicked: (Int) -> Unit,
 ) {
     val user = pagingUsers[index]
     user?.let {
-        UserItem(user = it)
+        UserItem(
+            modifier = Modifier.clickable { onUserClicked(user.id) },
+            user = it,
+        )
 
         if (index != pagingUsers.itemCount - 1) {
             HorizontalDivider(
@@ -52,6 +57,7 @@ private fun UsersListItemPreview() {
         UsersListItem(
             pagingUsers = usersFlow.collectAsLazyPagingItems(),
             index = 0,
+            onUserClicked = { }
         )
     }
 }

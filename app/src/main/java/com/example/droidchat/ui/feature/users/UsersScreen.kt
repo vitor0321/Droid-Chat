@@ -16,7 +16,8 @@ import kotlinx.coroutines.flow.flowOf
 
 @Composable
 internal fun UsersRoute(
-    viewModel: UsersViewModel = hiltViewModel()
+    viewModel: UsersViewModel = hiltViewModel(),
+    navigateToChatDetails: (userId: Int) -> Unit,
 ) {
     val pagingUsers = viewModel.usersFlow.collectAsLazyPagingItems()
 
@@ -26,14 +27,21 @@ internal fun UsersRoute(
 
     UsersScreen(
         pagingUsers = pagingUsers,
+        onUserClicked = { userId -> navigateToChatDetails(userId) }
     )
 }
 
 @Composable
 internal fun UsersScreen(
-    pagingUsers: LazyPagingItems<User>
+    pagingUsers: LazyPagingItems<User>,
+    onUserClicked: (userId: Int) -> Unit,
 ) {
-    UsersArea(pagingUsers = pagingUsers)
+    UsersArea(
+        pagingUsers = pagingUsers,
+        onUserClicked = { userId ->
+            onUserClicked(userId)
+        },
+    )
 }
 
 @Preview(showBackground = true)
@@ -42,7 +50,8 @@ private fun UsersScreenPreview() {
     DroidChatTheme {
         val usersFlow = flowOf(PagingData.from(userListPreviewParameterProvider))
         UsersScreen(
-            pagingUsers = usersFlow.collectAsLazyPagingItems()
+            pagingUsers = usersFlow.collectAsLazyPagingItems(),
+            onUserClicked = {}
         )
     }
 }

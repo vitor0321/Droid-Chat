@@ -17,12 +17,12 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.droidchat.domain.model.User
+import com.example.droidchat.ui.components.ErrorLazyColumnLoadMore
+import com.example.droidchat.ui.components.LoadingLoadMore
 import com.example.droidchat.ui.components.error.GeneralError
 import com.example.droidchat.ui.components.list.GeneralEmptyList
-import com.example.droidchat.ui.feature.users.components.field.UsersErrorLoadMore
 import com.example.droidchat.ui.feature.users.components.field.UsersListItem
 import com.example.droidchat.ui.feature.users.components.field.UsersLoading
-import com.example.droidchat.ui.feature.users.components.field.UsersLoadingLoadMore
 import com.example.droidchat.ui.mockPreview.userListPreviewParameterProvider
 import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
@@ -36,7 +36,8 @@ import kotlinx.coroutines.flow.flowOf
 @Composable
 internal fun UsersArea(
     modifier: Modifier = Modifier,
-    pagingUsers: LazyPagingItems<User>
+    pagingUsers: LazyPagingItems<User>,
+    onUserClicked: (userId: Int) -> Unit,
 ) {
     TopazScaffold(
         modifier = modifier,
@@ -50,7 +51,6 @@ internal fun UsersArea(
             is LoadState.NotLoading ->
                 if (pagingUsers.itemCount == 0)
                     GeneralEmptyList()
-
                 else
                     LazyColumn(
                         modifier = Modifier
@@ -60,17 +60,22 @@ internal fun UsersArea(
                         verticalArrangement = Arrangement.spacedBy(TopazSpacerSizeToken.MMedium.verticalWidth)
                     ) {
                         items(pagingUsers.itemCount) { index ->
-                            UsersListItem(pagingUsers, index)
+                            UsersListItem(
+                                pagingUsers = pagingUsers,
+                                index = index,
+                                onUserClicked = { userId -> onUserClicked(userId) }
+                            )
                         }
 
                         if (pagingUsers.loadState.append is LoadState.Loading)
                             item {
-                                UsersLoadingLoadMore()
+                                LoadingLoadMore()
                             }
 
                         if (pagingUsers.loadState.append is LoadState.Error)
                             item {
-                                UsersErrorLoadMore(
+                                ErrorLazyColumnLoadMore(
+                                    description = strings.usersStrings.featureUsersErrorLoadingMore,
                                     onErrorLoadMore = { pagingUsers.retry() }
                                 )
                             }
@@ -97,7 +102,8 @@ private fun UsersAreaPreview() {
             )
         )
         UsersArea(
-            pagingUsers = usersFlow.collectAsLazyPagingItems()
+            pagingUsers = usersFlow.collectAsLazyPagingItems(),
+            onUserClicked = { }
         )
     }
 }

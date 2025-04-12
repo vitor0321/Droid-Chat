@@ -1,14 +1,14 @@
 package com.example.droidchat.ui.navigation
 
-import android.app.Activity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navOptions
 import com.example.droidchat.ui.extension.slidOutTo
 import com.example.droidchat.ui.extension.slideInTo
+import com.example.droidchat.ui.feature.chatDetails.ChatDetailsRoute
 import com.example.droidchat.ui.feature.chats.ChatsRoute
 import com.example.droidchat.ui.feature.chats.navigation.navigateToChats
 import com.example.droidchat.ui.feature.signin.SignInRoute
@@ -22,7 +22,7 @@ internal fun ChatNavHost(
     navigationState: DroidChatNavigationState,
 ) {
     val navController = navigationState.navController
-    val activity = LocalContext.current as? Activity
+    val activity = LocalActivity.current
 
     NavHost(navController = navController, startDestination = SplashRoute) {
         composable<SplashRoute> {
@@ -70,7 +70,16 @@ internal fun ChatNavHost(
         }
 
         composable<Route.UsersRoute> {
-            UsersRoute()
+            UsersRoute(
+                navigateToChatDetails = { userId ->
+                    navController.navigate(Route.ChatDetailRoute(userId))
+                }
+            )
+        }
+        composable<Route.ChatDetailRoute> {
+            ChatDetailsRoute(
+                onNavigationBack = { navController.popBackStack() }
+            )
         }
     }
 }

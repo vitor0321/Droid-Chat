@@ -20,4 +20,9 @@ internal sealed interface Route {
 
     @Serializable
     object ProfileRoute
+
+    @Serializable
+    data class ChatDetailRoute(
+        val userId: Int
+    )
 }

@@ -1,6 +1,10 @@
 package com.example.droidchat.ui.mockPreview.testData
 
+import androidx.paging.LoadState
+import androidx.paging.LoadStates
+import androidx.paging.PagingData
 import com.example.droidchat.domain.model.ChatMessage
+import kotlinx.coroutines.flow.flowOf
 
 internal val chatMessage1TestData = ChatMessage(
     autoId = 1,
@@ -55,4 +59,21 @@ internal val chatMessage5TestData = ChatMessage(
     formattedDateTime = "15:10",
     isUnread = false,
     isSelf = true
+)
+
+internal val pagingChatMessage = flowOf(
+    PagingData.from(
+        listOf(
+            chatMessage5TestData,
+            chatMessage4TestData,
+            chatMessage3TestData,
+            chatMessage2TestData,
+            chatMessage1TestData,
+        ),
+        sourceLoadStates = LoadStates(
+            refresh = LoadState.NotLoading(endOfPaginationReached = true),
+            prepend = LoadState.NotLoading(endOfPaginationReached = true),
+            append = LoadState.NotLoading(endOfPaginationReached = true)
+        )
+    )
 )

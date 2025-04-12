@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.feature.users.components.field
+package com.example.droidchat.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,13 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.droidchat.ui.components.PrimaryButton
 import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme
 import com.walcker.topaz.tokens.TopazSpacerSizeToken
 
 @Composable
-internal fun UsersErrorLoadMore(
+internal fun ErrorLazyColumnLoadMore(
+    description: String = strings.commonStrings.commonErrorLoadingMore,
     onErrorLoadMore: () -> Unit,
 ) {
     Column(
@@ -29,7 +29,7 @@ internal fun UsersErrorLoadMore(
     ) {
         Text(
             modifier = Modifier.padding(TopazSpacerSizeToken.XSmall.horizontalHeight),
-            text = strings.usersStrings.featureUsersErrorLoadingMore,
+            text = description,
             color = MaterialTheme.colorScheme.error,
         )
 
@@ -45,9 +45,10 @@ internal fun UsersErrorLoadMore(
 
 @Preview(showBackground = true)
 @Composable
-private fun UsersErrorLoadMorePreview() {
+private fun ErrorLazyColumnLoadMorePreview() {
     DroidChatTheme {
-        UsersErrorLoadMore(
+        ErrorLazyColumnLoadMore(
+            description = "Error ao carregar mais",
             onErrorLoadMore = { }
         )
     }

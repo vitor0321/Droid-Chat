@@ -8,4 +8,5 @@ internal data class CommonStrings(
     val commonUploadPhoto: String = "Galeria",
     val commonNavigationItemChats: String = "Conversas",
     val commonNavigationItemProfile: String = "Perfil",
+    val commonErrorLoadingMore: String = "Erro ao carregar mais",
 )
