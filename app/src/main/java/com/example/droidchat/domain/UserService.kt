@@ -6,5 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 internal interface UserService {
 
+    suspend fun getUser(userId: Int): Result<User>
+
     fun getUsers(limit: Int = 10): Flow<PagingData<User>>
 }

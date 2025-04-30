@@ -1,7 +1,7 @@
 package com.example.droidchat.data.di
 
-import com.example.droidchat.data.SelfUserManager
-import com.example.droidchat.data.TokenManager
+import com.example.droidchat.data.manager.SelfUserManager
+import com.example.droidchat.data.manager.TokenManager
 import com.example.droidchat.data.manager.selfuser.SelfUserManagerImpl
 import com.example.droidchat.data.manager.token.SecureTokenMangerImpl
 import dagger.Binds

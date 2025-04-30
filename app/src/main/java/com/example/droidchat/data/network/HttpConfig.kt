@@ -10,4 +10,5 @@ internal enum class HttpConfig(val value: String) {
     UPLOADING("/profile-picture"),
     CONVERSATIONS("/conversations"),
     USERS("/users"),
+    MESSAGES("/messages"),
 }

@@ -35,6 +35,8 @@ securityCrypto = "1.1.0-alpha06"
 constraintLayoutCompose = "1.1.1"
 survicateSdk = "6.2.0"
 topaz = "0.0.1"
+paging = "3.3.6"
+room = "2.6.1"
 
 [libraries]
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
@@ -90,6 +92,10 @@ security-crypto = { module = "androidx.security:security-crypto", version.ref = 
 constraint-layout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintLayoutCompose" }
 survicate-sdk = { module = "com.survicate:survicate-sdk", version.ref = "survicateSdk" }
 topaz = { module = "com.walcker.compose.ui:topaz", version.ref = "topaz" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

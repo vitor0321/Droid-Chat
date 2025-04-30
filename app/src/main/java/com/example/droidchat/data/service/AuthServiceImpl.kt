@@ -1,12 +1,13 @@
 package com.example.droidchat.data.service
 
-import com.example.droidchat.data.NetWorkDataSource
-import com.example.droidchat.data.SelfUserManager
-import com.example.droidchat.data.TokenManager
 import com.example.droidchat.data.di.IoDispatcher
-import com.example.droidchat.data.service.mapper.CreateAccountMapper.toCreateAccountRequest
-import com.example.droidchat.data.service.mapper.ImageMapper.toImage
-import com.example.droidchat.data.service.model.request.AuthRequest
+import com.example.droidchat.data.manager.SelfUserManager
+import com.example.droidchat.data.manager.TokenManager
+import com.example.droidchat.data.mapper.CreateAccountMapper.toCreateAccountRequest
+import com.example.droidchat.data.mapper.ImageMapper.toImage
+import com.example.droidchat.data.model.request.AuthRequest
+import com.example.droidchat.data.network.NetWorkDataSource
+import com.example.droidchat.data.util.safeCallResult
 import com.example.droidchat.domain.AuthService
 import com.example.droidchat.domain.model.CreateAccount
 import com.example.droidchat.domain.model.Image
@@ -33,31 +34,24 @@ internal class AuthServiceImpl @Inject constructor(
         }
 
     override suspend fun signUp(createAccount: CreateAccount): Result<Unit> =
-        withContext(ioDispatcher) {
-            runCatching {
-                networkDataSource.signUp(request = createAccount.toCreateAccountRequest())
-            }
+        safeCallResult(ioDispatcher) {
+            networkDataSource.signUp(request = createAccount.toCreateAccountRequest())
         }
 
     override suspend fun signIn(email: String, password: String): Result<Unit> =
-        withContext(ioDispatcher) {
-            runCatching {
-                val tokenResponse = networkDataSource.signIn(request = AuthRequest(email, password))
+        safeCallResult(ioDispatcher) {
+            val tokenResponse = networkDataSource.signIn(request = AuthRequest(email, password))
                 tokenManager.saveAccessToken(tokenResponse.token)
-            }
         }
 
     override suspend fun uploadProfilePicture(filePath: String): Result<Image> =
-        withContext(ioDispatcher) {
-            runCatching {
-                networkDataSource.uploadProfilePicture(filePath = filePath).toImage()
-            }
+        safeCallResult(ioDispatcher) {
+            networkDataSource.uploadProfilePicture(filePath = filePath).toImage()
         }
 
     override suspend fun authenticate(): Result<Unit> =
-        withContext(ioDispatcher) {
-            runCatching {
-                val userResponse = networkDataSource.authenticate()
+        safeCallResult(ioDispatcher) {
+            val userResponse = networkDataSource.authenticate()
                 selfUserManager.saveSelfUserData(
                     id = userResponse.id,
                     firstName = userResponse.firstName,
@@ -66,5 +60,4 @@ internal class AuthServiceImpl @Inject constructor(
                     email = userResponse.email
                 )
             }
-        }
 }

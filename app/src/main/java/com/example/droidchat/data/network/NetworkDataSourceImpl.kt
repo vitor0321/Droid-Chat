@@ -1,14 +1,14 @@
 package com.example.droidchat.data.network
 
-import com.example.droidchat.data.NetWorkDataSource
-import com.example.droidchat.data.service.model.request.AuthRequest
-import com.example.droidchat.data.service.model.request.CreateAccountRequest
-import com.example.droidchat.data.service.model.request.PaginationParams
-import com.example.droidchat.data.service.model.response.ImageResponse
-import com.example.droidchat.data.service.model.response.PaginatedChatResponse
-import com.example.droidchat.data.service.model.response.PaginatedUserResponse
-import com.example.droidchat.data.service.model.response.TokenResponse
-import com.example.droidchat.data.service.model.response.UserResponse
+import com.example.droidchat.data.model.request.AuthRequest
+import com.example.droidchat.data.model.request.CreateAccountRequest
+import com.example.droidchat.data.model.request.PaginationParams
+import com.example.droidchat.data.model.response.ImageResponse
+import com.example.droidchat.data.model.response.PaginatedChatResponse
+import com.example.droidchat.data.model.response.PaginatedMessageResponse
+import com.example.droidchat.data.model.response.PaginatedUserResponse
+import com.example.droidchat.data.model.response.TokenResponse
+import com.example.droidchat.data.model.response.UserResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.forms.formData
@@ -55,10 +55,18 @@ internal class NetworkDataSourceImpl @Inject constructor(
             url { appendPaginationParams(paginationParams) }
         }.body()
 
+    override suspend fun getUser(userId: Int): UserResponse =
+        httpClient.get(HttpConfig.USERS.value + "/$userId").body()
+
     override suspend fun getUsers(
         paginationParams: PaginationParams
     ): PaginatedUserResponse =
         httpClient.get(HttpConfig.USERS.value) {
+            url { appendPaginationParams(paginationParams) }
+        }.body()
+
+    override suspend fun getMessages(receiverId: Int, paginationParams: PaginationParams): PaginatedMessageResponse =
+        httpClient.get(HttpConfig.MESSAGES.value + "/$receiverId") {
             url { appendPaginationParams(paginationParams) }
         }.body()
 

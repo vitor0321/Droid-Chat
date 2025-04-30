@@ -1,9 +1,9 @@
 package com.example.droidchat.data.di
 
 
-import com.example.droidchat.data.TokenManager
+import com.example.droidchat.data.manager.TokenManager
+import com.example.droidchat.data.model.exception.NetworkException
 import com.example.droidchat.data.network.HttpConfig
-import com.example.droidchat.data.service.model.exception.NetworkException
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -23,13 +23,13 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.droidchat.domain.model.ChatMessage
-import com.example.droidchat.ui.components.ChatMessageBubble
-import com.example.droidchat.ui.components.ChatMessageTextField
 import com.example.droidchat.ui.components.ErrorLazyColumnLoadMore
 import com.example.droidchat.ui.components.LoadingLoadMore
 import com.example.droidchat.ui.components.error.GeneralError
 import com.example.droidchat.ui.components.list.GeneralEmptyList
 import com.example.droidchat.ui.feature.chatDetails.components.field.ChatDetailsTopAppBar
+import com.example.droidchat.ui.feature.chatDetails.components.field.ChatMessageBubble
+import com.example.droidchat.ui.feature.chatDetails.components.field.ChatMessageTextField
 import com.example.droidchat.ui.mockPreview.testData.pagingChatMessage
 import com.example.droidchat.ui.strings.strings
 import com.example.droidchat.ui.theme.DroidChatTheme

@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.components
+package com.example.droidchat.ui.feature.chatDetails.components.field
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

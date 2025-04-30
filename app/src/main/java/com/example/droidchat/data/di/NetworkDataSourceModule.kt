@@ -1,6 +1,6 @@
 package com.example.droidchat.data.di
 
-import com.example.droidchat.data.NetWorkDataSource
+import com.example.droidchat.data.network.NetWorkDataSource
 import com.example.droidchat.data.network.NetworkDataSourceImpl
 import dagger.Binds
 import dagger.Module

@@ -1,6 +1,6 @@
 package com.example.droidchat.domain.mapper
 
-import com.example.droidchat.data.service.model.exception.NetworkException
+import com.example.droidchat.data.model.exception.NetworkException
 import com.example.droidchat.domain.model.exception.ExceptionPresentation
 
 internal object ExceptionMapper {

@@ -2,24 +2,27 @@ package com.example.droidchat.ui.feature.chatDetails
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.droidchat.domain.model.ChatMessage
 import com.example.droidchat.ui.feature.chatDetails.components.area.ChatDetailsArea
+import com.example.droidchat.ui.feature.chatDetails.viewModel.ChatDetailsViewModel
 import com.example.droidchat.ui.mockPreview.testData.pagingChatMessage
 import com.example.droidchat.ui.theme.DroidChatTheme
 
 @Composable
 internal fun ChatDetailsRoute(
+    viewModel: ChatDetailsViewModel = hiltViewModel(),
     onNavigationBack: () -> Unit,
 ) {
 
     ChatDetailsScreen(
-        pagingChatMessage = pagingChatMessage.collectAsLazyPagingItems(),
-        messageText = "",
+        pagingChatMessage = viewModel.pagingChatMessages.collectAsLazyPagingItems(),
+        messageText = viewModel.messageText,
         onNavigationBack = onNavigationBack,
-        onMessageChanged = {},
-        onSendClicked = {}
+        onMessageChanged = viewModel::onMessageChange,
+        onSendClicked = viewModel::sendMessage
     )
 }
 

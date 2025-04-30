@@ -1,4 +1,4 @@
-package com.example.droidchat.ui.components
+package com.example.droidchat.ui.feature.chatDetails.components.field
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -70,7 +70,6 @@ internal fun ChatMessageTextField(
                 color = MaterialTheme.colorScheme.surface,
                 shape = ShapeDefaults.ExtraLarge.copy(CornerSize(TopazSpacerSizeToken.ExtraLarge.horizontalHeight))
             ),
-        textStyle = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurface),
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Default,
         ),
@@ -97,7 +96,19 @@ internal fun ChatMessageTextField(
                             innerTextField = innerTextField,
                             enabled = false,
                             singleLine = false,
-                            placeholder = { Text(text = placeholder) },
+                            colors = TextFieldDefaults.colors(
+                                unfocusedTextColor = MaterialTheme.colorScheme.primary,
+                                focusedTextColor = MaterialTheme.colorScheme.primary,
+                                disabledTextColor = MaterialTheme.colorScheme.primary, 
+                                unfocusedPlaceholderColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                focusedPlaceholderColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                            ),
+                            placeholder = { 
+                                Text(
+                                    text = placeholder, 
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant 
+                                ) 
+                            },
                             visualTransformation = VisualTransformation.None,
                             interactionSource = remember {
                                 MutableInteractionSource()

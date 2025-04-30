@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.droidchat.data.service.model.exception.NetworkException
+import com.example.droidchat.data.model.exception.NetworkException
 import com.example.droidchat.domain.AuthService
 import com.example.droidchat.ui.extension.validator.FormValidator
 import com.example.droidchat.ui.feature.signin.navigation.SignInAction
